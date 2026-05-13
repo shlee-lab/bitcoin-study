@@ -437,14 +437,13 @@ function EthereumAddressCompare() {
       <div className="flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-[#b58cff]" />
         <h3 className="text-[15px] font-medium text-text">
-          Rabby / MetaMask 의 <Term id="ethereum-address">Ethereum 주소</Term>는
-          어떻게 다른가
+          <Term id="ethereum-address">Ethereum 주소</Term>
         </h3>
       </div>
       <p className="text-[14px] text-text/72 leading-[1.75]">
-        Rabby 와 MetaMask 에서 보는{" "}
+        Rabby 나 MetaMask 같은 Ethereum 지갑에서 보는{" "}
         <code className="font-mono text-text">0x...</code> 주소는 Bitcoin 주소가
-        아니라 Ethereum 계열 주소다. 둘 다 지갑이 seed/private key 에서 공개키를
+        아니라 Ethereum 주소다. 둘 다 지갑이 seed/private key 에서 공개키를
         만들고, 그 공개키를 해시해 주소를 만든다는 큰 흐름은 비슷하다. 다만
         Bitcoin 은 <code className="font-mono">bc1...</code> 같은 별도 인코딩과
         강한 체크섬을 붙이고, Ethereum 은 해시 결과의 마지막 20 byte 를{" "}
