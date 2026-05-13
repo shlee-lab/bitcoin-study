@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bitcoin-study.vercel.app";
 
 export const metadata: Metadata = {
   title: "Bitcoin Study",
@@ -12,6 +11,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bitcoin Study",
     description: "1 BTC 전송으로 이해하는 Bitcoin",
+    url: siteUrl,
+    siteName: "Bitcoin Study",
     type: "website",
     images: [
       {
