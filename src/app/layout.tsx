@@ -3,7 +3,8 @@ import "./globals.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://bitcoin-study.vercel.app";
-const ogImageUrl = "/og/bitcoin-study-v3.png";
+const ogImagePath = "/og/bitcoin-study-v3.png";
+const ogImageUrl = `${siteUrl}${ogImagePath}`;
 
 export const metadata: Metadata = {
   title: "Bitcoin Study",
