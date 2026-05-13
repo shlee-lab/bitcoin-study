@@ -1,0 +1,19 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0d0f14"/>
+  <circle cx="944" cy="162" r="112" fill="#f7931a" fill-opacity="0.1"/>
+  <circle cx="944" cy="162" r="70" fill="#f7931a" fill-opacity="0.16"/>
+  <text x="84" y="132" fill="#f7931a" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="600">Bitcoin Study</text>
+  <text x="84" y="215" fill="#e6e8ec" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="600">한 번의 송금 안에</text>
+  <text x="84" y="292" fill="#e6e8ec" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="600">비트코인 전체가 들어있다</text>
+  <text x="84" y="356" fill="#a0a8b8" font-family="Inter, Arial, sans-serif" font-size="27">기초 흐름부터 설계 선택과 트레이드오프까지</text>
+  <g transform="translate(84 430)">
+    <rect x="0" y="0" width="210" height="60" fill="#11141b" stroke="#2a2f3a"/>
+    <rect x="200" y="22" width="210" height="60" fill="#11141b" stroke="#2a2f3a"/>
+    <rect x="400" y="44" width="210" height="60" fill="#11141b" stroke="#2a2f3a"/>
+    <rect x="600" y="66" width="210" height="60" fill="#11141b" stroke="#2a2f3a"/>
+    <text x="24" y="38" fill="#e6e8ec" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Wallet</text>
+    <text x="224" y="60" fill="#e6e8ec" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Transaction</text>
+    <text x="424" y="82" fill="#e6e8ec" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Mining</text>
+    <text x="624" y="104" fill="#e6e8ec" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Privacy</text>
+  </g>
+</svg>
