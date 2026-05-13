@@ -142,9 +142,9 @@ export default function Home() {
                 설계까지 비교하는 블록체인 일반 코스를 추가할 예정입니다.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[13px]">
-                <NextCourseItem title="Ethereum의 장부" text="UTXO가 아니라 계정 잔액을 갱신하는 체인" />
-                <NextCourseItem title="계약이 만드는 앱" text="토큰, DEX, NFT가 같은 실행 환경 위에 놓이는 방식" />
-                <NextCourseItem title="합의와 새 체인" text="PoS, BFT, 모듈러 체인이 속도와 검증 비용을 교환하는 방식" />
+                <NextCourseItem title="Ethereum" text="Account model, gas, EVM이 만드는 실행 환경" />
+                <NextCourseItem title="Smart Contract" text="Token, DeFi, NFT, security issues" />
+                <NextCourseItem title="Consensus" text="PoS, BFT, validator, high-throughput chain" />
               </div>
             </div>
           </div>
