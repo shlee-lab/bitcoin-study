@@ -137,14 +137,14 @@ export default function Home() {
               <p className="text-[15px] text-text/70 leading-[1.75] max-w-2xl">
                 지금 코스는 비트코인 한 건의 송금이 실제로 처리되는 과정을
                 끝까지 따라가는 비트코인 원리 편입니다. 이후 업데이트에서는
-                Bitcoin 을 기준점으로 삼아 Ethereum, smart contract, consensus,
-                그리고 새로 등장한 체인들이 어떤 문제를 다르게 풀려고 하는지
-                비교하는 블록체인 일반 코스를 추가할 예정입니다.
+                Bitcoin 을 기준점으로 삼아, Ethereum 이 왜 ‘잔액 장부와 실행
+                환경’ 을 선택했는지부터 smart contract 앱과 신생 체인의 합의
+                설계까지 비교하는 블록체인 일반 코스를 추가할 예정입니다.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[13px]">
-                <NextCourseItem title="Ethereum" text="Account model, gas, EVM 접근법" />
-                <NextCourseItem title="Smart contract" text="상태를 가진 프로그램과 보안 이슈" />
-                <NextCourseItem title="Consensus" text="PoS, validator, 신생 체인 설계" />
+                <NextCourseItem title="Ethereum의 장부" text="UTXO가 아니라 계정 잔액을 갱신하는 체인" />
+                <NextCourseItem title="계약이 만드는 앱" text="토큰, DEX, NFT가 같은 실행 환경 위에 놓이는 방식" />
+                <NextCourseItem title="합의와 새 체인" text="PoS, BFT, 모듈러 체인이 속도와 검증 비용을 교환하는 방식" />
               </div>
             </div>
           </div>
