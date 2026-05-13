@@ -3,6 +3,7 @@ import "./globals.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://bitcoin-study.vercel.app";
+const ogImageUrl = "/og/bitcoin-study-v3.png";
 
 export const metadata: Metadata = {
   title: "Bitcoin Study",
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og/bitcoin-study.png",
+        url: ogImageUrl,
+        secureUrl: ogImageUrl,
+        type: "image/png",
         width: 1200,
         height: 630,
         alt: "Bitcoin Study",
@@ -27,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bitcoin Study",
     description: "1 BTC 전송으로 이해하는 Bitcoin",
-    images: ["/og/bitcoin-study.png"],
+    images: [ogImageUrl],
   },
 };
 
