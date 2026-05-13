@@ -1,9 +1,33 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
   title: "Bitcoin Study",
-  description: "Interactive bitcoin learning",
+  description: "1 BTC 전송으로 이해하는 Bitcoin",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "Bitcoin Study",
+    description: "1 BTC 전송으로 이해하는 Bitcoin",
+    type: "website",
+    images: [
+      {
+        url: "/og/bitcoin-study.png",
+        width: 1200,
+        height: 630,
+        alt: "Bitcoin Study",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bitcoin Study",
+    description: "1 BTC 전송으로 이해하는 Bitcoin",
+    images: ["/og/bitcoin-study.png"],
+  },
 };
 
 export default function RootLayout({
