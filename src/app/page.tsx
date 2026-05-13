@@ -136,15 +136,15 @@ export default function Home() {
             <div className="space-y-3">
               <p className="text-[15px] text-text/70 leading-[1.75] max-w-2xl">
                 지금 코스는 비트코인 한 건의 송금이 실제로 처리되는 과정을
-                끝까지 따라가는 비트코인 원리 편입니다. 이후 업데이트에서는 이
-                구조를 기준점으로 삼아, 다른 체인들이 상태·계산·합의를 어떻게
-                다르게 설계했는지 비교하는 블록체인 일반 코스를 추가할
-                예정입니다.
+                끝까지 따라가는 비트코인 원리 편입니다. 이후 업데이트에서는
+                Bitcoin 을 기준점으로 삼아 Ethereum, smart contract, consensus,
+                그리고 새로 등장한 체인들이 어떤 문제를 다르게 풀려고 하는지
+                비교하는 블록체인 일반 코스를 추가할 예정입니다.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[13px]">
-                <NextCourseItem title="State" text="UTXO와 account model · 예정" />
-                <NextCourseItem title="Compute" text="Script와 smart contract · 예정" />
-                <NextCourseItem title="Consensus" text="PoW와 PoS, validator · 예정" />
+                <NextCourseItem title="Ethereum" text="Account model, gas, EVM 접근법" />
+                <NextCourseItem title="Smart contract" text="상태를 가진 프로그램과 보안 이슈" />
+                <NextCourseItem title="Consensus" text="PoS, validator, 신생 체인 설계" />
               </div>
             </div>
           </div>

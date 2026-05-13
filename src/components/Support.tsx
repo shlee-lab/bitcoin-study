@@ -28,7 +28,7 @@ export function Support() {
             <CoffeeIcon />
             <div>
               <div className="text-[15px] font-medium text-text/88">
-                Buy me a coffee
+                커피 한 잔 보내기
               </div>
               <div className="text-[13px] text-text/55">
                 Ethereum / ERC-20
