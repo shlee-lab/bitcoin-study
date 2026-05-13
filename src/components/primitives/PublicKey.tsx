@@ -418,7 +418,7 @@ function Step({
   result: string;
 }) {
   return (
-    <div className="grid grid-cols-[18px_1fr] gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-[18px_1fr] gap-2">
       <div className="text-muted">{n}.</div>
       <div className="space-y-0.5">
         <div className="text-text/85">{formula}</div>

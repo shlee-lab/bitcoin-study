@@ -120,7 +120,7 @@ function DbCard({
           <div className="text-xs text-muted font-mono mb-1">value</div>
           <div className="rounded border border-edge bg-bg/60 p-2.5 font-mono text-[12px] space-y-1">
             {valueExample.map(([k, v], i) => (
-              <div key={i} className="grid grid-cols-[100px_1fr] gap-2">
+              <div key={i} className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-2">
                 <span className="text-muted">{k}</span>
                 <span className="text-text/85 break-all">{v}</span>
               </div>

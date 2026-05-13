@@ -944,7 +944,7 @@ function SelfishMechanic() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm pt-1">
         <div className="border border-edge bg-surface/40 p-3">
-          <div className="text-xs text-muted font-mono uppercase tracking-wider mb-1">
+          <div className="text-[13px] text-muted font-semibold mb-1">
             전략이 이득이 되는 조건
           </div>
           <ul className="space-y-1 text-[13px] text-text/85 leading-relaxed">
@@ -953,7 +953,7 @@ function SelfishMechanic() {
           </ul>
         </div>
         <div className="border border-edge bg-surface/40 p-3">
-          <div className="text-xs text-muted font-mono uppercase tracking-wider mb-1">
+          <div className="text-[13px] text-muted font-semibold mb-1">
             현실의 카운터
           </div>
           <ul className="space-y-1 text-[13px] text-text/85 leading-relaxed">
@@ -972,7 +972,7 @@ function BWHMechanic() {
     <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-3 text-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="rounded-sm border border-edge bg-surface/40 p-3">
-          <div className="text-xs text-muted font-mono uppercase tracking-wider mb-1">
+          <div className="text-[13px] text-muted font-semibold mb-1">
             메커니즘
           </div>
           <ul className="space-y-1 text-[13px] text-text/85 leading-relaxed">
@@ -983,7 +983,7 @@ function BWHMechanic() {
           </ul>
         </div>
         <div className="rounded-sm border border-edge bg-surface/40 p-3">
-          <div className="text-xs text-muted font-mono uppercase tracking-wider mb-1">
+          <div className="text-[13px] text-muted font-semibold mb-1">
             왜 위험한가
           </div>
           <ul className="space-y-1 text-[13px] text-text/85 leading-relaxed">

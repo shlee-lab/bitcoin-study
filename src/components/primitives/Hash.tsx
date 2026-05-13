@@ -253,7 +253,7 @@ function Compare({
   return (
     <div className="rounded-sm border border-edge bg-surface/30 divide-y divide-edge font-mono text-[13px]">
       {rows.map((r, i) => (
-        <div key={i} className="grid grid-cols-[100px_1fr] gap-3 px-3 py-2.5">
+        <div key={i} className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-3 px-3 py-2.5">
           <div className="text-muted">{r.input}</div>
           <div
             className="text-accent break-all leading-relaxed"
@@ -281,7 +281,7 @@ function ScaleBox({
         return (
           <div
             key={i}
-            className="grid grid-cols-[1fr_auto] gap-4 px-3 py-2.5"
+            className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 px-3 py-2.5"
           >
             <div className={last && highlightLast ? "text-text" : "text-muted"}>
               {label}
@@ -314,7 +314,7 @@ function PropertyTable({
 }) {
   return (
     <div className="border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[180px_1fr_100px_100px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="hidden sm:grid sm:grid-cols-[180px_1fr_100px_100px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>성질</div>
         <div>정의</div>
         <div className="text-right">n-bit 비용</div>
@@ -324,7 +324,7 @@ function PropertyTable({
         {rows.map((r) => (
           <div
             key={r.name}
-            className="grid grid-cols-[180px_1fr_100px_100px] gap-3 px-4 py-3 items-baseline"
+            className="grid grid-cols-1 sm:grid-cols-[180px_1fr_100px_100px] gap-3 px-4 py-3 items-baseline"
           >
             <div className="space-y-0.5">
               <div className="font-mono text-[13px] text-text/90">{r.name}</div>
@@ -333,10 +333,16 @@ function PropertyTable({
             <div className="text-[13px] text-text/80 leading-[1.65]">
               {r.def}
             </div>
-            <div className="text-right font-mono text-[13px] text-accent2">
-              {r.cost}
+            <div className="flex items-baseline justify-between gap-3 sm:block sm:text-right font-mono text-[13px] text-accent2">
+              <span className="sm:hidden font-sans text-[12px] font-semibold text-muted">
+                n-bit 비용
+              </span>
+              <span>{r.cost}</span>
             </div>
-            <div className="text-right space-y-0.5">
+            <div className="flex items-baseline justify-between gap-3 sm:block sm:text-right space-y-0.5">
+              <span className="sm:hidden text-[12px] font-semibold text-muted">
+                SHA-256
+              </span>
               <div className="font-mono text-[13px] text-accent">{r.sha}</div>
               {r.note && (
                 <div className="font-mono text-[10px] text-muted">{r.note}</div>
@@ -401,7 +407,7 @@ function SamplesTable() {
   }, {});
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[80px_1fr_70px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr_70px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>input</div>
         <div>SHA-256 (last 8 hex)</div>
         <div className="text-right">mod 16</div>
@@ -414,7 +420,7 @@ function SamplesTable() {
           return (
             <div
               key={i}
-              className="grid grid-cols-[80px_1fr_70px] gap-3 px-4 py-1.5 items-baseline"
+              className="grid grid-cols-1 sm:grid-cols-[80px_1fr_70px] gap-3 px-4 py-1.5 items-baseline"
             >
               <div className="font-mono text-sm text-text/85">{s.input}</div>
               <div className="font-mono text-[13px] text-text/65">

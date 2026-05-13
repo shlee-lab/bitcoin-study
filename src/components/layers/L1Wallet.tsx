@@ -169,7 +169,7 @@ function IntroPair() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
           <div>친숙한 것</div>
           <div>비트코인의 대응</div>
         </div>
@@ -501,7 +501,7 @@ function AnalogyRow({
   crypto: string;
 }) {
   return (
-    <div className="grid grid-cols-[140px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="text-[13px] text-text/85 font-medium">{real}</div>
       <div className="text-[13px] text-text/75 leading-[1.65]">{crypto}</div>
     </div>

@@ -18,7 +18,7 @@ export function L10Scalability(props: LayerProps) {
             steps={[
               {
                 title: "병목의 정체",
-                subtitle: "왜 1 MB · 10 분이 문제인가",
+                subtitle: "블록 공간과 생성 간격이 만드는 한계",
                 body: <Bottleneck />,
               },
               {
@@ -78,7 +78,7 @@ function Bottleneck() {
         이라는 점이다.
       </p>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
           <div>한계</div>
           <div>의미</div>
         </div>
@@ -155,7 +155,7 @@ function TwoApproaches() {
         </div>
       </div>
       <div className="border border-edge bg-surface/30 overflow-x-auto">
-        <div className="grid min-w-[680px] grid-cols-[120px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:min-w-[680px] sm:grid-cols-[120px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>선택</div>
           <div>장점</div>
           <div>단점</div>
@@ -247,7 +247,7 @@ function PaymentChannel() {
         </p>
       </Callout>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>개념</div>
           <div>실제로 의미하는 것</div>
         </div>
@@ -315,7 +315,7 @@ function LightningNetwork() {
         도착하면 경로 위의 모든 채널 상태가 한 번에 갱신된다.
       </p>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>구성 요소</div>
           <div>왜 중요한가</div>
         </div>
@@ -774,7 +774,7 @@ function OtherEcosystems() {
             보수성을 포기하는 대신 처리량을 끌어올린다.
           </p>
           <div className="border border-edge bg-bg/40 overflow-hidden">
-            <div className="grid grid-cols-[120px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+            <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
               <div>체인</div>
               <div>기술 핵심 + 실측 / 이론치</div>
             </div>
@@ -883,7 +883,7 @@ function OtherEcosystems() {
       </div>
 
       <div className="border border-edge bg-surface/30 overflow-x-auto">
-        <div className="grid min-w-[680px] grid-cols-[120px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:min-w-[680px] sm:grid-cols-[120px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>방식</div>
           <div>좋은 점</div>
           <div>감수하는 점</div>
@@ -979,7 +979,7 @@ function PaymentRailsReflection() {
 
 function ChainRow({ name, tech }: { name: string; tech: string }) {
   return (
-    <div className="grid grid-cols-[120px_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className="font-mono text-[13px] text-accent/85">{name}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{tech}</div>
     </div>
@@ -996,7 +996,7 @@ function TradeoffRow({
   bad: string;
 }) {
   return (
-    <div className="grid min-w-[680px] grid-cols-[120px_1fr_1fr] gap-3 px-4 py-3 items-start">
+    <div className="grid grid-cols-1 sm:min-w-[680px] sm:grid-cols-[120px_1fr_1fr] gap-3 px-4 py-3 items-start">
       <div className="font-mono text-[13px] text-accent/85">{name}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{good}</div>
       <div className="text-[13px] text-text/65 leading-relaxed">{bad}</div>
@@ -1015,7 +1015,7 @@ function ChoicePoint({ title, body }: { title: string; body: string }) {
 
 function Row({ label, body }: { label: string; body: string }) {
   return (
-    <div className="grid grid-cols-[160px_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className="font-mono text-[13px] text-accent/80">{label}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{body}</div>
     </div>

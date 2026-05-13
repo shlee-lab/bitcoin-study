@@ -315,7 +315,7 @@ function Line({
   tone?: "accent";
 }) {
   return (
-    <div className="grid grid-cols-[80px_1fr] gap-2 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr] gap-2 items-baseline">
       <div className="text-xs text-muted font-mono">{label}</div>
       <div
         className={`font-mono text-[13px] break-all ${
@@ -393,7 +393,7 @@ const STAGES: {
 function Lifecycle() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[100px_120px_1fr_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[100px_120px_1fr_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>단계</div>
         <div>주체</div>
         <div>무슨 일</div>
@@ -410,7 +410,7 @@ function Lifecycle() {
           return (
             <div
               key={s.name}
-              className="grid grid-cols-[100px_120px_1fr_120px] gap-3 px-4 py-2.5 items-baseline"
+              className="grid grid-cols-1 sm:grid-cols-[100px_120px_1fr_120px] gap-3 px-4 py-2.5 items-baseline"
             >
               <div className="flex items-baseline gap-2">
                 <span className="text-xs text-muted font-mono">
@@ -503,7 +503,7 @@ function FeeStory() {
       />
 
       <div className="rounded-sm border border-edge bg-surface/25 overflow-hidden">
-        <div className="grid grid-cols-[120px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
           <div>체인</div>
           <div>사용자가 내는 것</div>
           <div>누가 받는가</div>
@@ -615,7 +615,7 @@ function FeeCompareRow({
   tone?: "accent";
 }) {
   return (
-    <div className="grid grid-cols-[120px_1fr_1fr] gap-3 px-4 py-3 items-start">
+    <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_1fr] gap-3 px-4 py-3 items-start">
       <div className={tone === "accent" ? "text-accent" : "text-accent2"}>
         {chain}
       </div>
@@ -631,7 +631,7 @@ function FeeCompareRow({
 function TxTypes() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[130px_1fr_90px] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[130px_1fr_90px] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
         <div>형식</div>
         <div>무엇이 달라졌나</div>
         <div>주소 모습</div>
@@ -686,7 +686,7 @@ function TxTypeRow({
 }) {
   return (
     <div
-      className={`grid grid-cols-[130px_1fr_90px] gap-3 px-4 py-3 items-baseline ${
+      className={`grid grid-cols-1 sm:grid-cols-[130px_1fr_90px] gap-3 px-4 py-3 items-baseline ${
         highlight ? "bg-accent/5" : ""
       }`}
     >

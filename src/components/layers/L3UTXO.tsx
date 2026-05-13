@@ -329,7 +329,7 @@ function ModelCompare() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>축</div>
           <div className="text-text/85">UTXO (비트코인)</div>
           <div className="text-muted">계정 (이더리움)</div>
@@ -387,7 +387,7 @@ function CompareRow({
   account: string;
 }) {
   return (
-    <div className="grid grid-cols-[140px_1fr_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="text-[13px] text-muted font-mono">{axis}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{utxo}</div>
       <div className="text-[13px] text-muted leading-relaxed">{account}</div>
@@ -410,8 +410,8 @@ function ModelCard({
     tone === "accent" ? "border-accent/40 bg-accent/5" : "border-edge bg-bg/40";
   const heading = tone === "accent" ? "text-accent" : "text-text/85";
   return (
-    <div className={`rounded-sm border  p-4 space-y-2.5`}>
-      <div className={`font-mono text-[13px] ${heading} uppercase tracking-wider`}>
+    <div className={`rounded-sm border ${border} p-4 space-y-2.5`}>
+      <div className={`text-[15px] font-semibold ${heading} leading-snug`}>
         {title}
       </div>
       <div className="text-xs text-muted">{examples}</div>
@@ -435,7 +435,7 @@ function CoinSelection() {
         0.7001 이 되는 부분집합 골라야 함.
       </p>
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[120px_1fr_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>전략</div>
           <div>고른 UTXO</div>
           <div className="text-right">잔돈 / 결과</div>
@@ -486,7 +486,7 @@ function SelectionRow({
 }) {
   const color = tone === "accent" ? "text-accent" : "text-text/85";
   return (
-    <div className="grid grid-cols-[120px_1fr_120px] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_120px] gap-3 px-4 py-2.5 items-baseline">
       <div className={`font-mono text-[13px] ${color}`}>{name}</div>
       <div className="text-text/85">{picks}</div>
       <div className="text-right text-[13px] text-muted">{result}</div>
@@ -1014,7 +1014,7 @@ function TrackingAndObfuscation() {
         <TaintGraph />
 
         <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-          <div className="grid grid-cols-[140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+          <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
             <div>전파 모델</div>
             <div>‘이 output 에 오염이 얼마나 묻었나’ 의 계산법</div>
           </div>
@@ -1192,7 +1192,7 @@ function TrackingAndObfuscation() {
         </p>
 
         <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-          <div className="grid grid-cols-[100px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+          <div className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
             <div>시점</div>
             <div>사건</div>
           </div>
@@ -1262,7 +1262,7 @@ function TaintRow({
 }) {
   const cls = tone === "warn" ? "text-[#f76b6b]" : "text-accent2";
   return (
-    <div className="grid grid-cols-[140px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className={`font-mono text-[13px] ${cls}`}>{name}</div>
       <div className="text-[14px] text-text/80 leading-[1.65]">{body}</div>
     </div>
@@ -1386,7 +1386,7 @@ function SanctionRow({
   const cls =
     tone === "warn" ? "text-[#f76b6b]" : tone === "ok" ? "text-accent2" : "text-muted";
   return (
-    <div className="grid grid-cols-[100px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className={`font-mono text-[12px] ${cls}`}>{when}</div>
       <div className="text-[14px] text-text/80 leading-[1.65]">{what}</div>
     </div>

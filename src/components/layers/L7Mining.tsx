@@ -48,9 +48,9 @@ export function L7Mining(props: LayerProps) {
                     <p className="text-[15px] text-text/75 leading-[1.7]">
                       아래 미니 채굴기는 이 과정을 작게 축소한 실험이다. 실제
                       SHA-256 공간을 0-99 눈금으로 줄여, 채굴자가 무엇을 반복하는지
-                      보여준다. 채굴 시도를 누를 때마다 nonce 를 바꿔 새 해시
-                      후보를 만들고, 그 값이 target 왼쪽에 들어오면 블록을 찾은
-                      것으로 본다.
+                      보여준다. 채굴 시도를 누를 때마다 블록 헤더의 작은 입력값이
+                      바뀌고 새 해시 후보가 나온다. 그 값이 target 왼쪽에 들어오면
+                      블록을 찾은 것으로 본다.
                     </p>
 
                     <MiniMiner />
@@ -241,7 +241,7 @@ function ReorgHistory() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[100px_1fr_100px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[100px_1fr_100px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>시점</div>
         <div>사건</div>
         <div className="text-right">깊이</div>
@@ -250,7 +250,7 @@ function ReorgHistory() {
         {events.map((e) => (
           <div
             key={e.date}
-            className="grid grid-cols-[100px_1fr_100px] gap-3 px-4 py-2.5 items-baseline"
+            className="grid grid-cols-1 sm:grid-cols-[100px_1fr_100px] gap-3 px-4 py-2.5 items-baseline"
           >
             <div className="font-mono text-[13px] text-muted">{e.date}</div>
             <div className="text-text/85 leading-relaxed">{e.desc}</div>
@@ -388,7 +388,7 @@ function MiniMiner() {
                 />
               )}
             </div>
-            <div className="grid grid-cols-[96px_1fr] gap-x-3 gap-y-1.5 text-[14px] font-mono">
+            <div className="grid grid-cols-1 sm:grid-cols-[96px_1fr] gap-x-3 gap-y-1.5 text-[14px] font-mono">
               <div className="text-muted">target</div>
               <div className="text-accent">{target.toString().padStart(2, "0")} / 100 미만</div>
               <div className="text-muted">최근 시도</div>
@@ -397,7 +397,7 @@ function MiniMiner() {
                   ? `${latest.value.toString().padStart(2, "0")} / 100`
                   : "아직 시도 없음"}
               </div>
-              <div className="text-muted">nonce</div>
+              <div className="text-muted">채굴 시도</div>
               <div className="text-text/80">{nonce.toLocaleString()}</div>
             </div>
           </div>
@@ -420,8 +420,8 @@ function MiniMiner() {
         </div>
 
         <div className="rounded-sm border border-edge bg-bg/50 overflow-hidden">
-          <div className="grid grid-cols-[76px_1fr_76px] gap-3 px-3 py-2.5 border-b border-edge text-[13px] font-semibold text-muted">
-            <div>nonce</div>
+          <div className="grid grid-cols-1 sm:grid-cols-[76px_1fr_76px] gap-3 px-3 py-2.5 border-b border-edge text-[13px] font-semibold text-muted">
+            <div>시도</div>
             <div>hash 후보</div>
             <div className="text-right">결과</div>
           </div>
@@ -434,7 +434,7 @@ function MiniMiner() {
               attempts.map((a) => (
                 <div
                   key={a.nonce}
-                  className="grid grid-cols-[76px_1fr_76px] gap-3 px-3 py-2.5 items-center text-[13px] font-mono"
+                  className="grid grid-cols-1 sm:grid-cols-[76px_1fr_76px] gap-3 px-3 py-2.5 items-center text-[13px] font-mono"
                 >
                   <div className="text-muted">{a.nonce}</div>
                   <div className="text-text/75 truncate">{a.hashHex}</div>
@@ -450,8 +450,8 @@ function MiniMiner() {
         <Callout title={latest?.won ? "블록 발견" : "검증은 쉽고, 찾기는 어렵다"} tone={latest?.won ? "accent" : "info"}>
           <p className="text-[15px] text-text/80 leading-[1.7]">
             {latest?.won
-              ? `nonce ${latest.nonce} 에서 target 보다 작은 해시가 나왔다. 다른 노드는 이 nonce 로 한 번만 해시를 계산해 조건을 바로 검증할 수 있다. 계속 시도하면 다음 블록 후보를 또 찾는 과정이 된다.`
-              : "채굴자는 target 아래의 해시가 나올 때까지 nonce 를 바꿔가며 반복한다. 성공 확률은 target 이 작아질수록 낮아진다."}
+              ? `${latest.nonce} 번째 채굴 시도에서 target 보다 작은 해시가 나왔다. 다른 노드는 같은 입력으로 한 번만 해시를 계산해 조건을 바로 검증할 수 있다. 계속 시도하면 다음 블록 후보를 또 찾는 과정이 된다.`
+              : "채굴자는 target 아래의 해시가 나올 때까지 입력값을 바꿔가며 반복한다. 성공 확률은 target 이 작아질수록 낮아진다."}
           </p>
         </Callout>
       </div>
@@ -662,7 +662,7 @@ function HalvingSchedule() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[60px_180px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[60px_180px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>era</div>
         <div>기간</div>
         <div>block subsidy</div>
@@ -671,7 +671,7 @@ function HalvingSchedule() {
         {halvings.map((h) => (
           <div
             key={h.era}
-            className={`grid grid-cols-[60px_180px_1fr] gap-3 px-4 py-2.5 items-baseline ${
+            className={`grid grid-cols-1 sm:grid-cols-[60px_180px_1fr] gap-3 px-4 py-2.5 items-baseline ${
               h.current ? "bg-accent/5" : ""
             }`}
           >
@@ -1005,7 +1005,7 @@ function PostSubsidyReflection() {
       </p>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[100px_120px_140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[100px_120px_140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>시점</div>
           <div>subsidy / 블록</div>
           <div>fee 비중 (현재)</div>
@@ -1132,7 +1132,7 @@ function PostRow({
         ? "text-accent"
         : "text-text/85";
   return (
-    <div className="grid grid-cols-[100px_120px_140px_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[100px_120px_140px_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className="font-mono text-[12px] text-muted">{t}</div>
       <div className={`font-mono text-[13px] ${color}`}>{subsidy}</div>
       <div className="font-mono text-[12px] text-muted">{fee}</div>
@@ -1209,7 +1209,7 @@ function ToyHashExample() {
       </div>
 
       <div className="rounded-sm border border-edge bg-bg/60 overflow-hidden">
-        <div className="grid grid-cols-[60px_1fr_60px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[60px_1fr_60px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>nonce</div>
           <div>hash (16-bit)</div>
           <div className="text-right">결과</div>
@@ -1218,7 +1218,7 @@ function ToyHashExample() {
           {trials.map((t, i) => (
             <div
               key={i}
-              className={`grid grid-cols-[60px_1fr_60px] gap-3 px-4 py-2 items-baseline ${
+              className={`grid grid-cols-1 sm:grid-cols-[60px_1fr_60px] gap-3 px-4 py-2 items-baseline ${
                 t.hit ? "bg-accent/[0.06]" : ""
               }`}
             >
@@ -1285,7 +1285,7 @@ function ToyStat({
 }) {
   return (
     <div className="rounded-sm border border-edge bg-surface/40 p-3 space-y-1">
-      <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+      <div className="text-[12px] font-semibold text-muted">
         {label}
       </div>
       <div className="font-mono text-[18px] text-accent">{value}</div>
@@ -1504,7 +1504,7 @@ function LengthExtensionDiagram() {
 function AsicMemoryCompare() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-x-auto">
-      <div className="grid min-w-[640px] grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:min-w-[640px] sm:grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>축</div>
         <div className="text-accent">Bitcoin · SHA-256</div>
         <div className="text-accent2">Ethereum · Ethash (PoW 시기)</div>
@@ -1531,7 +1531,7 @@ function AsicMemoryCompare() {
           b="Merge (2022) 까지 GPU 로 가능"
         />
       </div>
-      <div className="min-w-[640px] px-4 py-2.5 border-t border-edge text-[12px] text-text/60 leading-[1.7]">
+      <div className="sm:min-w-[640px] px-4 py-2.5 border-t border-edge text-[12px] text-text/60 leading-[1.7]">
         <span className="text-text/80">ASIC</span> = Application-Specific
         Integrated Circuit. 한 가지 작업 (SHA-256) 만 극도로 빠르게 하도록 만든
         전용 칩. 일반 GPU 가 분당 수십억 시도면 ASIC 은 분당 수천조 시도.
@@ -1553,7 +1553,7 @@ function CmpRow({
   b: string;
 }) {
   return (
-    <div className="grid min-w-[640px] grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:min-w-[640px] sm:grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className="font-mono text-[12px] text-muted">{axis}</div>
       <div className="text-[13px] text-text/85 leading-[1.65]">{a}</div>
       <div className="text-[13px] text-text/85 leading-[1.65]">{b}</div>

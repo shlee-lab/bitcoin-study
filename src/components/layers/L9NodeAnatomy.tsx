@@ -198,7 +198,7 @@ function NetworkVsStorage() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[160px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>저장소</div>
           <div>무엇이 들어 있나 · 왜 이 형태인가</div>
         </div>
@@ -259,7 +259,7 @@ function Stratum({
   body: string;
 }) {
   return (
-    <div className="grid grid-cols-[160px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="space-y-0.5">
         <div className="font-mono text-[13px] text-text/85">{name}</div>
         <div className="font-mono text-[11px] text-accent2/85 uppercase tracking-[0.14em]">
@@ -317,7 +317,7 @@ function Opening() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[180px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>이론 (앞 레이어)</div>
           <div>실제 (이 레이어에서 본다)</div>
         </div>
@@ -356,7 +356,7 @@ function Opening() {
 
 function BridgeRow({ theory, real }: { theory: string; real: string }) {
   return (
-    <div className="grid grid-cols-[180px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="font-mono text-[13px] text-accent2">{theory}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{real}</div>
     </div>
@@ -636,7 +636,7 @@ function RowExplain({
 }) {
   const color = tone === "accent2" ? "text-accent2" : "text-accent";
   return (
-    <div className="grid grid-cols-[80px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className={`text-[13px] font-semibold ${color}`}>
         {label}
       </div>
@@ -685,7 +685,7 @@ function ComponentTable() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[120px_1fr_140px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_140px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>구성 요소</div>
         <div>역할</div>
         <div>연결 레이어</div>
@@ -694,7 +694,7 @@ function ComponentTable() {
         {components.map((c) => (
           <div
             key={c.name}
-            className="grid grid-cols-[120px_1fr_140px] gap-3 px-4 py-2.5 items-baseline"
+            className="grid grid-cols-1 sm:grid-cols-[120px_1fr_140px] gap-3 px-4 py-2.5 items-baseline"
           >
             <div className="font-mono text-[13px] text-text/85">{c.name}</div>
             <div className="text-[13px] text-text/70 leading-relaxed">{c.role}</div>

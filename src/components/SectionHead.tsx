@@ -23,12 +23,12 @@ export function SectionHead({
     <div className="space-y-1.5 mb-3">
       {eyebrow && (
         <div
-          className={`text-[12px] font-medium ${eyebrowColor}`}
+          className={`text-[13px] font-semibold ${eyebrowColor}`}
         >
           {eyebrow}
         </div>
       )}
-      <div className="text-[15px] font-medium text-text leading-snug">
+      <div className="text-[17px] font-medium text-text leading-snug">
         {title}
       </div>
       {hint && (

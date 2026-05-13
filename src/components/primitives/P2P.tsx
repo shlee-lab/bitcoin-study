@@ -220,7 +220,7 @@ function MsgTable() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-x-auto">
-      <div className="grid min-w-[620px] grid-cols-[100px_80px_1fr_90px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:min-w-[620px] sm:grid-cols-[100px_80px_1fr_90px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>name</div>
         <div>direction</div>
         <div>역할</div>
@@ -230,7 +230,7 @@ function MsgTable() {
         {rows.map((r) => (
           <div
             key={r.name}
-            className="grid min-w-[620px] grid-cols-[100px_80px_1fr_90px] gap-3 px-4 py-2 items-baseline"
+            className="grid grid-cols-1 sm:min-w-[620px] sm:grid-cols-[100px_80px_1fr_90px] gap-3 px-4 py-2 items-baseline"
           >
             <div className="font-mono text-sm text-accent">{r.name}</div>
             <div className="text-[13px] text-muted">{r.dir}</div>

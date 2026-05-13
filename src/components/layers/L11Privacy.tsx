@@ -117,7 +117,7 @@ function ChainAnalysis() {
         따라가는 일이다.
       </p>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>확인할 것</div>
           <div>읽는 방법</div>
         </div>
@@ -232,7 +232,7 @@ function CoinJoinSection() {
         </li>
       </ol>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>핵심</div>
           <div>왜 필요한가</div>
         </div>
@@ -731,7 +731,7 @@ function TornadoCashReflection() {
 
 function HRow({ label, body }: { label: string; body: string }) {
   return (
-    <div className="grid grid-cols-[150px_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className="font-mono text-[13px] text-accent2/80">{label}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{body}</div>
     </div>

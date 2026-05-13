@@ -87,7 +87,7 @@ function Bridge() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[110px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[110px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>동작</div>
           <div>언제 / 무엇 / 얼마나 자주</div>
         </div>
@@ -135,10 +135,10 @@ function Op({
 }) {
   const c = tone === "accent" ? "text-accent" : "text-accent2";
   return (
-    <div className="grid grid-cols-[110px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[110px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="space-y-0.5">
         <div className={`font-mono text-[13px] ${c}`}>{name}</div>
-        <div className="font-mono text-[10px] text-muted uppercase tracking-[0.14em]">
+        <div className="text-[12px] text-muted font-medium">
           {sub}
         </div>
       </div>
@@ -320,7 +320,7 @@ function CrossLayerRecap() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[80px_70px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[80px_70px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>시간</div>
           <div>단계</div>
           <div>무슨 일</div>
@@ -329,7 +329,7 @@ function CrossLayerRecap() {
           {stages.map((s, i) => (
             <div
               key={i}
-              className="grid grid-cols-[80px_70px_1fr] gap-3 px-4 py-3 items-baseline"
+              className="grid grid-cols-1 sm:grid-cols-[80px_70px_1fr] gap-3 px-4 py-3 items-baseline"
             >
               <div className="font-mono text-[13px] text-accent">{s.when}</div>
               <div className="font-mono text-[13px] text-accent2">{s.layer}</div>

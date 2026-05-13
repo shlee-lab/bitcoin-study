@@ -225,7 +225,7 @@ function NodeKinds() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>종류</div>
         <div>역할</div>
         <div>디스크</div>
@@ -242,7 +242,7 @@ function NodeKinds() {
           return (
             <div
               key={k.name}
-              className="grid grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2.5 items-baseline"
+              className="grid grid-cols-1 sm:grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2.5 items-baseline"
             >
               <div>
                 <div className={`font-mono text-[13px] ${color}`}>{k.name}</div>
@@ -962,7 +962,7 @@ function WhyManyNodes() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/20 p-4 text-sm text-text/85 leading-relaxed space-y-1.5">
-        <div className="font-mono text-[12px] text-accent2 uppercase tracking-wider">
+        <div className="text-[13px] text-accent2 font-semibold">
           주의 · 채굴자 분포 vs 검증자 분포
         </div>
         <p>
@@ -995,7 +995,7 @@ function ThreatCard({
   return (
     <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-2">
       <div className="flex items-baseline justify-between gap-2 flex-wrap">
-        <span className={`font-mono text-[13px] ${accentClass} uppercase tracking-wider`}>
+        <span className={`text-[15px] font-semibold ${accentClass} leading-snug`}>
           {name}
         </span>
       </div>
@@ -1017,7 +1017,7 @@ function NodeCountRow({
   const color =
     tone === "bad" ? "text-[#f76b6b]" : tone === "good" ? "text-accent" : "text-accent2";
   return (
-    <div className="grid grid-cols-[120px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className={`font-mono text-[14px] ${color}`}>{n}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{outcome}</div>
     </div>
@@ -1250,7 +1250,7 @@ function ContrastCard({
 
 function Row({ label, body }: { label: string; body: string }) {
   return (
-    <div className="grid grid-cols-[80px_1fr] gap-3 text-[13px]">
+    <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr] gap-3 text-[13px]">
       <div className="text-muted font-mono">{label}</div>
       <div className="text-text/85 leading-[1.6]">{body}</div>
     </div>
@@ -1300,7 +1300,7 @@ function DistVsDecent() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>시스템</div>
           <div>분산도</div>
           <div>탈중앙도</div>
@@ -1582,7 +1582,7 @@ function DDRow({
 }) {
   const cls = tone === "accent" ? "text-accent" : "text-text/85";
   return (
-    <div className="grid grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className={`font-mono text-[13px] ${cls}`}>{name}</div>
       <div className="text-[13px] text-text/85">{dist}</div>
       <div className="text-[13px] text-text/85">{decent}</div>

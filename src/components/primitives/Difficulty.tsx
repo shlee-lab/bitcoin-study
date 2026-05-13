@@ -158,7 +158,7 @@ function AdjustmentExamples() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-x-auto">
-      <div className="grid min-w-[520px] grid-cols-[120px_100px_80px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:min-w-[520px] sm:grid-cols-[120px_100px_80px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>case</div>
         <div>actual</div>
         <div className="text-right">ratio</div>
@@ -175,7 +175,7 @@ function AdjustmentExamples() {
           return (
             <div
               key={i}
-              className="grid min-w-[520px] grid-cols-[120px_100px_80px_1fr] gap-3 px-4 py-2 items-baseline"
+              className="grid grid-cols-1 sm:min-w-[520px] sm:grid-cols-[120px_100px_80px_1fr] gap-3 px-4 py-2 items-baseline"
             >
               <div className="text-sm">{c.label}</div>
               <div className="font-mono text-[13px] text-text/85">{c.actual}</div>

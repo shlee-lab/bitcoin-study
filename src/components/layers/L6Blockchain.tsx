@@ -380,7 +380,7 @@ function ChainViz() {
 function ConfirmTable() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[80px_1fr_140px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr_140px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>confirmations</div>
         <div>실용 권장</div>
         <div className="text-right">평균 대기시간</div>
@@ -419,7 +419,7 @@ function ConfirmRow({
         ? "text-accent2"
         : "text-text/85";
   return (
-    <div className="grid grid-cols-[80px_1fr_140px] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr_140px] gap-3 px-4 py-2.5 items-baseline">
       <div className={`font-mono text-sm ${color}`}>{n}</div>
       <div className="text-text/85 leading-relaxed">{use}</div>
       <div className="text-right font-mono text-[13px] text-muted">{wait}</div>
@@ -573,8 +573,8 @@ function ForkTypeCard({
   const stroke = tone === "accent" ? "border-accent/40 bg-accent/5" : "border-accent2/40 bg-accent2/5";
   const heading = tone === "accent" ? "text-accent" : "text-accent2";
   return (
-    <div className={`rounded-sm border  p-4 space-y-2`}>
-      <div className={`font-mono text-[13px] ${heading} uppercase tracking-wider`}>
+    <div className={`rounded-sm border ${stroke} p-4 space-y-2`}>
+      <div className={`text-[15px] font-semibold ${heading} leading-snug`}>
         {kind}
       </div>
       <div className="text-[15px] text-text/85 leading-[1.7]">{line}</div>
@@ -593,19 +593,19 @@ function Genesis() {
         block #0 · 2009-01-03 18:15:05 UTC
       </div>
       <div className="p-4 space-y-2.5 font-mono text-[13px]">
-        <div className="grid grid-cols-[140px_1fr] gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
           <span className="text-muted">hash</span>
           <span className="text-accent break-all">
             00000000 0019d668 9c085ae1 6583e9 …
           </span>
         </div>
-        <div className="grid grid-cols-[140px_1fr] gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
           <span className="text-muted">prev_block_hash</span>
           <span className="text-text/85 break-all">
             00000000 00000000 00000000 00000000 …
           </span>
         </div>
-        <div className="grid grid-cols-[140px_1fr] gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
           <span className="text-muted">coinbase 메시지</span>
           <span className="text-accent2 break-words leading-relaxed">
             “The Times 03/Jan/2009 Chancellor on brink of second bailout for
@@ -651,7 +651,7 @@ function DAOHack() {
   return (
     <div className="space-y-3">
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-[120px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
           <div>시점</div>
           <div>사건</div>
         </div>
@@ -668,7 +668,7 @@ function DAOHack() {
             return (
               <div
                 key={i}
-                className="grid grid-cols-[120px_1fr] gap-3 px-4 py-2.5 items-baseline"
+                className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 px-4 py-2.5 items-baseline"
               >
                 <div className={`font-mono text-[13px] ${color}`}>{t.when}</div>
                 <div className="text-text/85 leading-relaxed">{t.what}</div>
@@ -739,40 +739,62 @@ function MostWorkRule() {
           eyebrow="구체 예시"
           title="높이 vs work · 둘이 다를 수 있다"
         />
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-[13px] font-semibold text-muted border-b border-edge">
-                <th className="text-left px-3 py-2 font-normal">사슬</th>
-                <th className="text-left px-3 py-2 font-normal">길이 (높이)</th>
-                <th className="text-left px-3 py-2 font-normal">평균 difficulty</th>
-                <th className="text-left px-3 py-2 font-normal">총 work</th>
-                <th className="text-left px-3 py-2 font-normal">노드 선택?</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-edge">
-              <tr>
-                <td className="px-3 py-2.5 font-medium text-text/85">사슬 A</td>
-                <td className="px-3 py-2.5 font-mono text-accent2">100 블록</td>
-                <td className="px-3 py-2.5 font-mono text-text/85">1.0×</td>
-                <td className="px-3 py-2.5 font-mono text-text/85">100 W</td>
-                <td className="px-3 py-2.5 text-accent">✓ 채택</td>
-              </tr>
-              <tr>
-                <td className="px-3 py-2.5 font-medium text-text/85">사슬 B</td>
-                <td className="px-3 py-2.5 font-mono text-accent2">102 블록</td>
-                <td className="px-3 py-2.5 font-mono text-text/85">0.9×</td>
-                <td className="px-3 py-2.5 font-mono text-text/85">91.8 W</td>
-                <td className="px-3 py-2.5 text-[#f76b6b]">✗ 무시</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="border border-edge/70 bg-bg/40 divide-y divide-edge/70">
+          <div className="hidden md:grid grid-cols-[0.9fr_1fr_1fr_1fr_1fr] gap-3 px-3 py-2 text-[13px] font-semibold text-muted">
+            <div>사슬</div>
+            <div>길이 (높이)</div>
+            <div>평균 difficulty</div>
+            <div>총 work</div>
+            <div>노드 선택?</div>
+          </div>
+          <WorkRow chain="사슬 A" height="100 블록" difficulty="1.0×" work="100 W" selected />
+          <WorkRow chain="사슬 B" height="102 블록" difficulty="0.9×" work="91.8 W" />
         </div>
         <div className="text-[13px] text-muted mt-3 leading-relaxed">
           B 가 더 길지만 work 가 적다 → 노드는 A 를 ‘진짜’ 사슬로 본다.
         </div>
       </div>
     </section>
+  );
+}
+
+function WorkRow({
+  chain,
+  height,
+  difficulty,
+  work,
+  selected,
+}: {
+  chain: string;
+  height: string;
+  difficulty: string;
+  work: string;
+  selected?: boolean;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1fr_1fr_1fr_1fr] gap-2.5 md:gap-3 px-3 py-3 text-sm">
+      <div className="font-medium text-text/85">{chain}</div>
+      <MobileCell label="길이">{height}</MobileCell>
+      <MobileCell label="평균 difficulty">{difficulty}</MobileCell>
+      <MobileCell label="총 work">{work}</MobileCell>
+      <div className="flex items-baseline justify-between gap-3 md:block">
+        <span className="md:hidden text-[12px] font-semibold text-muted">노드 선택</span>
+        <span className={selected ? "text-accent" : "text-[#f76b6b]"}>
+          {selected ? "채택" : "무시"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function MobileCell({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3 md:block font-mono text-text/85">
+      <span className="md:hidden font-sans text-[12px] font-semibold text-muted">
+        {label}
+      </span>
+      <span>{children}</span>
+    </div>
   );
 }
 
@@ -945,7 +967,7 @@ function AttackCase({
 }) {
   const chainColor = tone === "warn" ? "text-[#f76b6b]" : "text-accent";
   return (
-    <div className="grid grid-cols-[100px_160px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[100px_160px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="font-mono text-[12px] text-muted">{when}</div>
       <div className={`font-mono text-[13px] ${chainColor}`}>{chain}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{what}</div>
@@ -955,7 +977,7 @@ function AttackCase({
 
 function AttackStep({ n, what }: { n: string; what: string }) {
   return (
-    <div className="grid grid-cols-[40px_1fr] gap-3 px-4 py-2.5 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[40px_1fr] gap-3 px-4 py-2.5 items-baseline">
       <div className="font-mono text-accent text-sm">{n}</div>
       <div className="text-text/85 leading-relaxed">{what}</div>
     </div>

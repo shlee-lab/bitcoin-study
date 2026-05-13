@@ -136,18 +136,18 @@ function Bullet({ children }: { children: React.ReactNode }) {
 }
 
 const TEST_WORDS = [
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "abandon",
-  "about",
+  "river",
+  "orange",
+  "glass",
+  "planet",
+  "silver",
+  "market",
+  "winter",
+  "canvas",
+  "rocket",
+  "forest",
+  "paper",
+  "demo-only",
 ];
 
 function Bip39Example() {
@@ -155,14 +155,13 @@ function Bip39Example() {
     <div className="space-y-3">
       <div className="border-l-2 border-[#f76b6b] bg-[#f76b6b]/[0.06] p-4 space-y-2">
         <div className="text-[14px] font-medium text-[#f76b6b] leading-snug">
-          ⚠ 이 시드 문구는 절대 실제 지갑에 사용하지 말 것
+          ⚠ 화면용 더미 시드 문구 · 실제 지갑에서 복원되지 않음
         </div>
         <p className="text-[13px] text-text/85 leading-[1.7]">
-          아래는 BIP39 사양에 박혀 있는{" "}
-          <span className="text-text">test vector</span>. 전 세계의 모든
-          개발자·봇이 이미 알고 있다. 이 시드 문구로 만들어지는 모든 주소에 들어온
-          BTC 는 <span className="text-text">초 단위로 자동으로 인출</span> 된다
-          (봇이 24/7 모니터링 중).
+          아래 단어들은 BIP39 흐름을 설명하기 위한 더미 예시다. 일부러 실제
+          지갑에서 복원 가능한 mnemonic 으로 맞추지 않았다. 공개된 테스트 벡터나
+          인터넷에 올라온 시드 문구를 실제 지갑에 넣는 순간, 그 지갑은 사실상
+          누구나 열 수 있는 지갑이 된다.
         </p>
         <p className="text-[13px] text-text/85 leading-[1.7]">
           넓혀 말해 <span className="text-text">인터넷·블로그·튜토리얼·YouTube·
@@ -174,8 +173,8 @@ function Bip39Example() {
         </p>
       </div>
       <div className="border border-edge bg-surface/30 p-4 space-y-3">
-        <div className="text-xs text-muted font-mono uppercase tracking-wider">
-          BIP39 test vector · 12 단어 (예시 전용)
+        <div className="text-[13px] text-muted font-semibold">
+          더미 시드 문구 · 12 단어 (복원 불가)
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 font-mono text-sm">
           {TEST_WORDS.map((w, i) => (
@@ -189,9 +188,9 @@ function Bip39Example() {
           ))}
         </div>
         <div className="text-xs text-muted leading-relaxed">
-          각 단어는 BIP39 사전 (영어 2048 단어) 의 인덱스. 같은 시드 문구를 입력
-          하면 어느 BIP39 호환 지갑에서든 같은 트리, 같은 주소들이 복원된다 ·
-          그래서 시드 문구가 곧 자산.
+          실제 BIP39 mnemonic 은 2048단어 사전에서 고른 단어와 checksum 이 함께
+          맞아야 한다. 같은 유효 mnemonic 은 호환 지갑 어디에서든 같은 master
+          seed 와 주소들을 복원한다. 그래서 실제 시드 문구는 곧 자산이다.
         </div>
       </div>
 
@@ -318,7 +317,7 @@ function SeedFlow() {
           </marker>
         </defs>
 
-        <FlowBox x={140} y={10} w={200} h={36} title="12 단어 시드 문구" sub="abandon abandon abandon … about" tone="accent2" />
+        <FlowBox x={140} y={10} w={200} h={36} title="12 단어 시드 문구" sub="river orange glass … demo-only" tone="accent2" />
 
         <line
           x1={240}
@@ -510,7 +509,7 @@ function PathExample() {
         {parts.map((p, i) => (
           <div
             key={i}
-            className="grid grid-cols-[60px_1fr] gap-3 px-3 py-2 rounded border border-edge bg-bg/60"
+            className="grid grid-cols-1 sm:grid-cols-[60px_1fr] gap-3 px-3 py-2 rounded border border-edge bg-bg/60"
           >
             <div className="font-mono text-accent2">{p.label}</div>
             <div className="text-text/85 text-[13px]">{p.desc}</div>

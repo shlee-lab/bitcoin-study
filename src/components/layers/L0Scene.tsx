@@ -727,7 +727,7 @@ function MoneyTimeline() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-x-auto">
-      <div className="grid min-w-[560px] grid-cols-[100px_140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:min-w-[560px] sm:grid-cols-[100px_140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>시기</div>
         <div>체제</div>
         <div>무엇에 묶여 있었나</div>
@@ -743,7 +743,7 @@ function MoneyTimeline() {
           return (
             <div
               key={e.name}
-              className="grid min-w-[560px] grid-cols-[100px_140px_1fr] gap-3 px-4 py-2.5 items-baseline"
+              className="grid grid-cols-1 sm:min-w-[560px] sm:grid-cols-[100px_140px_1fr] gap-3 px-4 py-2.5 items-baseline"
             >
               <div className="font-mono text-[13px] text-muted">{e.when}</div>
               <div className={`font-mono text-[13px] ${color}`}>{e.name}</div>

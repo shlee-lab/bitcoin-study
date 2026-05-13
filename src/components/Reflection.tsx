@@ -70,12 +70,12 @@ export function Reading({
   children: ReactNode;
 }) {
   return (
-    <div className="pt-3 space-y-2 max-w-prose">
-      <div className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#cdb7ff] leading-snug">
+    <div className="pt-4 mt-1 border-t border-edge/60 space-y-2 max-w-prose">
+      <div className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-accent2 leading-snug">
         <span className="h-1.5 w-1.5 rounded-full bg-[#b58cff]" />
         {label}
       </div>
-      <div className="text-[14px] text-text/65 leading-[1.75]">{children}</div>
+      <div className="text-[14px] text-text/72 leading-[1.75]">{children}</div>
     </div>
   );
 }

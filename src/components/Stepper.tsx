@@ -69,9 +69,9 @@ export function Stepper({ steps }: { steps: Step[] }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12, duration: 0.25 }}
           onClick={advance}
-          className="group w-full max-w-2xl text-left flex items-baseline gap-5 py-4 pr-2 border-t border-edge hover:border-accent2/60 transition-colors"
+          className="group w-full max-w-2xl text-left flex flex-col sm:flex-row sm:items-baseline gap-2.5 sm:gap-5 py-4 pr-2 border-t border-edge hover:border-accent2/60 transition-colors"
         >
-          <span className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase shrink-0 w-16 pt-0.5">
+          <span className="font-mono text-[11px] tracking-[0.12em] text-muted uppercase shrink-0 sm:w-16 pt-0.5">
             {String(revealed + 1).padStart(2, "0")}
             <span className="text-muted/50"> / {String(steps.length).padStart(2, "0")}</span>
           </span>
@@ -79,12 +79,12 @@ export function Stepper({ steps }: { steps: Step[] }) {
             <span className="flex items-center gap-2 flex-wrap">
               <LevelBadge level={levelOf(next)} />
               <span className="text-[16px] font-semibold text-text/90 group-hover:text-text transition-colors leading-snug">
-                {next.title}
+                {displayTitle(next)}
               </span>
             </span>
-            {next.subtitle && (
+            {displaySubtitle(next) && (
               <span className="block text-[13px] text-text/55 leading-relaxed">
-                {next.subtitle}
+                {displaySubtitle(next)}
               </span>
             )}
           </span>
@@ -108,13 +108,13 @@ function StepHeader({
 }) {
   return (
     <div className="flex items-center gap-2.5 flex-wrap">
-      <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-muted">
+      <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted">
         {String(index + 1).padStart(2, "0")}
         <span className="text-muted/45"> / {String(total).padStart(2, "0")}</span>
       </span>
       <LevelBadge level={levelOf(step)} />
-      <span className="text-[15px] font-semibold text-text/82 leading-snug">
-        {step.title}
+      <span className="text-[16px] font-semibold text-text/86 leading-snug">
+        {displayTitle(step)}
       </span>
     </div>
   );
@@ -150,11 +150,21 @@ function LevelBadge({ level }: { level: StepLevel }) {
   };
   const m = meta[level];
   return (
-    <span className={`inline-flex items-center gap-1.5 text-[13px] font-semibold ${m.text}`}>
+    <span className={`inline-flex items-center gap-1.5 text-[13px] font-semibold leading-none ${m.text}`}>
       <span className={`h-1.5 w-1.5 rounded-full ${m.dot}`} />
       {m.label}
     </span>
   );
+}
+
+function displayTitle(step: Step) {
+  if (step.title === "생각해보기" && step.subtitle) return step.subtitle;
+  return step.title;
+}
+
+function displaySubtitle(step: Step) {
+  if (step.title === "생각해보기") return undefined;
+  return step.subtitle;
 }
 
 function levelOf(step: Step): StepLevel {

@@ -136,7 +136,7 @@ function ExecTrace() {
 
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-[160px_1fr_1.4fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr_1.4fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
         <div>op</div>
         <div>설명</div>
         <div>stack (after)</div>
@@ -145,7 +145,7 @@ function ExecTrace() {
         {steps.map((s, i) => (
           <div
             key={i}
-            className="grid grid-cols-[160px_1fr_1.4fr] gap-3 px-4 py-2 items-start"
+            className="grid grid-cols-1 sm:grid-cols-[160px_1fr_1.4fr] gap-3 px-4 py-2 items-start"
           >
             <div className="font-mono text-[13px] text-accent">{s.op}</div>
             <div className="text-[13px] text-text/85 leading-relaxed">

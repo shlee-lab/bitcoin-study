@@ -326,9 +326,9 @@ function UseCard({
           ? "text-[#f7931a]"
           : "text-text/85";
   return (
-    <div className={`rounded-sm border  bg-surface/30 p-4 space-y-2`}>
+    <div className={`rounded-sm border ${border} bg-surface/30 p-4 space-y-2`}>
       <div className="flex items-baseline justify-between gap-2 flex-wrap">
-        <div className={`font-mono text-[13px] ${heading} uppercase tracking-wider`}>
+        <div className={`text-[15px] font-semibold ${heading} leading-snug`}>
           {name}
         </div>
         <div className="text-xs text-muted font-mono">{since}</div>
@@ -355,7 +355,7 @@ function Part({
   return (
     <section className="space-y-5">
       <div className="border-l-2 border-accent/60 pl-4">
-        <div className="text-xs text-muted font-mono uppercase tracking-wider">
+        <div className="text-[13px] text-muted font-semibold">
           {n}
         </div>
         <h2 className="text-lg font-medium mt-1">{title}</h2>

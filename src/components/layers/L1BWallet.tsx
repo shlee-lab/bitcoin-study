@@ -405,15 +405,15 @@ function BrandChip({ name, iconify }: Brand) {
 
 function Badge({ badge }: { badge: WalletType["badge"] }) {
   const styles: Record<WalletType["badge"], { label: string; cls: string }> = {
-    cold: { label: "cold", cls: "border-accent2/40 text-accent2 bg-accent2/10" },
-    hot: { label: "hot", cls: "border-accent/40 text-accent bg-accent/10" },
-    custodial: { label: "custodial", cls: "border-[#f76b6b]/40 text-[#f76b6b] bg-[#f76b6b]/10" },
-    advanced: { label: "advanced", cls: "border-text/30 text-text/85 bg-text/5" },
-    legacy: { label: "legacy", cls: "border-muted/40 text-muted bg-muted/5" },
+    cold: { label: "오프라인", cls: "border-accent2/40 text-accent2 bg-accent2/10" },
+    hot: { label: "온라인", cls: "border-accent/40 text-accent bg-accent/10" },
+    custodial: { label: "수탁", cls: "border-[#f76b6b]/40 text-[#f76b6b] bg-[#f76b6b]/10" },
+    advanced: { label: "고급", cls: "border-text/30 text-text/85 bg-text/5" },
+    legacy: { label: "레거시", cls: "border-muted/40 text-muted bg-muted/5" },
   };
   const s = styles[badge];
   return (
-    <span className={`text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border ${s.cls}`}>
+    <span className={`text-[12px] font-semibold leading-none px-2 py-1 rounded-sm border ${s.cls}`}>
       {s.label}
     </span>
   );
@@ -431,43 +431,39 @@ function ComparisonTable() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
       <div className="px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/80">한눈에 비교</div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-[13px] font-semibold text-muted border-b border-edge">
-              <Th>종류</Th>
-              <Th>키 위치</Th>
-              <Th>네트워크</Th>
-              <Th>서명 권한</Th>
-              <Th>복원</Th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-edge">
-            {rows.map((r) => (
-              <tr key={r.kind}>
-                <Td bold>{r.kind}</Td>
-                <Td>{r.location}</Td>
-                <Td><Net value={r.online} /></Td>
-                <Td><Custody value={r.yours} /></Td>
-                <Td>{r.recovery}</Td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="divide-y divide-edge">
+        <div className="hidden md:grid grid-cols-[1.1fr_1.25fr_0.8fr_0.9fr_1.3fr] gap-3 px-4 py-2 text-[13px] font-semibold text-muted">
+          <div>종류</div>
+          <div>키 위치</div>
+          <div>네트워크</div>
+          <div>서명 권한</div>
+          <div>복원</div>
+        </div>
+        {rows.map((r) => (
+          <div
+            key={r.kind}
+            className="grid grid-cols-1 md:grid-cols-[1.1fr_1.25fr_0.8fr_0.9fr_1.3fr] gap-2.5 md:gap-3 px-4 py-3 text-sm"
+          >
+            <div className="font-medium text-text">{r.kind}</div>
+            <CompareCell label="키 위치">{r.location}</CompareCell>
+            <CompareCell label="네트워크"><Net value={r.online} /></CompareCell>
+            <CompareCell label="서명 권한"><Custody value={r.yours} /></CompareCell>
+            <CompareCell label="복원">{r.recovery}</CompareCell>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function Th({ children }: { children: React.ReactNode }) {
-  return <th className="text-left px-4 py-2 font-normal">{children}</th>;
-}
-
-function Td({ children, bold }: { children: React.ReactNode; bold?: boolean }) {
+function CompareCell({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <td className={`px-4 py-2 align-top ${bold ? "font-medium text-text" : "text-text/85"}`}>
-      {children}
-    </td>
+    <div className="flex items-baseline justify-between gap-3 md:block text-text/85">
+      <span className="md:hidden text-[12px] font-semibold text-muted shrink-0">
+        {label}
+      </span>
+      <span className="text-right md:text-left">{children}</span>
+    </div>
   );
 }
 
