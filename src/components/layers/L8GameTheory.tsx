@@ -137,7 +137,7 @@ export function L8GameTheory(props: LayerProps) {
                       얼마나 큰가” 를 본다.
                     </p>
                     <Reading label="관련 연구">
-                      핵심 참고는 Tim Roughgarden 의{" "}
+                      관련 핵심 연구로 Tim Roughgarden 의{" "}
                       <a
                         href="https://arxiv.org/abs/2106.01340"
                         target="_blank"
@@ -146,24 +146,25 @@ export function L8GameTheory(props: LayerProps) {
                       >
                         <em>“Transaction Fee Mechanism Design”</em>
                       </a>{" "}
-                      (2021) 은 Bitcoin 과 Ethereum 의 수수료 시장을 mechanism
+                      (2021) 을 들 수 있다. 이 논문은 Bitcoin 과 Ethereum 의 수수료 시장을 mechanism
                       design 문제로 다룬다. 사용자가 어떤 fee 를 제시해야 하는지,
                       블록 생산자가 어떤 tx 를 포함해야 하는지, 서로 담합하면 규칙을
                       우회할 수 있는지를 하나의 메커니즘으로 분석한다. 특히 Ethereum
                       의 EIP-1559 를 사례로 삼아, base fee 소각·tip·가변 블록 크기가
                       인센티브를 어떻게 바꾸는지 설명한다. 이 논문은 EIP-1559 가 특정
                       조건에서 DSIC 를 만족하고, miner 의 조작과 off-chain collusion
-                      에 대해서도 별도 조건 (MMIC, OCA-proofness) 으로 분석할 수
+                      에 대해서도 별도 조건 (<Term id="mmic">MMIC</Term>,{" "}
+                      <Term id="oca-proofness">OCA-proofness</Term>) 으로 분석할 수
                       있음을 보인다.
                     </Reading>
                     <p>
-                      이 원리는 블록체인에만 머물지 않는다. AI 학습 데이터 라벨링,
+                      이 원리는 블록체인에만 국한되지 않는다. AI 학습 데이터 라벨링,
                       추천 시스템, 온라인 광고 경매, 클라우드 자원 배분, 오픈소스
                       유지보수, 사회 제도와 정책 설계까지 모두 “참여자가 자기 이익을
                       따라 움직일 때 어떤 결과가 나오는가” 를 다룬다. 블록체인에서
                       특히 이 문제가 강조되는 이유는 더 분명하다. 블록체인은 중앙
                       운영자를 신뢰하지 않는 구조이므로, 참여자의 이익 구조 자체가
-                      프로토콜의 보안 가정이 된다.
+                      프로토콜의 보안 전제가 된다.
                     </p>
                     <Probe>
                       같은 원리를 어디에 더 적용할 수 있을까? 콘텐츠 모더레이션?

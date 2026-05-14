@@ -317,11 +317,11 @@ function Opening() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
           <div>앞에서 배운 개념</div>
           <div>노드 안의 실제 구성요소</div>
         </div>
-        <div className="divide-y divide-edge text-sm">
+        <div className="divide-y divide-edge">
           <BridgeRow
             theory="현재 쓰지 않은 출력들의 목록"
             real="현재 안 쓴 출력들의 키-값 저장소. 매 블록마다 수천 개 항목 추가·삭제."
@@ -356,9 +356,11 @@ function Opening() {
 
 function BridgeRow({ theory, real }: { theory: string; real: string }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-3 px-4 py-3 items-baseline">
-      <div className="font-mono text-[13px] text-accent2">{theory}</div>
-      <div className="text-[13px] text-text/85 leading-relaxed">{real}</div>
+    <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-2.5 sm:gap-4 px-4 py-3.5 items-start">
+      <div className="text-[15px] font-medium text-accent2 leading-snug">
+        {theory}
+      </div>
+      <div className="text-[14px] text-text/82 leading-[1.65]">{real}</div>
     </div>
   );
 }

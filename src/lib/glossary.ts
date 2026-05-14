@@ -331,6 +331,14 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     term: "selfish mining",
     def: "찾은 블록을 곧장 공개하지 않고 비밀 체인을 키우다 전략적으로 던져 정직한 네트워크 작업을 헛수고로 만드는 채굴 전략. 임계 hashrate (≈25-33%) + 강한 연결성 필요.",
   },
+  mmic: {
+    term: "MMIC · Myopic Miner Incentive Compatibility",
+    def: "블록 생산자가 현재 블록의 직접 수익만 보고 행동하더라도, 프로토콜이 의도한 방식대로 tx 를 포함하는 것이 최선이 되는 성질. 수수료 메커니즘이 채굴자나 validator 의 조작 유인을 얼마나 줄이는지 볼 때 쓰인다.",
+  },
+  "oca-proofness": {
+    term: "OCA-proofness · Off-Chain Agreement-proofness",
+    def: "사용자와 블록 생산자가 프로토콜 밖에서 별도 계약이나 뇌물을 주고받아도, 정해진 수수료 규칙을 우회해 더 이득을 보기 어려운 성질. 블록체인 수수료 시장의 담합 저항성을 설명할 때 쓰인다.",
+  },
   lamport: {
     term: "Leslie Lamport",
     def: "분산 시스템 이론의 거장. ‘Time, Clocks, and the Ordering of Events’ (1978), Paxos 합의 알고리즘, 그리고 1982 년 Byzantine Generals Problem 이 모두 그의 작업이다. 2013 년 Turing Award 수상. 부수적으로 · 학계에서 수식을 보기 좋게 조판하기 위해 만든 매크로 패키지가 바로 LaTeX (Lamport TeX) 다. 분산 합의를 모르는 사람도 그가 만든 LaTeX 로 논문을 쓰고 있는 셈이다.",
