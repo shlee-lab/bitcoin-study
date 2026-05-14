@@ -497,13 +497,13 @@ function RegulatoryPressure() {
       <p className="text-[17px] text-text/85 leading-[1.75]">
         프라이버시 코인의 ‘설계상 추적 불가’ 는 사용자에겐 강점이지만, 금융
         규제 입장에선 자금 세탁 추적이 막힌다는 뜻이기도 하다. 그 충돌이
-        제도화된 형태가 <Term id="aml">AML</Term> 과{" "}
-        <Term id="travel-rule">Travel Rule</Term>.
+        제도화된 형태가 <span className="text-text">AML</span> 과{" "}
+        <span className="text-text">Travel Rule</span>.
       </p>
 
       <div className="border border-edge bg-surface/30 p-5 space-y-2.5">
         <h3 className="text-[16px] font-medium text-text">
-          <Term id="aml">AML · Anti-Money Laundering</Term>
+          AML · Anti-Money Laundering
         </h3>
         <p className="text-[14px] text-text/80 leading-[1.7]">
           자금 세탁 방지. 모든 금융 기관이 ‘의심 거래’ 를 정부에 보고하고,
@@ -515,7 +515,7 @@ function RegulatoryPressure() {
 
       <div className="border border-edge bg-surface/30 p-5 space-y-2.5">
         <h3 className="text-[16px] font-medium text-text">
-          <Term id="travel-rule">Travel Rule</Term> · 송수신자 정보 동반 의무
+          Travel Rule · 송수신자 정보 동반 의무
         </h3>
         <p className="text-[14px] text-text/80 leading-[1.7]">
           <Term id="fatf">FATF (Financial Action Task Force)</Term> 가 2019
@@ -538,7 +538,9 @@ function RegulatoryPressure() {
         <p className="text-[14px] text-text/80 leading-[1.7]">
           Travel Rule 을 지키려면 송수신자 정보가 알려져 있어야 한다. 그런데
           Monero 는 그 정보 자체가 프로토콜 수준에서 가려져 있어, 거래소가
-          정보를 추출해 보고할 방법이 없다. 결국:
+          정보를 추출해 보고할 방법이 없다. 완전한 프라이버시 코인뿐 아니라,
+          기존 코인에 선택적 프라이버시 레이어를 추가한 경우도 같은 충돌을
+          만든다. 결국:
         </p>
         <div className="text-[13px] text-text/75 leading-[1.7] space-y-1 pt-1">
           <div>
@@ -550,6 +552,13 @@ function RegulatoryPressure() {
             ·{" "}
             <span className="text-text">2024 년 2 월, Binance</span> 가 Monero,
             Mobilecoin 등 다수를 폐지했다. 글로벌 최대 거래소의 결정이었다.
+          </div>
+          <div>
+            · <span className="text-text">2022 년, Litecoin</span> 도
+            MimbleWimble Extension Blocks (MWEB) 라는 선택적 프라이버시 기능을
+            활성화한 뒤 한국 주요 거래소에서 상장 폐지되었다. ‘프라이버시 전용
+            코인’ 이 아니어도 추적 불가능한 전송 경로가 생기면 규제 리스크가
+            발생할 수 있다는 사례다.
           </div>
           <div>
             · 결과적으로 프라이버시 코인은 ‘CEX (중앙화 거래소) 에서 사기
@@ -662,17 +671,11 @@ function ZKPLimitsReflection() {
         내부 고발자에게는 ‘국가 정보 기관도 풀 수 없는 수준’ 이 필요할 수 있다.
         프라이버시 도구의 선택은 곧 자기 위협 모델 (threat model) 의 선언이다.
       </Probe>
-      <Reading label="참고 문헌">
-        Pfitzmann · Hansen 의{" "}
-        <span className="text-text">‘anonymity terminology’ 보고서</span> ·
-        unobservability, unlinkability, anonymity, pseudonymity 가 어떻게 서로
-        다른 개념인지 정리한 표준 문서.
-      </Reading>
-      <Reading label="위협 모델 키워드">
-        <span className="text-text">‘harvest now, decrypt later’</span> · 지금
-        가린 데이터가 미래의 더 강한 분석 (양자 + 더 큰 graph + 추가 leak) 에
-        의해 풀릴 가능성. 프라이버시는 ‘오늘’ 만이 아니라 ‘앞으로 수십 년’ 의
-        문제.
+      <Reading label="개념 정리">
+        익명성, 가명성, 연결 불가능성 (unlinkability), 관찰 불가능성
+        (unobservability) 은 서로 다른 목표다. 이 섹션에서는 그중 비트코인에서
+        가장 중요한 차이, 즉 “실명이 안 보이는 것” 과 “거래 흐름을 연결할 수
+        없는 것” 이 다르다는 점만 기억하면 충분하다.
       </Reading>
     </Reflection>
   );
