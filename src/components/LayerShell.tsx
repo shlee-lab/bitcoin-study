@@ -186,6 +186,8 @@ function CompletionPanel() {
         </div>
       </div>
 
+      <SupportMini />
+
       <div className="flex flex-wrap items-center gap-2">
         <Link
           href="/"
@@ -202,8 +204,6 @@ function CompletionPanel() {
           처음부터 다시 보기
         </button>
       </div>
-
-      <SupportMini />
     </motion.section>
   );
 }

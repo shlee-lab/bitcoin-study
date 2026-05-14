@@ -397,6 +397,7 @@ function CompletionDetailQuiet() {
         <CompletionBadge text="학습 완료" />
         <CompletionCopy includeNext />
       </div>
+      <SupportMini />
       <div className="flex flex-wrap items-center gap-2">
         <Link
           href="/"
@@ -412,7 +413,6 @@ function CompletionDetailQuiet() {
           처음부터 다시 보기
         </Link>
       </div>
-      <SupportMini />
     </div>
   );
 }
