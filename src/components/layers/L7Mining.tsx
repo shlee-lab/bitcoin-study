@@ -163,12 +163,12 @@ export function L7Mining(props: LayerProps) {
                 ),
               },
               {
-                title: "Target과 난이도 조정",
+                title: "채굴 난이도(target)와 조정",
                 level: "deep",
                 body: (
                   <Section
-                    heading="target 의 정확한 정의와 자동 조정 규칙"
-                    sub="‘target 이 작을수록 어렵다’ 정도만 봤는데, 그 값이 어떻게 정해지고 시간에 따라 어떻게 자동 조정되는지."
+                    heading="채굴 난이도(target)의 정의와 자동 조정 규칙"
+                    sub="앞에서는 target 이 작을수록 채굴이 어려워진다고만 보았다. 이제 그 값이 어떻게 정해지고, 왜 약 2주마다 자동으로 조정되는지 살펴본다."
                   >
                     <PrimitivePanel ids={["difficulty"]} />
                   </Section>
@@ -191,8 +191,8 @@ export function L7Mining(props: LayerProps) {
                 body: (
                   <Reflection title="‘낭비’ 와 ‘보안’ 사이 · 공짜 점심은 없다">
                     <p>
-                      PoW 비판자: “비트코인은 한 나라 (≈ 아르헨티나) 만큼의
-                      전기를 먹는다. 명백한 낭비.”
+                      PoW 비판자: “비트코인은 아르헨티나의 1년 전력 사용량에
+                      가까운 전기를 쓴다. 이 정도 규모의 에너지 소비는 낭비다.”
                     </p>
                     <p>
                       PoW 옹호자: “그 전기가 곧 보안이다. 51% 로 사슬을
@@ -1035,7 +1035,7 @@ function EnergyContext() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
           <Stat label="네트워크 hashrate" value="≈ 1 ZH/s" sub="10²¹ H/s" />
-          <Stat label="연간 전력 사용" value="≈ 150 TWh" sub="아르헨티나 1 국 수준" />
+          <Stat label="연간 전력 사용" value="≈ 150 TWh" sub="아르헨티나 1년 전력 사용량 수준" />
           <Stat label="재생에너지 비중" value="≈ 50–60%" sub="추정치, 변동 큼" />
         </div>
         <p className="text-[15px] text-text/85 leading-[1.7]">
@@ -1080,9 +1080,9 @@ function EnergyContext() {
               PoS 의 한계
             </div>
             <p className="text-text/78 leading-[1.7]">
-              지분이 큰 참여자가 더 큰 영향력을 갖는다. 구현에 따라 slashing,
-              validator set, delegation, finality gadget 같은 세부 설계가 크게
-              달라진다.
+              지분이 큰 참여자가 더 큰 영향력을 갖는다. 거래소나 대형 스테이킹
+              사업자에게 지분이 모이면, 검증 권한과 거버넌스 영향력도 함께
+              집중될 수 있다.
             </p>
           </div>
         </div>
@@ -1096,7 +1096,8 @@ function EnergyContext() {
         </p>
         <p className="text-[13px] text-muted leading-relaxed">
           현재는 비트코인을 제외한 다수의 새 체인이 PoS 계열을 채택한다. 다만
-          “PoS” 라는 한 단어 안에도 구현은 매우 다양하다. 여기서는 에너지 논쟁의
+          “PoS” 라는 한 단어 안에도 slashing, validator set, delegation,
+          finality gadget 같은 구현 방식은 크게 다르다. 여기서는 에너지 논쟁의
           대안으로만 소개하고, 구체적인 합의 알고리즘의 차이는 이후 블록체인 일반
           학습 코스에서 다루는 편이 적절하다.
         </p>
