@@ -118,22 +118,26 @@ export function L8GameTheory(props: LayerProps) {
                   <Reflection title="인센티브 설계는 어디까지 작동할까">
                     <p>
                       비트코인은 참여자가 자기 이익을 추구하더라도, 대체로 정직하게
-                      행동하는 편이 유리하도록 설계되어 있다. 게임이론에서는 이런
-                      성질을 <span className="text-text">incentive-compatible</span>
-                      하다고 말한다. 핵심은 선의를 믿는 것이 아니라, 보상 구조를
-                      그렇게 만드는 것이다.
+                      행동하는 편이 유리하도록 설계되어 있다. 이런 성질을{" "}
+                      <span className="text-text">incentive compatibility</span>,
+                      즉 “규칙을 따르는 행동이 참여자 자신의 이익에도 맞는 상태” 라고
+                      부른다. 핵심은 선의를 믿는 것이 아니라, 개인의 이익과 시스템이
+                      원하는 행동을 같은 방향으로 맞추는 것이다.
                     </p>
                     <p>
                       조금 더 강한 조건으로{" "}
                       <span className="text-text">DSIC (dominant-strategy incentive compatibility)</span>
                       가 있다. 다른 사람이 어떤 전략을 쓰든, 나에게는 정직하게
-                      행동하는 것이 항상 최선이라는 뜻이다. 블록체인에서는 이 질문이
-                      수수료 시장에도 바로 적용된다. 사용자가 얼마를 bid 해야 하고,
-                      채굴자나 validator 는 어떤 tx 를 포함해야 하며, 서로 담합하면
-                      규칙을 우회할 수 있는가를 따져야 하기 때문이다.
+                      행동하는 것이 항상 최선이라는 뜻이다. 반대로{" "}
+                      <span className="text-text">cost of anarchy</span> 는 조금
+                      다른 질문을 던진다. 모두가 자기 이익만 따라 움직일 때, 사회
+                      전체의 효율이 최적 설계에 비해 얼마나 나빠지는지를 재는 렌즈다.
+                      즉 incentive compatibility 는 “정직한 행동을 유도할 수 있는가”,
+                      cost of anarchy 는 “이기적 행동을 허용했을 때 사회적 손실이
+                      얼마나 큰가” 를 본다.
                     </p>
                     <Reading label="관련 연구">
-                      Tim Roughgarden 의{" "}
+                      핵심 참고는 Tim Roughgarden 의{" "}
                       <a
                         href="https://arxiv.org/abs/2106.01340"
                         target="_blank"
@@ -143,27 +147,23 @@ export function L8GameTheory(props: LayerProps) {
                         <em>“Transaction Fee Mechanism Design”</em>
                       </a>{" "}
                       (2021) 은 Bitcoin 과 Ethereum 의 수수료 시장을 mechanism
-                      design 문제로 다룬다. 관련 보고서{" "}
-                      <a
-                        href="https://arxiv.org/abs/2012.00854"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-text/85 underline decoration-edge underline-offset-4 hover:text-accent"
-                      >
-                        <em>“An Economic Analysis of EIP-1559”</em>
-                      </a>
-                      는 Ethereum 의 EIP-1559 를 분석하며,
-                      기존 first-price auction 과 달리 base fee 소각, tip, 가변
-                      블록 크기가 사용자와 블록 생산자의 인센티브를 어떻게 바꾸는지
-                      설명한다. 논문은 EIP-1559 가 특정 조건에서 DSIC 를 만족하고,
-                      miner 의 조작과 off-chain collusion 에 대해서도 별도 조건
-                      (MMIC, OCA-proofness) 으로 분석할 수 있음을 보인다.
+                      design 문제로 다룬다. 사용자가 어떤 fee 를 제시해야 하는지,
+                      블록 생산자가 어떤 tx 를 포함해야 하는지, 서로 담합하면 규칙을
+                      우회할 수 있는지를 하나의 메커니즘으로 분석한다. 특히 Ethereum
+                      의 EIP-1559 를 사례로 삼아, base fee 소각·tip·가변 블록 크기가
+                      인센티브를 어떻게 바꾸는지 설명한다. 이 논문은 EIP-1559 가 특정
+                      조건에서 DSIC 를 만족하고, miner 의 조작과 off-chain collusion
+                      에 대해서도 별도 조건 (MMIC, OCA-proofness) 으로 분석할 수
+                      있음을 보인다.
                     </Reading>
                     <p>
-                      비슷한 패턴은 다른 분산 시스템에서도 보인다. Tor 의 relay
-                      운영자, BitTorrent 의 tit-for-tat, 위키의 reputation,
-                      Stack Overflow 의 점수 시스템은 모두 개인의 이익이나 평판을
-                      시스템 전체의 유익한 행동과 연결하려는 설계다.
+                      이 원리는 블록체인에만 머물지 않는다. AI 학습 데이터 라벨링,
+                      추천 시스템, 온라인 광고 경매, 클라우드 자원 배분, 오픈소스
+                      유지보수, 사회 제도와 정책 설계까지 모두 “참여자가 자기 이익을
+                      따라 움직일 때 어떤 결과가 나오는가” 를 다룬다. 블록체인에서
+                      특히 이 문제가 강조되는 이유는 더 분명하다. 블록체인은 중앙
+                      운영자를 신뢰하지 않는 구조이므로, 참여자의 이익 구조 자체가
+                      프로토콜의 보안 가정이 된다.
                     </p>
                     <Probe>
                       같은 원리를 어디에 더 적용할 수 있을까? 콘텐츠 모더레이션?
