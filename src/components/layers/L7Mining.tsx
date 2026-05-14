@@ -315,6 +315,7 @@ function MiniMiner() {
   const [difficulty, setDifficulty] = useState<"easy" | "normal" | "hard">("normal");
   const [attempts, setAttempts] = useState<MineAttempt[]>([]);
   const [nonce, setNonce] = useState(0);
+  const [swingTick, setSwingTick] = useState(0);
 
   const target = {
     easy: 24,
@@ -328,6 +329,7 @@ function MiniMiner() {
     const value = Math.floor(Math.random() * 100);
     const won = value < target;
     setNonce(nextNonce);
+    setSwingTick((tick) => tick + 1);
     setAttempts((prev) => [
       {
         nonce: nextNonce,
@@ -416,10 +418,24 @@ function MiniMiner() {
             <button
               type="button"
               onClick={tryNonce}
-              className="group flex-1 rounded-sm bg-accent text-bg px-4 py-3 text-[15px] font-semibold hover:bg-accent/90 transition-colors inline-flex items-center justify-center gap-2.5"
+              className="group relative flex-1 rounded-sm bg-accent text-bg px-4 py-3 text-[15px] font-semibold hover:bg-accent/90 transition-colors inline-flex items-center justify-center gap-2.5 overflow-hidden"
             >
-              <PickaxeIcon className="h-5 w-5 transition-transform group-hover:-rotate-6" />
+              <span
+                key={swingTick}
+                className={swingTick > 0 ? "mine-pickaxe-hit" : "transition-transform group-hover:-rotate-6"}
+              >
+                <PickaxeIcon className="h-6 w-6" />
+              </span>
               <span>채굴 시도</span>
+              {swingTick > 0 && (
+                <span
+                  key={`clang-${swingTick}`}
+                  className="mine-clang pointer-events-none absolute right-3 top-1 text-[11px] font-bold text-bg/80"
+                  aria-hidden="true"
+                >
+                  깡
+                </span>
+              )}
             </button>
             <button
               type="button"
@@ -484,43 +500,42 @@ function fakeHash(nonce: number, value: number) {
 function PickaxeIcon({ className = "" }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox="0 0 48 48"
       aria-hidden="true"
       className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <ellipse cx="25" cy="42" rx="11" ry="2.2" fill="#7a3d00" opacity="0.16" />
       <path
-        d="M5.4 4.9c3.9-2.1 8.2-2 11.8.3"
-        stroke="currentColor"
+        d="M17.2 19.7 25.6 14.8 36.7 33.9c.9 1.6.4 3.6-1.2 4.5l-1.3.8c-1.6.9-3.6.4-4.5-1.2L18.6 18.9"
+        fill="#8A5A32"
+      />
+      <path
+        d="M22.7 16.5 36.7 40.7"
+        stroke="#5A351F"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        opacity="0.35"
+      />
+      <path
+        d="M8.1 16.4C14.6 7.8 25.6 5.5 36.7 9.9c-6.7.2-12.4 2.6-17 7.4l2.2 4.1-6.9 3.8-2.1-4.2c-1.8-.4-3.5-1.5-4.8-4.6Z"
+        fill="#FFD166"
+      />
+      <path
+        d="M8.1 16.4C14.6 7.8 25.6 5.5 36.7 9.9c-6.7.2-12.4 2.6-17 7.4l2.2 4.1-6.9 3.8-2.1-4.2c-1.8-.4-3.5-1.5-4.8-4.6Z"
+        stroke="#6B3F1D"
+        strokeWidth="2.2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16.2 12.9c4.1-2.9 9-3.6 14.1-2.5"
+        stroke="#FFF0B8"
         strokeWidth="2"
         strokeLinecap="round"
       />
-      <path
-        d="M14.5 5.2c1.9.7 3.4 1.9 4.6 3.5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        opacity="0.55"
-      />
-      <path
-        d="M12.7 7.3 5.9 18.9"
-        stroke="currentColor"
-        strokeWidth="2.3"
-        strokeLinecap="round"
-      />
-      <path
-        d="m4.8 20.6 2.2-3.8"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <path
-        d="m11.3 6.5 2.8 1.7"
-        stroke="currentColor"
-        strokeWidth="2.3"
-        strokeLinecap="round"
-      />
+      <circle cx="16.1" cy="23.9" r="2.1" fill="#F7931A" />
+      <circle cx="32.8" cy="36.4" r="1.4" fill="#B87945" opacity="0.7" />
     </svg>
   );
 }
