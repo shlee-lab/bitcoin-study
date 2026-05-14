@@ -69,10 +69,10 @@ export function L4Block(props: LayerProps) {
                       메시지는 네트워크에 잠시 떠다니다 (mempool), 누군가가
                       <span className="text-text"> 한 묶음으로 봉인한 단위</span>
                       에 담겨 영구히 기록된다. 그 묶음이 바로{" "}
-                      <span className="text-text">블록</span> 이다. 그리고 블록들이
+                      <span className="text-text">블록</span> 이다. 여러 블록이
                       다시{" "}
-                      <span className="text-text">암호학적으로 묶여 사슬을 이루면</span>{" "}
-                      그게 블록체인이다 (두 단계 뒤 S7). 즉:
+                      <span className="text-text">암호학적으로 연결되어 하나의 사슬을 이루면</span>{" "}
+                      그것이 블록체인이 된다 (두 단계 뒤 S7).
                     </p>
 
                     <div className="grid grid-cols-3 gap-3 text-center">
@@ -82,9 +82,9 @@ export function L4Block(props: LayerProps) {
                     </div>
 
                     <p className="text-[16px] text-text/75 leading-[1.7]">
-                      여기 S5 에선 ‘한 블록 안’ 을 본다. 블록이 어떻게
-                      구성되어 있고, 왜 그 구조가 변조 불가능성과 PoW 의
-                      토대가 되는지.
+                      여기 S5 에서는 ‘한 블록 안’ 을 본다. 블록이 어떻게
+                      구성되어 있으며, 그 구조가 왜 변조 불가능성과 PoW 의
+                      토대가 되는지 확인한다.
                     </p>
 
                     <BlockSplitDiagram />
@@ -98,9 +98,9 @@ export function L4Block(props: LayerProps) {
                     </p>
 
                     <p className="text-[15px] text-text/65 leading-[1.7]">
-                      다음에는 두 가지 장치를 본다. ① 헤더가 어떻게 블록 전체의
-                      지문이 되는가, ② 수천 건의 트랜잭션을 어떻게 짧은 약속으로
-                      묶는가.
+                      다음에는 두 가지 장치를 차례로 살펴본다. 첫째, 헤더가 어떻게
+                      블록 전체의 지문이 되는지 본다. 둘째, 수천 건의 트랜잭션을
+                      어떻게 짧은 약속으로 묶는지 본다.
                     </p>
                   </section>
                 ),
@@ -186,16 +186,18 @@ export function L4Block(props: LayerProps) {
                       2017 년 비트코인은 둘로 갈라졌다. ‘블록 크기를 늘리자’
                       (Bitcoin Cash) vs ‘기반 계층은 작게, 그 위에 Lightning
                       같은 2계층으로 확장’ (Bitcoin). 같은 코드, 같은 출발점에서
-                      나왔지만 디자인 철학이 정반대.
+                      나왔지만 디자인 철학은 정반대였다.
                     </p>
                     <p>
-                      블록이 클수록: 처리량 ↑, 사용자 fee ↓. 그러나 노드 운영
-                      비용 ↑ → 풀 노드 운영자가 줄어 결국 소수 대형 노드만 남는
-                      방향. 분산성 ↓.
+                      블록이 커지면 처리량이 늘고 사용자 수수료는 낮아질 수 있다.
+                      그러나 노드 운영 비용도 함께 커진다. 그 결과 풀 노드를
+                      운영할 수 있는 사람이 줄어들고, 네트워크가 소수 대형 노드에
+                      의존할 위험이 커진다.
                     </p>
                     <p>
-                      블록이 작을수록: 누구나 풀 노드 운영 가능 → 분산성 ↑. 그러나
-                      기반 계층 처리량이 제한 → 수수료 시장 활성, 2계층 의존 ↑.
+                      블록이 작으면 일반 사용자도 풀 노드를 운영하기 쉽고 분산성을
+                      유지하기 유리하다. 대신 기반 계층의 처리량이 제한되고,
+                      수수료 시장과 2계층 확장에 더 의존하게 된다.
                     </p>
                     <Probe>
                       ‘분산성’ 이 정확히 무엇인가? 노드 수? 채굴자 수? 누가
@@ -245,7 +247,7 @@ function BlockSpaceUses() {
         <UseCard
           name="Runes"
           since="2024 (Halving)"
-          summary="Casey 가 ordinals 의 한계 (UTXO 부풀림) 를 보완하려 발표한 새 fungible 토큰 표준. OP_RETURN 기반이라 UTXO 셋을 덜 더럽힘."
+          summary="Casey 가 ordinals 의 한계 (UTXO 부풀림) 를 보완하려 발표한 새 fungible 토큰 표준. OP_RETURN 기반이라 UTXO 셋에 남기는 부담이 상대적으로 작다."
           examples="UNCOMMON•GOODS 등"
         />
         <UseCard
@@ -258,7 +260,7 @@ function BlockSpaceUses() {
         <UseCard
           name="Atomic swap · HTLC"
           since="2017~"
-          summary="해시 기반 시간 잠금 (Hashed Timelock Contract) 으로 두 체인 간 신뢰 없이 자산을 교환. 한 쪽이 비밀을 공개하면 다른 쪽도 같은 비밀로 풀림."
+          summary="해시 기반 시간 잠금 (Hashed Timelock Contract) 으로 두 체인 간 신뢰 없이 자산을 교환한다. 한쪽이 비밀을 공개하면 다른 쪽도 같은 비밀로 자금을 풀 수 있다."
           examples="BTC ↔ LTC 교환, Lightning 결제 라우팅의 토대"
         />
         <UseCard
@@ -283,13 +285,13 @@ function BlockSpaceUses() {
           이 모든 용도는 ‘블록 공간 = 영구 분산 저장소’ 라는 비트코인의 강점을
           빌린다. 하지만 그 공간은 비싸고 (모든 풀 노드가 영구 보관), 채굴자
           fee 시장에서 결제 트랜잭션과 경쟁한다. ordinals 붐 때 평균 수수료가
-          평소의 5–20× 까지 치솟은 것이 그 예.
+          평소의 5–20× 까지 치솟은 것이 대표적인 예다.
         </p>
         <p className="text-muted mt-2">
-          이게 ‘좋은 사용’ 인지는 의견이 갈린다. 어떤 이는 fee 시장을 키워 장기
-          보안에 도움이라 보고, 어떤 이는 결제 본연의 용도를 방해하는 spam 이라
-          본다. 비트코인 프로토콜은 그저 데이터를 받아들일 뿐, 그 데이터의
-          ‘의미’ 는 외부 해석에 달렸다.
+          이것이 ‘좋은 사용’ 인지에 대해서는 의견이 갈린다. 어떤 사람은 수수료
+          시장을 키워 장기 보안에 도움이 된다고 보고, 어떤 사람은 결제 본연의
+          용도를 방해하는 spam 이라고 본다. 비트코인 프로토콜은 데이터를
+          받아들일 뿐이며, 그 데이터의 ‘의미’ 는 외부 해석에 달려 있다.
         </p>
       </div>
     </div>

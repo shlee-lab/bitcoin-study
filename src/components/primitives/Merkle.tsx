@@ -29,9 +29,9 @@ export function MerkleBody() {
       <Section title="① 짝지어 올라간다">
         <MerkleViz />
         <p className="text-sm text-muted">
-          홀수 개일 땐 마지막 잎을 자기 자신과 짝지어 채운다 (비트코인 방식).
-          짝지어 해시 → 짝지어 해시 … 마지막에 한 개만 남으면 그게{" "}
-          <code className="font-mono">root</code>.
+          홀수 개일 때는 마지막 잎을 자기 자신과 짝지어 채운다 (비트코인 방식).
+          이렇게 둘씩 묶어 해시하는 과정을 반복하면 마지막에 한 값만 남고,
+          그 값이 <code className="font-mono">root</code> 가 된다.
         </p>
         <FormulaBox>
           <div>
@@ -50,13 +50,13 @@ export function MerkleBody() {
           </div>
           <div className="text-[12px] text-muted pt-2">
             아래 식은 정확한 계산 방식이다. 처음 읽을 때는 “둘씩 묶어 해시해
-            루트까지 올라간다” 정도만 잡아도 충분하다.
+            루트까지 올라간다” 는 구조만 잡아도 충분하다.
           </div>
           <div className="text-[12px] text-muted pt-1">
             비트코인은 <code className="font-mono">H = double-SHA256</code>.
-            그래서 정확히는 <code className="font-mono">M = SHA256(SHA256(left ‖ right))</code>.
+            따라서 정확히는 <code className="font-mono">M = SHA256(SHA256(left ‖ right))</code>.
             <code className="font-mono">‖</code> 는 학계 표준의{" "}
-            <span className="text-text">byte 연결 (concatenation)</span> 기호.
+            <span className="text-text">byte 연결 (concatenation)</span> 기호다.
           </div>
         </FormulaBox>
       </Section>

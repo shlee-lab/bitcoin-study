@@ -54,7 +54,7 @@ export function PublicKeyBody() {
         <p className="text-sm text-muted">
           이 두 연산만 있으면{" "}
           <code className="font-mono">k · G = G + G + … + G</code> (k 번 더하기)
-          가 정의된다. 이게 ‘점 곱셈 (scalar multiplication)’.
+          가 정의된다. 이것을 ‘점 곱셈 (scalar multiplication)’ 이라고 부른다.
         </p>
       </Section>
 
@@ -721,7 +721,7 @@ function SignFlow() {
         msg 는 트랜잭션의 직렬화된 형태. <span className="text-text">d</span>{" "}
         없이 <span className="text-accent">sig</span> 를 만들 수 없고,{" "}
         <span className="text-text">Q</span> 만으로{" "}
-        <span className="text-accent">sig</span> 가 진짜인지 누구나 확인 가능.
+        <span className="text-accent">sig</span> 가 진짜인지 누구나 확인할 수 있다.
       </div>
     </div>
   );

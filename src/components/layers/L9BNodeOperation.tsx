@@ -255,7 +255,8 @@ function NodeTwoModes() {
         </ul>
         <p className="text-[13px] text-text/65 leading-[1.7]">
           모두 통과하면 UTXO 셋 갱신 (input 제거, output 추가) → 자기 mempool 에서
-          포함된 tx 제거 → 이웃 노드들에 ‘새 블록 있어’ 가십. 이게 한 사이클.
+          포함된 tx 제거 → 이웃 노드들에 ‘새 블록 있어’ 가십으로 이어진다. 이것이
+          한 검증 사이클이다.
           전 세계의 모든 풀 노드가 같은 검증을 똑같이 적용하기 때문에 ‘무엇이
           유효한 블록인가’ 의 정의가 전체 네트워크에서 일치한다.
         </p>
@@ -299,7 +300,7 @@ function CrossLayerRecap() {
     {
       when: "T+1h",
       layer: "S7",
-      what: "그 위로 5 블록이 더 쌓여 6 confirmation 도달 → 사실상 finality. 누가 reorg 하려면 정직 hashrate 를 압도하는 자원이 필요.",
+      what: "그 위로 5 블록이 더 쌓이면 6 confirmation 에 도달한다. 이 시점부터는 실용적으로 finality 에 가깝다. reorg 하려면 정직 hashrate 를 압도하는 자원이 필요하다.",
     },
     {
       when: "T+∞",

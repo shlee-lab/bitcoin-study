@@ -220,7 +220,7 @@ const CUSTODIAL: WalletType = {
   Icon: CustodialIcon,
   tagline: "내 키를 남(거래소·핀테크) 이 갖고 있다.",
   detail:
-    "비트코인 시스템 입장에선 그 회사가 ‘진짜 소유자’. 사용자는 회사 장부의 엔트리를 갖는 셈. ‘not your keys, not your coins.’ Mt.Gox, FTX 등 사례 다수.",
+    "비트코인 시스템 관점에서는 그 회사가 ‘진짜 소유자’ 다. 사용자는 회사 장부에 적힌 청구권을 갖는다. ‘not your keys, not your coins.’ Mt.Gox, FTX 등이 대표 사례다.",
   brands: [
     { name: "Coinbase", iconify: "simple-icons:coinbase" },
     { name: "Binance", iconify: "simple-icons:binance" },
@@ -329,7 +329,7 @@ function MultisigCard() {
 
       <div className="text-xs text-[#f7931a]/85 leading-relaxed border-t border-edge pt-2.5">
         ⚠ 키들을 다른 장소·다른 종류로 진짜 분산해야 의미가 있다. 한 컴퓨터에
-        다 두면 multi-sig 가 아니라 그냥 복잡한 single-sig.
+        다 두면 multi-sig 라기보다 복잡한 single-sig 에 가깝다.
       </div>
     </div>
   );

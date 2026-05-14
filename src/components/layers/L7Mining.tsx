@@ -24,23 +24,34 @@ export function L7Mining(props: LayerProps) {
                     <p className="text-[17px] text-text/80 leading-[1.75]">
                       S7 에서 블록들이{" "}
                       <span className="text-text">prev_hash 로 이어져</span>{" "}
-                      변조 불가능한 사슬이 된다는 걸 봤다. 그런데 그 사슬 끝에{" "}
-                      <span className="text-text">새 블록을 누가, 어떤 자격으로</span>{" "}
-                      추가하는가? PoW 는 겉보기엔 ‘퍼즐 풀기 게임’ 처럼
-                      보이지만, 본질은{" "}
-                      <span className="text-text">‘어떤 블록을 다음 블록으로 받아들일지 투표하는 규칙’</span>{" "}
+                      변조 불가능한 사슬이 된다는 걸 봤다. 이제 남은 질문은 그
+                      사슬 끝에{" "}
+                      <span className="text-text">새 블록을 누가 추가할 수 있는가</span>
+                      다. 블록을 만드는 권한은 단순한 순번이 아니라 권력에 가깝다.
+                      어떤 트랜잭션이 언제 포함되는지, 어떤 트랜잭션이 뒤로 밀리는지
+                      를 사실상 결정하기 때문이다.
+                    </p>
+                    <p className="text-[16px] text-text/80 leading-[1.7]">
+                      비트코인에는 “이번 블록은 이 사람이 만든다” 고 정하는
+                      중앙화된 관리자가 없다. 그렇다면 다음 블록을 만들 사람을
+                      어떻게 정해야 할까? 사토시 나카모토의 답은 연산 경쟁이었다.
+                      채굴자는 해시 퍼즐을 반복해서 풀고, 먼저 유효한 답을 찾은
+                      사람이 다음 블록 후보를 네트워크에 제안한다. PoW 는 겉보기엔
+                      퍼즐 풀기 게임처럼 보이지만, 본질은{" "}
+                      <span className="text-text">어떤 블록을 다음 블록으로 받아들일지 정하는 투표 규칙</span>
                       이다.
                     </p>
 
                     <Whitepaper />
 
                     <p className="text-[16px] text-text/80 leading-[1.7]">
-                      문제는 ‘1 인 1 표’ 가 인터넷에선 안 통한다는 점. IP 는 얼마든
-                      위조할 수 있으니까 (S6 의 sybil 공격). 그래서 사토시는 한
-                      CPU 가 ‘할 수 있는 일’ 을 표로 본다.{" "}
-                      <span className="text-text">한 시간에 더 많은 해시를 계산한 CPU 가 더 많은 표를 가진다</span>.
-                      그런데 ‘CPU 가 일을 얼마나 했는지’ 는 어떻게 측정할까?{" "}
-                      <span className="text-text">확률</span> 로 측정한다.
+                      여기서 중요한 점은 ‘1 인 1 표’ 가 인터넷에서는 통하지
+                      않는다는 것이다. IP 나 계정은 얼마든지 만들 수 있기 때문이다
+                      (S6 의 sybil 공격). 그래서 사토시는 사람 수가 아니라{" "}
+                      <span className="text-text">연산으로 실제 비용을 낸 정도</span>
+                      를 표로 삼았다. 더 많은 해시를 계산한 채굴자일수록 다음 블록을
+                      찾을 확률이 높다. 즉 PoW 의 투표권은 신원에서 나오지 않고,
+                      반복된 계산에서 나온다.
                     </p>
 
                     <ToyHashExample />
@@ -83,7 +94,7 @@ export function L7Mining(props: LayerProps) {
                         </div>
                       </Note>
                       <Note title="hashrate · 끊임없는 시도 횟수">
-                        네트워크 전체가 1 초에 엄청난 수의 해시를 시도한다.
+                        네트워크 전체가 1 초에 막대한 수의 해시를 시도한다.
                         지금은 일반 컴퓨터가 아니라 <Term id="asic">ASIC</Term>
                         이라는 전용 칩이 이 일을 거의 전담한다.
                       </Note>
@@ -99,7 +110,7 @@ export function L7Mining(props: LayerProps) {
                         ‘작업 증명’ 이 증명하는 것
                       </h4>
                       누군가 이 블록 헤더에 평균적으로{" "}
-                      <span className="text-text">엄청난 양의 시도</span> 를
+                      <span className="text-text">막대한 양의 시도</span> 를
                       들였다는 사실이다. target 이 작을수록 (= 어려울수록) 평균
                       시도 수는 기하급수적으로 늘어난다. 그 ‘들인 시도’ 가 곧
                       사슬의 뒷받침이 된다.
@@ -405,9 +416,10 @@ function MiniMiner() {
             <button
               type="button"
               onClick={tryNonce}
-              className="flex-1 rounded-sm bg-accent text-bg px-4 py-3 text-[15px] font-semibold hover:bg-accent/90 transition-colors"
+              className="group flex-1 rounded-sm bg-accent text-bg px-4 py-3 text-[15px] font-semibold hover:bg-accent/90 transition-colors inline-flex items-center justify-center gap-2.5"
             >
-              채굴 시도
+              <PickaxeIcon className="h-5 w-5 transition-transform group-hover:-rotate-6" />
+              <span>채굴 시도</span>
             </button>
             <button
               type="button"
@@ -469,6 +481,50 @@ function fakeHash(nonce: number, value: number) {
   return `${out.slice(0, 8)}...${out.slice(-12)}`;
 }
 
+function PickaxeIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.4 4.9c3.9-2.1 8.2-2 11.8.3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14.5 5.2c1.9.7 3.4 1.9 4.6 3.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
+      <path
+        d="M12.7 7.3 5.9 18.9"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+      />
+      <path
+        d="m4.8 20.6 2.2-3.8"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="m11.3 6.5 2.8 1.7"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 function Puzzle() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
@@ -493,7 +549,8 @@ function Puzzle() {
         <div className="rounded border border-edge bg-bg/60 p-3 text-text/85 break-all">
           0000000000000000 0000034219000000…
           <div className="text-xs text-muted mt-1">
-            앞에 0 이 많을수록 어려움. 한 자리 추가될 때마다 약 2× 어려워짐.
+            앞에 0 이 많을수록 어렵다. 한 자리가 추가될 때마다 평균적으로 약 2배
+            어려워진다.
           </div>
         </div>
 
@@ -911,7 +968,7 @@ function SupplyReflection() {
         본 것이다.
       </p>
       <p>
-        왜 ‘반감기 (halving)’ 라는 모양일까? 그냥 일정 시점에 갑자기 발행을
+        왜 ‘반감기 (halving)’ 라는 모양일까? 일정 시점에 갑자기 발행을
         멈추면 그 직전·직후 채굴 인센티브가 단절된다. 등비수열 (50 → 25 →
         12.5 → … ) 은 <span className="text-text">단계적으로 줄어드는 감소</span> 다.
         채굴자가 4 년 단위로 적응할 시간이 있고, 새 코인은 점점 희소해지지만
@@ -932,16 +989,16 @@ function SupplyReflection() {
         오래 있다. 한편 인플레이션 통화 (USD, KRW) 도 ‘조용히 가치 빼앗기’ 의
         한 형태이고, 누가 그 권한을 쥐느냐의 문제이기도 하다. ‘발행 정책 =
         정치’ 라는 명제를 받아들이면, 비트코인은 그 정치를 ‘없음’ 으로 고정한
-        셈이다.
+        시스템이다.
       </Probe>
       <Reading label="비교 사례">
         Monero 의 <span className="text-text">tail emission</span> (∞ 미래에도
-        블록당 0.6 XMR 발행 · ‘채굴자 인센티브를 영구히 유지’ 가 목표),
+        블록당 0.6 XMR 발행. 채굴자 인센티브를 영구히 유지하는 것이 목표다),
         Ethereum 의 issuance 정책 변경 (PoS 전환 후 ‘ultrasound money’ 마케팅),
         Milton Friedman 의{" "}
         <em className="text-text/85">k-percent rule</em> (통화 공급을 일정
         비율로만 늘리자는 1960 년대 제안). 비트코인의 ‘0% 영구 인플레이션’ 은
-        이 흐름의 극단점.
+        이 흐름에서 가장 강한 형태의 선택이다.
       </Reading>
     </Reflection>
   );
@@ -959,10 +1016,10 @@ function EnergyContext() {
         <Stat label="재생에너지 비중" value="≈ 50–60%" sub="추정치, 변동 큼" />
       </div>
       <p className="text-[15px] text-text/85 leading-[1.7]">
-        이 ‘들인 에너지 = 보안’ 이라는 게 PoW 의 본질이라 줄이는 건 곧 보안을
-        포기하는 셈. 한편 전력원 자체를 재생에너지·잉여 가스 (flared gas) 로
-        옮기려는 흐름이 있고, 그래서 ‘얼마 쓰냐’ 와 ‘무엇을 쓰냐’ 는 별개의
-        논쟁.
+        PoW 에서는 들인 에너지가 보안의 일부이므로, 에너지 사용을 줄이는 것은
+        보안 예산을 줄이는 문제와 연결된다. 한편 전력원 자체를 재생에너지·잉여
+        가스 (flared gas) 로 옮기려는 흐름도 있다. 그래서 ‘얼마를 쓰느냐’ 와
+        ‘무엇을 쓰느냐’ 는 별개의 논쟁이다.
       </p>
       <p className="text-[13px] text-muted leading-relaxed">
         대안 합의 모델 (PoS) 은 전력 소모는 거의 없지만 ‘지분이 곧 권력’ 이라는
@@ -1015,7 +1072,7 @@ function PostSubsidyReflection() {
           <PostRow t="2024" subsidy="3.125 BTC" fee="변동" change="현재 구간. fee 비중은 블록 공간 수요가 몰릴 때 크게 오른다." />
           <PostRow t="2032" subsidy="0.78 BTC" fee="?" change="subsidy 가 2024 년의 1/4 로 줄어든다. 보안을 유지하려면 fee 비중이 커져야 한다." />
           <PostRow t="2048" subsidy="≈ 0.05 BTC" fee="?" change="subsidy 가 사실상 의미 없는 수준" tone="warn" />
-          <PostRow t="2140" subsidy="0" fee="100%" change="subsidy 끝. fee 만으로 hashrate 를 유지" tone="bad" />
+          <PostRow t="2140" subsidy="0" fee="100%" change="subsidy 가 끝나고 fee 만으로 hashrate 를 유지해야 한다." tone="bad" />
         </div>
       </div>
 
@@ -1096,9 +1153,10 @@ function PostSubsidyReflection() {
       </Callout>
 
       <Probe>
-        위 논문은 ‘불안정’ 쪽이지만, 시간 (116 년) 과 시장 적응 가능성을 봤을 때
-        비관이 옳다고 단정할 수 있나? 비트코인이 ‘자기 보안 모델 자체에 풀리지
-        않은 가설’ 을 품고 있다는 사실을 어떻게 받아들여야 하는가. 결함인가,
+        위 논문은 fee-only 모델이 불안정할 수 있다는 쪽에 가깝다. 다만 시간
+        (116 년) 과 시장 적응 가능성을 함께 보면 비관이 옳다고 단정할 수 있을까?
+        비트코인이 ‘자기 보안 모델 자체에 풀리지 않은 가설’ 을 품고 있다는 사실을
+        어떻게 받아들여야 하는가. 결함인가,
         미래에 풀 수 있는 미해결 문제인가, 아니면 PoW 자체의 본질적 한계인가?
       </Probe>
       <Reading label="참고 논문">
@@ -1257,16 +1315,18 @@ function ToyHashExample() {
       <div className="mt-2">
         <Callout title="핵심: 시도 횟수 = ‘투표 수’">
           <p className="text-[14px] text-text/75 leading-[1.7]">
-            A 의 CPU 가 초당 1,000 번 시도, B 가 초당 100 번 시도.{" "}
+            A 의 CPU 가 초당 1,000 번 시도하고, B 의 CPU 가 초당 100 번 시도한다고
+            하자.{" "}
             <span className="text-text">A 가 먼저 hit 할 확률이 ≈ 10 배 높다</span>{" "}
             (초당 시도 수에 비례). 그래서 ‘1 분 동안 누가 다음 블록을 만드는가’
-            는 정확히 ‘초당 시도 수 (= 해시 파워, hashrate)’ 비율의 추첨.
+            는 ‘초당 시도 수 (= 해시 파워, hashrate)’ 비율로 정해지는 추첨에
+            가깝다.
           </p>
           <p className="text-[14px] text-text/65 leading-[1.7]">
-            이게 바로 사토시가 말한{" "}
+            이것이 사토시가 말한{" "}
             <span className="text-text">one-CPU-one-vote</span> 의 운영적 의미다.
-            ‘1 표’ 의 단위는 ‘초당 한 번의 SHA-256 시도’ 다. 위조 불가능한 자원
-            (전기 + ASIC) 으로 측정되는 표.
+            여기서 ‘1 표’ 의 단위는 ‘초당 한 번의 SHA-256 시도’ 다. 이 표는
+            위조하기 어려운 자원, 즉 전기와 ASIC 으로 측정된다.
           </p>
         </Callout>
       </div>
@@ -1300,9 +1360,10 @@ function HashChoice() {
       <div className="space-y-2">
         <p className="text-[17px] text-text/80 leading-[1.75]">
           비트코인은 SHA-256 을 한 번도 아니고{" "}
-          <span className="text-text">두 번 (double-SHA256)</span> 적용한다. 이게
-          왜? 이더리움은 같은 PoW 시기에도 다른 해시 (Keccak / Ethash) 를 썼다.
-          왜? 두 선택의 차이가 곧 ‘어떤 채굴 생태계를 원하는가’ 의 디자인 결정.
+          <span className="text-text">두 번 (double-SHA256)</span> 적용한다.
+          이더리움은 PoW 시기에도 다른 해시 계열 (Keccak / Ethash) 을 사용했다.
+          두 선택의 차이는 결국 ‘어떤 채굴 생태계를 원하는가’ 라는 설계 판단으로
+          이어진다.
         </p>
       </div>
 
@@ -1348,7 +1409,7 @@ function HashChoice() {
         <p className="text-[14px] text-text/75 leading-[1.7]">
           sponge 는 ‘입력을 흡수 → 내부 상태를 비밀로 유지 → 출력만 짜냄
           (squeeze)’. 출력이 내부 상태 그대로 노출되지 않아 length-extension
-          공격이 구조적으로 불가능. 그래서 한 번만 적용해도 안전.
+          공격이 구조적으로 불가능하다. 따라서 한 번만 적용해도 안전하다.
         </p>
         <p className="text-[14px] text-text/75 leading-[1.7]">
           참고: 이더리움이 쓰는 건 정확히는 NIST 가 표준화한 SHA-3 이 아니라{" "}
@@ -1427,7 +1488,7 @@ function HashChoice() {
           그래서 이더리움은 PoW 시기 내내 GPU 채굴이 주력이었고, 개인도 RTX
           카드 같은 범용 GPU 로 참여할 수 있었다. 반면 비트코인은 2013 년 이후
           ASIC 중심으로 산업화되었다. 두 디자인은 ‘채굴의 산업화’ 와 ‘일반 사용자
-          채굴’ 사이에서 서로 다른 답을 택한 셈이다. 이더리움은 2022 년 PoS 로
+          채굴’ 사이에서 서로 다른 답을 택했다. 이더리움은 2022 년 PoS 로
           전환하며 이 게임 자체를 끝냈다.
         </p>
       </div>

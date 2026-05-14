@@ -74,8 +74,8 @@ export function L9NodeAnatomy(props: LayerProps) {
                       건너뛰는 버그였다. 악용됐다면 한 UTXO 를 여러 번 소비해
                       ‘없는 코인’ 을 만들 수 있었음 → 21 M 발행 한도가 무너지는
                       인플레이션. 다행히 패치 전에 발견·수정. 이 사건이 던진
-                      질문은: ‘단일 구현의 단일점 실패’ vs ‘다양한 구현 사이에서
-                      합의가 갈라질 위험’ 중 어느 쪽이 더 나은 트레이드오프인가?
+                      질문은 ‘단일 구현의 단일점 실패’ 와 ‘다양한 구현 사이에서
+                      합의가 갈라질 위험’ 중 어떤 트레이드오프를 감수할 것인가다.
                     </Probe>
                     <Reading label="검토 질문">
                       ‘Don’t trust, verify’ 라는 비트코인의 모토가 코드 자체에
@@ -113,14 +113,14 @@ function GovernanceReflection() {
       <p>
         Bitcoin 코드 작성 풀도 좁다. 정기 contributor 는 수십 명 수준이고, 그
         다수가 (Chaincode Labs, Spiral, Brink, Block 등) 특정 후원처에
-        의존한다는 점이 또 다른 층위다. 즉 ‘탈중앙 시스템의 프로토콜’ 이 실제론{" "}
+        의존한다는 점도 중요하다. 결국 ‘탈중앙 시스템의 프로토콜’ 이 실제로는{" "}
         <span className="text-text">상대적으로 작은 코드·사람 풀에 묶여 있다</span>.
       </p>
       <p>
-        Probe: ‘노드 운영자가 어느 버전을 돌릴지로 투표한다’ 는 명제는 이론상
+        ‘노드 운영자가 어느 버전을 돌릴지로 투표한다’ 는 명제는 이론상
         맞지만, 대체 client 의 성숙도가 낮으면 실질 선택지가 없다. 결국 ‘Core
-        가 release 하면 따라간다’ 가 default 가 된다. 이게 ‘탈중앙’ 의 운영적
-        한계다.
+        가 release 하면 따라간다’ 가 기본값이 된다. 이것이 ‘탈중앙’ 이 실제
+        운영에서 마주하는 한계다.
       </p>
       <Probe>
         Bitcoin 의 거버넌스가 ‘소수 maintainers + 후원 의존 contributor + 사실상
@@ -160,8 +160,8 @@ function NetworkVsStorage() {
           <code className="font-mono text-text">blocks/</code> (원시 블록 본체),{" "}
           <code className="font-mono text-text">blocks/index/</code> (어느
           블록이 어느 파일·어느 위치에 있나의 인덱스), 그리고 휘발성{" "}
-          <code className="font-mono text-text">mempool</code>. 이걸 어떻게
-          나눠뒀는가가 ‘추상 vs 구현’ 의 핵심.
+          <code className="font-mono text-text">mempool</code>. 이것을 어떻게
+          나눠뒀는가가 ‘추상과 구현의 차이’ 를 이해하는 핵심이다.
         </p>
       </div>
 
@@ -176,8 +176,8 @@ function NetworkVsStorage() {
           <p className="text-[14px] text-text/75 leading-[1.7]">
             합의의 추상 자료구조. 한 블록이{" "}
             <code className="font-mono text-text">prev_hash</code> 로 직전
-            블록을 가리키는 <span className="text-text">linked chain</span>.
-            S7 에서 본 그 모양 그대로. 이게 ‘비트코인이 무엇인가’ 의 정의.
+            블록을 가리키는 <span className="text-text">linked chain</span> 이다.
+            S7 에서 본 구조가 곧 비트코인이 합의를 표현하는 방식이다.
           </p>
         </div>
         <div className="rounded-sm border border-edge bg-surface/30 p-5 space-y-2.5">
@@ -234,8 +234,8 @@ function NetworkVsStorage() {
           한 줄로 거꾸로 거슬러 올라가 변조 불가능을 보장.
           그러나 한 노드 안에선 그 추상을 그대로 메모리/디스크에 둘 이유가 없다.
           노드가 매 순간 묻는 질문은 ‘이 UTXO 가 아직 살아있나?’ 같은{" "}
-          <span className="text-text">key-value lookup</span>. 그래서 LevelDB 가
-          그 일을 맡는다.
+          <span className="text-text">key-value lookup</span> 이다. 그래서 LevelDB 가
+          그 역할을 맡는다.
         </p>
         <p className="text-[14px] text-text/65 leading-[1.7]">
           요약: <span className="text-text">‘블록체인 = 합의의 추상’</span>,{" "}
@@ -302,7 +302,7 @@ function Opening() {
         <p className="text-[17px] text-text/80 leading-[1.7]">
           S1 ~ S9 까지 ‘비트코인이 어떻게 작동 가능한가’ 의 수학·암호·게임이론
           그림을 봤다. 그럼 그 모든 추상적인 개념이 실제로{" "}
-          <span className="text-text">컴퓨터 한 대 위에선 뭐가 어떻게
+          <span className="text-text">컴퓨터 한 대 위에서 무엇이 어떻게
           돌아가는가?</span>
         </p>
         <h2 className="text-xl font-medium leading-snug pt-3">
@@ -576,7 +576,7 @@ function ComponentMapGuide() {
         <RowExplain
           label="영구"
           tone="muted"
-          body="디스크에 사실상 영원히 쌓이는 데이터. Block files (블록 본체 모음) 와 Wallet (옵션, 키와 트랜잭션 기록). 이게 ‘노드를 껐다 켜도 잃지 않는’ 자산."
+          body="디스크에 사실상 영원히 쌓이는 데이터. Block files (블록 본체 모음) 와 Wallet (옵션, 키와 트랜잭션 기록) 이 여기에 해당한다. 노드를 껐다 켜도 보존되어야 하는 상태다."
         />
       </div>
 

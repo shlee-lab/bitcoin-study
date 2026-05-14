@@ -5,7 +5,7 @@ import { Term } from "../Term";
 export const SignatureMeta = {
   id: "signature" as const,
   title: "Digital signature (ECDSA)",
-  oneLiner: "메시지 + 비밀키 → 서명. 누구든 공개키로 검증 가능.",
+  oneLiner: "메시지와 비밀키로 서명을 만들고, 누구든 공개키로 검증할 수 있다.",
 };
 
 export function SignatureBody() {
@@ -54,7 +54,8 @@ export function SignatureBody() {
           ECDSA 의 보안은{" "}
           <span className="text-text">매 서명마다 새로운, 진짜 무작위 k</span>{" "}
           에 전적으로 의존한다. 같은 k 를 두 번만 써도 비밀키 d 가 평범한
-          나눗셈으로 복원된다. ‘무작위성이 한 번 어긋나면 → 자산 전부 도난’.
+          나눗셈으로 복원된다. 무작위성이 한 번 어긋나면 그 키가 통제하던 자산
+          전체가 위험해진다.
         </p>
 
         <div className="rounded-sm border border-[#f76b6b]/40 bg-[#f76b6b]/[0.04] p-5 space-y-3">
@@ -88,8 +89,8 @@ export function SignatureBody() {
             </div>
           </FormulaBox>
           <p className="text-[13px] text-text/70 leading-[1.65]">
-            모듈러 역원 두 번이면 끝. 서명 두 개만 공개되어 있으면 누구든 d 를
-            복원할 수 있다. 그 주소의 모든 자금에 즉시 접근.
+            모듈러 역원 두 번이면 충분하다. 서명 두 개만 공개되어 있으면 누구든
+            d 를 복원할 수 있고, 그 주소의 모든 자금에 접근할 수 있다.
           </p>
         </div>
 
@@ -100,12 +101,12 @@ export function SignatureBody() {
           <Incident
             year="2010"
             title="Sony PS3 마스터 키 노출"
-            body="Sony 가 PS3 펌웨어 서명에 매번 같은 k 를 썼다. 해킹 그룹 fail0verflow 가 발견 → 마스터 비밀키 추출 → 수정된 펌웨어를 정식 서명처럼 만들어 jailbreak 가능. Sony 의 가장 큰 보안 사고 중 하나."
+            body="Sony 는 PS3 펌웨어 서명에 매번 같은 k 를 사용했다. 해킹 그룹 fail0verflow 가 이를 발견했고, 마스터 비밀키를 추출해 수정된 펌웨어를 정식 서명처럼 만들 수 있었다. Sony 의 대표적인 보안 사고 중 하나다."
           />
           <Incident
             year="2013-08"
             title="Android Bitcoin Wallet 일제 도난"
-            body="Android 의 java.security.SecureRandom 버그로 일부 기기에서 같은 k 가 반복 생성. 거래소 BlockChain.info 등 Bitcoin 지갑 앱들이 영향. 약 55 BTC ($5,700 당시) 를 누군가가 자동 스크립트로 즉시 인출. 사후 RFC 6979 채택의 직접 계기."
+            body="Android 의 java.security.SecureRandom 버그로 일부 기기에서 같은 k 가 반복 생성됐다. BlockChain.info 등 Bitcoin 지갑 앱들이 영향을 받았고, 누군가가 자동 스크립트로 약 55 BTC (당시 약 5,700 달러) 를 빠르게 인출했다. 이 사건은 이후 RFC 6979 채택의 직접 계기가 되었다."
           />
           <Incident
             year="2014~"
@@ -140,7 +141,7 @@ export function SignatureBody() {
         <p className="text-sm text-muted">
           d 없이 P.x 를 r 에 맞추는 건{" "}
           <Term id="ecdlp">ECDLP</Term> 를 푸는 것과 동치이므로 사실상
-          불가능.
+          불가능하다.
         </p>
       </Section>
 

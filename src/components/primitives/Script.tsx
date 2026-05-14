@@ -46,9 +46,10 @@ export function ScriptBody() {
 
       <Section title="④ Script 의 의도된 한계">
         <p>
-          반복문 없음, 함수 없음, Turing-incomplete. 일부러 표현력을 줄여 ‘각
-          OP 의 비용이 정확히 예측 가능 + 무한 루프 불가능’ 을 보장. 이게
-          이더리움처럼 임의 코드를 실행하는 모델과의 큰 차이.
+          Script 는 반복문과 함수를 지원하지 않는 Turing-incomplete 언어다.
+          의도적으로 표현력을 줄였기 때문에 각 OP 의 실행 비용을 예측할 수 있고,
+          무한 루프도 만들 수 없다. 이것이 이더리움처럼 임의 코드를 실행하는
+          모델과의 큰 차이다.
         </p>
       </Section>
     </div>

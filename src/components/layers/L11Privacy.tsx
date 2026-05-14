@@ -339,9 +339,9 @@ function SilentPayments() {
       <Callout title="왜 강력한가">
         <p className="text-[14px] text-text/80 leading-[1.7]">
           기존 ‘새 주소 매번’ 방식은 받는 쪽이 발신자마다 다른 주소를 공유해야
-          했다. 공개 후원 주소 같은 케이스에선 불가능. Silent Payments 는 그
-          제약을 푼다. 주소 하나만 공개해도 모든 송금이 서로 다른 출력으로
-          분산된다.
+          했다. 공개 후원 주소 같은 경우에는 이 방식이 현실적으로 어렵다.
+          Silent Payments 는 그 제약을 푼다. 주소 하나만 공개해도 모든 송금이
+          서로 다른 출력으로 분산된다.
         </p>
       </Callout>
       <p className="text-[13px] text-muted leading-[1.7]">
@@ -429,8 +429,8 @@ function PrivacyCoins() {
             <Term id="stealth-address">
               <span className="text-text">Stealth address</span>
             </Term>{" "}
-            · 받는 주소가 발신자마다 다르게 일회용으로 파생된다. 수신자가 자기
-            비밀키로만 ‘내 것’ 인지 검사 가능.
+            · 받는 주소가 발신자마다 다르게 일회용으로 파생된다. 수신자는 자기
+            비밀키로만 ‘내 것’ 인지 검사할 수 있다.
           </div>
           <div className="text-[13px] text-text/80 leading-[1.7]">
             ·{" "}

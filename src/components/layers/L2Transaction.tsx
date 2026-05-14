@@ -123,20 +123,21 @@ export function L2Transaction(props: LayerProps) {
                   <Reflection title="비트코인 거래는 환불이 가능할까?">
                     <p>
                       신용카드는 사기 발견 시{" "}
-                      <span className="text-text">chargeback</span> (지급 취소)
-                      가능. 거래소·플랫폼도 정책으로 환불·복구 처리. 즉 누군가
-                      뒤에서 ‘되돌릴 수 있는 권한’ 을 갖고 있다.
+                      <span className="text-text">chargeback</span> (지급 취소)이
+                      가능하다. 거래소나 플랫폼도 정책에 따라 환불·복구를 처리할 수
+                      있다. 즉 누군가가 뒤에서 ‘되돌릴 수 있는 권한’ 을 갖고 있다.
                     </p>
                     <p>
-                      비트코인은 엄밀히 말하면 ‘영구’ 가 아니다. 가장 무거운
-                      사슬 (most-work chain) 이 항상 진실이고, 누군가가 정직한
+                      비트코인은 엄밀히 말하면 ‘영구’ 가 아니다. 네트워크는 흔히
+                      Longest chain rule 이라고 부르는 규칙, 더 정확히는
+                      most-work chain 규칙으로 한 사슬을 선택한다. 누군가가 정직한
                       네트워크보다 더 많은 작업을 들여 다른 사슬을 키우면 깊은
                       블록도 이론상 reorg 된다. 다만 confirmation 깊이가 깊어질
-                      수록 그게 일어날 확률이 기하급수적으로 작아져서, 6
+                      수록 그런 일이 일어날 확률이 기하급수적으로 작아져서, 6
                       confirmation 즈음부턴 ‘실용적으로’ 영구라고 합의해 쓰는
-                      것뿐. 즉{" "}
-                      <span className="text-text">절대적 finality 가 아니라 확률적 finality</span>.
-                      이건{" "}
+                      것이다. 즉{" "}
+                      <span className="text-text">절대적 finality 가 아니라 확률적 finality</span>{" "}
+                      를 사용하는 구조다. 이것은{" "}
                       <span className="text-text">검열 저항</span> 의 토대이지만,
                       잘못 보낸 송금은 회수할 수 없고 사기 피해도 외부의 도움을 받을 수 없다.
                     </p>
@@ -377,14 +378,14 @@ const STAGES: {
   {
     name: "mined",
     who: "채굴자",
-    desc: "어느 채굴자가 이 트랜잭션을 담은 블록의 PoW 를 풀어 네트워크에 broadcast 한다. 이게 첫 ‘confirmation = 1’.",
+    desc: "어느 채굴자가 이 트랜잭션을 담은 블록의 PoW 를 풀어 네트워크에 broadcast 한다. 이것이 첫 번째 confirmation 이다.",
     reversible: "reorg 가능 (낮은 확률)",
     tone: "accent",
   },
   {
     name: "confirmed",
     who: "시간",
-    desc: "그 블록 위에 6 개 블록이 더 쌓이면 통상 ‘final’ 로 간주한다. 다만 most-work chain rule 때문에 이론상 reorg 는 항상 가능하다. 깊이가 깊을수록 그 확률이 기하급수적으로 작아질 뿐이다 (확률적 finality).",
+    desc: "그 블록 위에 6 개 블록이 더 쌓이면 통상 ‘final’ 로 간주한다. 다만 Longest chain rule, 정확히는 most-work chain 규칙 때문에 이론상 reorg 는 항상 가능하다. 깊이가 깊을수록 그 확률이 기하급수적으로 작아질 뿐이다 (확률적 finality).",
     reversible: "확률적 영구 (S7 참조)",
     tone: "accent",
   },
@@ -571,7 +572,7 @@ function FeeStory() {
         <p className="text-text/70">
           그런데 채굴 보상은 4 년마다 반감해 결국 0 에 수렴한다 (~ 2140 년). 그
           시점엔 채굴 보안의 거의 100% 가 수수료 시장에 의존. 트랜잭션 수요가
-          충분히 클까? 이게 비트코인의 장기 보안 가설이고, S8 / S9 에서 다시
+          충분히 클까? 이것이 비트코인의 장기 보안 가설이고, S8 / S9 에서 다시
           만난다.
         </p>
       </Reflection>
@@ -707,19 +708,20 @@ function SplitIntuition() {
       <div className="space-y-3">
         <p className="text-[17px] text-text/80 leading-[1.75]">
           앞 단계에서 본 <span className="text-text">지갑 (S1 · S2)</span>{" "}
-          은 키와 주소를 갖고 있었다. 이제 그 지갑으로 ‘무엇을 보내는가’.
-          그게 <span className="text-text">트랜잭션</span> · 한 통의 서명된
-          메시지. 그런데 이 메시지가 은행 송금처럼 ‘잔액에서 1 빼기’ 가
-          아니다. 직관부터.
+          은 키와 주소를 갖고 있었다. 이제 그 지갑으로 ‘무엇을 보내는가’를
+          살펴본다. <span className="text-text">트랜잭션</span> 은 한 통의
+          서명된 메시지다. 다만 이 메시지는 은행 송금처럼 ‘잔액에서 1 빼기’가
+          아니다. 먼저 직관부터 잡아보자.
         </p>
         <h2 className="text-[20px] font-medium tracking-tight pt-2">
           Alice 가 1.4 BTC 를 갖고 1 BTC 를 Bob 에게 보내려면?
         </h2>
         <p className="text-[15px] text-text/70 leading-[1.7]">
-          은행 계좌라면 ‘1 빼고 0.4 남기기’ 한 줄 갱신. 비트코인은 그게 안 된다.
+          은행 계좌라면 ‘1 빼고 0.4 남기기’ 라는 한 줄 갱신으로 충분하다.
+          비트코인에서는 그렇게 처리할 수 없다.
           Alice 가 가진 1.4 BTC 는 한 덩어리의{" "}
           <span className="text-text">‘영수증’</span> (UTXO) 이라서, 부분 사용이
-          불가능. 통째로 ‘소비’ 하고{" "}
+          불가능하다. 통째로 ‘소비’ 하고{" "}
           <span className="text-text">새 영수증 두 장</span> 을 만들어 다시 쪼갠다.
         </p>
       </div>

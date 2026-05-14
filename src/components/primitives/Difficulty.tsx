@@ -59,12 +59,12 @@ export function DifficultyBody() {
         <p>
           누군가 갑자기 hashrate 를 100× 늘렸다고 거짓말 하는 헤더를 만들기
           어렵게 만든다. 그리고 한 사이클에서 너무 큰 변화는 시스템 안정성에도
-          위험. 4× 라는 cap 이 그 안전 장치.
+          위험하다. 4× cap 은 이런 급격한 변화를 막는 안전 장치다.
         </p>
         <p className="text-sm text-muted">
-          참고: 매 블록의 timestamp 는 노드들이 각자 약간의 허용 범위 안에서만
+          참고로, 매 블록의 timestamp 는 노드들이 각자 약간의 허용 범위 안에서만
           받는다. 미래로 너무 멀거나, 직전 11 블록 중앙값보다 과거인 블록은
-          거부.
+          거부된다.
         </p>
       </Section>
     </div>
@@ -118,8 +118,8 @@ function BitsExample() {
         </div>
       </div>
       <div className="text-[13px] text-muted">
-        ‘앞에 0 이 몇 개’ 로 직관 가능. 0 이 한 자리 더 늘 때마다 평균적으로 약
-        16× 어려워짐.
+        ‘앞에 0 이 몇 개’ 인지를 보면 target 의 크기를 직관적으로 이해할 수
+        있다. 0 이 한 자리 더 늘 때마다 평균적으로 약 16배 어려워진다.
       </div>
     </div>
   );

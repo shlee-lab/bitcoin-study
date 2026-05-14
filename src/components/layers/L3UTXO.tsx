@@ -61,7 +61,7 @@ export function L3UTXO(props: LayerProps) {
                         </Bullet>
                         <Bullet>
                           노드는 모든 UTXO 를 메모리/LevelDB 에 보관하고, 새
-                          트랜잭션이 들어오면 그게 가리키는 출력이 진짜 ‘안 쓴’
+                          트랜잭션이 들어오면 해당 입력이 가리키는 출력이 진짜 ‘안 쓴’
                           상태인지만 본다.
                         </Bullet>
                       </ul>
@@ -152,7 +152,8 @@ export function L3UTXO(props: LayerProps) {
                       이더리움은 표현력을 택했다. 같은 결제 시스템이라도 데이터
                       모델을 어떻게 고르는지에 따라 가능한 것과 불가능한 것이
                       달라진다. 단순함 자체가 보안 자산이라는 주장과, 단순함이 곧
-                      한계라는 주장. 어느 쪽이 옳을까?
+                      한계라는 주장이 충돌한다. 어떤 트레이드오프가 더 설득력
+                      있는가?
                     </Probe>
                     <Reading label="검색 키워드">
                       Cardano 의 eUTXO (extended UTXO), 비트코인의 covenants
@@ -347,13 +348,13 @@ function ModelCompare() {
           />
           <CompareRow
             axis="프라이버시"
-            utxo="매 송금마다 새 주소(=새 UTXO 위치) 를 만드는 게 자연스러움. 외부에서 한 사람의 잔액을 합산하기 어려움."
+            utxo="매 송금마다 새 주소(=새 UTXO 위치) 를 만드는 흐름이 자연스럽다. 외부에서 한 사람의 잔액을 합산하기 어렵다."
             account="주소가 곧 잔액 통장. 외부에서 쉽게 한 사람의 모든 활동을 추적."
           />
           <CompareRow
             axis="상태 검증"
-            utxo="‘이 UTXO 는 아직 안 쓰였다’ 만 보면 된다 → 가벼운 set 자료구조."
-            account="모든 계정의 현재 잔액 + nonce 트리를 유지해야 한다 → 무거운 글로벌 상태."
+            utxo="‘이 UTXO 는 아직 안 쓰였다’ 만 확인하면 된다. 비교적 가벼운 set 자료구조로 검증할 수 있다."
+            account="모든 계정의 현재 잔액과 nonce 트리를 유지해야 한다. 글로벌 상태가 무거워진다."
           />
           <CompareRow
             axis="programmability"
@@ -747,8 +748,8 @@ function UtxoSetReality() {
         </h2>
         <p className="text-[17px] text-text/70 leading-[1.7] mt-2">
           한 시점에 비트코인 네트워크에 살아있는 UTXO 의 수와 그것이 차지하는
-          디스크 용량을 본다. 이게 곧 ‘노드 운영 비용’ 이고, 누가 노드를
-          돌릴 수 있는가 (즉 분산도) 의 척도가 된다.
+          디스크 용량을 본다. 이 값은 노드 운영 비용을 결정하고, 누가 노드를
+          돌릴 수 있는지를 가르는 분산도의 척도가 된다.
         </p>
       </div>
 
@@ -764,16 +765,17 @@ function UtxoSetReality() {
 
       <div className="rounded-sm border border-edge bg-surface/30 p-5 space-y-3">
         <h4 className="text-[17px] font-medium text-text leading-snug">
-          왜 이게 분산도의 척도인가
+          왜 이것이 분산도의 척도인가
         </h4>
         <p className="text-[15px] text-text/85 leading-[1.7]">
           모든 풀 노드는 이 UTXO 셋 전체를 메모리/디스크에 갖고, 새 트랜잭션이
           들어올 때마다 ‘이 input 이 가리키는 UTXO 가 셋에 있는가’ 를 즉시 본다.
-          셋이 커질수록 노드 운영 비용 ↑ → 운영자 수 ↓ → 분산성 ↓.
+          셋이 커질수록 노드 운영 비용이 높아지고, 운영자 수가 줄어들며,
+          결과적으로 분산성이 약해진다.
         </p>
         <p className="text-[14px] text-text/70 leading-[1.7]">
           그래서 ‘UTXO 부풀림 (UTXO bloat)’ 은 비트코인 커뮤니티가 진지하게
-          신경 쓰는 주제. 두 종류의 ‘잘 안 움직이는 UTXO’ 가 특히 비판받는다.
+          다루는 주제다. 특히 두 종류의 ‘잘 움직이지 않는 UTXO’ 가 자주 비판받는다.
           첫째는 위에서 본{" "}
           <span className="text-text">dust output</span> (옮기는 비용 &gt; 가치
           → 영영 안 쓰임). 둘째는{" "}
@@ -996,7 +998,8 @@ function TrackingAndObfuscation() {
           발전한다. <span className="text-text">한쪽은 ‘추적’</span>{" "}
           (chain analysis 회사들), <span className="text-text">다른 쪽은 ‘우회’</span>{" "}
           (mixer, ZKP, off-chain). 그 사이의 줄다리기가 비트코인 프라이버시의
-          현재 모습.
+          현재 모습이다. 여기서는 UTXO 그래프 관점의 기본 원리만 보고, 실제
+          프라이버시 도구와 규제 이슈는 S13 Privacy 에서 다시 다룬다.
         </p>
       </div>
 
@@ -1008,7 +1011,8 @@ function TrackingAndObfuscation() {
         <p className="text-[15px] text-text/80 leading-[1.7]">
           체인 분석사가 어떤 UTXO 를 ‘위험 출처’ (해킹·랜섬·다크넷) 로 표시하면,
           그 UTXO 가 input 으로 들어가는 모든 후속 트랜잭션의 output 들에도
-          오염이 ‘전파’ 된다. 그 라벨이 어디까지 따라붙는지가 곧 추적의 본질.
+          오염이 ‘전파’ 된다. 그 라벨이 어디까지 따라붙는지를 계산하는 것이
+          추적의 핵심이다.
         </p>
 
         <TaintGraph />
@@ -1025,7 +1029,7 @@ function TrackingAndObfuscation() {
             />
             <TaintRow
               name="Haircut"
-              body="모든 output 에 input 의 오염을 액수 비례로 균등 분배. 가장 보수적이라 한 번 섞이면 모두에 오염이 묻음 → 거의 모든 BTC 가 ‘약한 오염’ 으로 분류되는 부작용."
+              body="모든 output 에 input 의 오염을 액수 비례로 균등 분배한다. 가장 보수적인 모델이라 한 번 섞이면 모든 output 에 오염이 묻고, 거의 모든 BTC 가 ‘약한 오염’ 으로 분류되는 부작용이 생긴다."
             />
             <TaintRow
               name="Poison"
@@ -1038,7 +1042,7 @@ function TrackingAndObfuscation() {
         <Callout tone="warn" title="fungibility (대체가능성) 의 위협">
           <p className="text-[15px] text-text/80 leading-[1.7]">
             이론상 모든 1 BTC 는 같다 (fungible). 하지만 거래소가 ‘오염된 1 BTC’
-            입금을 거부하면 같은 액면이 다른 가치를 갖는다. 이게 비트코인
+            입금을 거부하면 같은 액면이 다른 가치를 갖는다. 이것이 비트코인
             보유자들이 ‘mixer 가 도덕적이냐 아니냐’ 보다도 fungibility 보호
             차원에서 mixing 을 옹호하는 이유다.
           </p>
@@ -1087,8 +1091,8 @@ function TrackingAndObfuscation() {
             equal-output 자체가 패턴이라, chain analysis 가 ‘이 트랜잭션은 CoinJoin’
             이라고 일단 분류할 수 있다. 그 후엔 timing·IP·후속 송금의 합산
             패턴 등 메타데이터로 잘게 분리된다. 또한 mixing 한 자금만 따로
-            거래소에서 거부당하기도 한다. 익명성이 곧 사용 거부와 거래되는
-            셈이다.
+            거래소에서 거부당하기도 한다. 익명성을 높이려는 선택이 실제 사용성
+            저하로 이어질 수 있다는 뜻이다.
           </p>
         </Callout>
       </div>
@@ -1155,7 +1159,7 @@ function TrackingAndObfuscation() {
             <li>
               <span className="text-muted">·</span>{" "}
               <span className="text-text">Timing</span>: Tornado 입금 5 분 뒤
-              같은 액수 인출 → 사실상 같은 사람으로 추정.
+              같은 액수가 인출되면 사실상 같은 사람으로 추정될 수 있다.
             </li>
             <li>
               <span className="text-muted">·</span>{" "}

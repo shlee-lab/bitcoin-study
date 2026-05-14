@@ -462,10 +462,9 @@ function DistributedThesis() {
         <h2 className="text-[20px] font-medium tracking-tight">왜 ‘분산 네트워크’ 인가</h2>
         <p className="text-[17px] text-text/70 leading-[1.7] mt-1.5 max-w-2xl">
           앞 레이어들 (지갑·트랜잭션·UTXO·블록) 은 <em>혼자서도</em> 수학적으로
-          만들 수 있다. 그러나 ‘이게 진짜 비트코인의 한 부분’ 이 되려면 한 가지가
-          더 필요하다. 모르는 사람 수만 명이{" "}
-          <span className="text-text">같은 사실</span> 에 동의해야 한다는 것.
-          중앙 서버 없이.
+          만들 수 있다. 그러나 그것이 진짜 비트코인의 한 부분이 되려면 한 가지가
+          더 필요하다. 모르는 사람 수만 명이 중앙 서버 없이{" "}
+          <span className="text-text">같은 사실</span> 에 동의해야 한다.
         </p>
       </div>
 
@@ -483,7 +482,7 @@ function DistributedThesis() {
         <ThesisCard
           n="③"
           title="합의 = 다수가 같은 사슬"
-          body="같은 규칙 (consensus rules) 을 따르는 노드들이 같은 사슬에 도달한다. 룰이 다르면 다른 사슬로 갈라진다. 그게 fork. 이걸 안전하게 하는 게 다음 레이어들의 일."
+          body="같은 규칙 (consensus rules) 을 따르는 노드들이 같은 사슬에 도달한다. 룰이 다르면 다른 사슬로 갈라지고, 이것이 fork 다. 다음 레이어들은 이런 갈림을 안전하게 수렴시키는 방법을 다룬다."
           tone="accent"
         />
       </div>
@@ -923,7 +922,7 @@ function WhyManyNodes() {
         <ThreatCard
           name="Eclipse 공격"
           short="한 노드를 가짜 peer 로 둘러싸기"
-          body="피해자 노드의 8 개 outbound + 117 개 inbound 슬롯을 공격자 IP 로 모두 차지하면, 그 노드는 ‘공격자 우주’ 에서 살게 된다. 가짜 사슬·이중지출이 가능. 노드 수가 많고 IP 다양성이 클수록 어려워짐."
+          body="피해자 노드의 8 개 outbound + 117 개 inbound 슬롯을 공격자 IP 로 모두 차지하면, 그 노드는 ‘공격자 우주’ 에서 살게 된다. 이 경우 가짜 사슬과 이중지출이 가능해진다. 노드 수가 많고 IP 다양성이 클수록 공격은 어려워진다."
         />
         <ThreatCard
           name="국가급 검열"
@@ -945,7 +944,7 @@ function WhyManyNodes() {
         <div className="divide-y divide-edge text-sm">
           <NodeCountRow
             n="~ 1,000"
-            outcome="중앙화 클러스터에 가까움. 정부·대기업이 마음먹으면 사슬 통제 가능. ‘은행과 다를 게 없는’ 시스템."
+            outcome="중앙화 클러스터에 가깝다. 정부나 대기업이 마음먹으면 사슬을 통제할 수 있어, 은행과 크게 다르지 않은 시스템이 된다."
             tone="bad"
           />
           <NodeCountRow
@@ -955,7 +954,7 @@ function WhyManyNodes() {
           />
           <NodeCountRow
             n="100 만 +"
-            outcome="실질적으로 검열·차단 불가능. 단점은 P2P 트래픽 폭증, 그래서 Erlay/Compact Blocks 같은 효율 개선이 활발."
+            outcome="실질적으로 검열하거나 차단하기 어렵다. 단점은 P2P 트래픽이 폭증한다는 점이며, 그래서 Erlay/Compact Blocks 같은 효율 개선이 활발하다."
             tone="good"
           />
         </div>
@@ -1034,7 +1033,7 @@ function SystemContrast() {
           (Satoshi Nakamoto, 2008). 우리는 지금까지 이 제목의 뒷부분 ·{" "}
           <span className="text-text">electronic cash</span> · ‘전자 현금이
           어떻게 서명되고 (S3) 기록되는지 (S4 ~ S5)’ 를 봤다. 이제 앞부분 ·{" "}
-          <span className="text-text">peer-to-peer</span> · ‘그게 도대체 어떤
+          <span className="text-text">peer-to-peer</span> · ‘그 일이 어떤
           네트워크 위에서 일어나는가’ 를 본다. 중앙 서버 한 대가 진실을
           발표하면 끝나는 시스템이 아니어서, 이 단계가 비트코인의 가장 어려운
           문제다.

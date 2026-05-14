@@ -794,8 +794,9 @@ function OtherEcosystems() {
             </div>
           </div>
           <p className="text-[13px] text-muted/85 leading-[1.7]">
-            트레이드오프 · 검증 비용 ↑ → 노드 운영 비용 ↑ → 자기 노드 검증의 진입
-            장벽 ↑. S6 의 ‘분산성 vs 처리량’ 논쟁이 다시 나타난다.
+            트레이드오프는 분명하다. 검증 비용이 커지면 노드 운영 비용도 커지고,
+            자기 노드로 직접 검증하기 위한 진입 장벽도 높아진다. S6 의 ‘분산성
+            vs 처리량’ 논쟁이 다시 나타나는 지점이다.
           </p>
         </div>
 
@@ -834,9 +835,9 @@ function OtherEcosystems() {
             </div>
           </div>
           <p className="text-[13px] text-muted/85 leading-[1.7]">
-            결과 · 한 건 수수료가 L1 의 약 1/10 ~ 1/100, 블록 시간은 초 단위가
-            된다. 카드 결제에 사실상 근접한 UX 가 가능해진 첫 단계라 할 수
-            있다.
+            결과적으로 한 건의 수수료는 L1 의 약 1/10 ~ 1/100 수준으로 낮아지고,
+            블록 시간은 초 단위가 된다. 카드 결제에 가까운 UX 를 현실적으로 만들기
+            시작한 접근이다.
           </p>
         </div>
 
@@ -875,9 +876,9 @@ function OtherEcosystems() {
             </div>
           </div>
           <p className="text-[13px] text-muted/85 leading-[1.7]">
-            트레이드오프 · 병렬성은 커지지만 “모든 노드가 모든 것을 직접
-            검증한다”는 단순성이 줄어든다. 데이터 가용성, shard 간 통신, validator
-            샘플링 같은 새 문제가 생긴다.
+            병렬성은 커지지만 “모든 노드가 모든 것을 직접 검증한다”는 단순성은
+            줄어든다. 데이터 가용성, shard 간 통신, validator 샘플링 같은 새
+            문제가 생긴다.
           </p>
         </div>
       </div>
@@ -939,8 +940,9 @@ function PaymentRailsReflection() {
         </li>
         <li>
           <span className="text-text">규제·KYC·AML</span> · 카드망은
-          금융기관으로서 정부 감독 안에 있다. 이게 비용이자 보호. ‘은행 계좌 동결’
-          같은 일이 가능한 이유.
+          금융기관으로서 정부 감독 안에 있다. 이것은 비용이면서 동시에 사용자
+          보호 장치이기도 하다. ‘은행 계좌 동결’ 같은 일이 가능한 이유도 여기에
+          있다.
         </li>
         <li>
           <span className="text-text">법정통화 안정성</span> · 결제는 가치 저장이
@@ -965,11 +967,11 @@ function PaymentRailsReflection() {
       <Reading label="관련 사례">
         Visa B2B Connect, Circle Cross-Chain Transfer Protocol, PayPal PYUSD,
         Stripe 의 USDC 결제 베타. ‘카드사와 stablecoin 의 hybrid’ 를 향한 실제
-        움직임들.
+        움직임을 보여주는 사례다.
       </Reading>
       <Reading label="보충 맥락">
-        Lightning, rollup 의 한 가지 공통 약점 · 자기 보관 + 일상 결제 두 가지
-        UX 를 동시에 만족시키는 일이 여전히 어렵다. Custodial Lightning 지갑
+        Lightning 과 rollup 의 공통 약점은 자기 보관과 일상 결제 UX 를 동시에
+        만족시키기 어렵다는 점이다. Custodial Lightning 지갑
         (Wallet of Satoshi, Phoenix, ZBD) 의 폭발적 성장이 그 증거다. 사용성과
         자기 보관 사이의 트레이드오프가 드러난다.
       </Reading>

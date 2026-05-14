@@ -26,7 +26,8 @@ export function L6Blockchain(props: LayerProps) {
                       에게 전해진다고 끝이 아니다. 시간이 지나며{" "}
                       <span className="text-text">블록이 계속 추가되는데</span>,
                       그 블록들이 어떻게 한 줄로 묶여 ‘되돌릴 수 없게’ 되는가.
-                      그 묶음이 <span className="text-text">블록체인</span>.
+                      이렇게 이어진 블록들의 사슬을{" "}
+                      <span className="text-text">블록체인</span> 이라고 부른다.
                     </p>
                     <p className="text-[15px] text-text/70 leading-[1.7]">
                       열쇠는 헤더 안의 한 필드,{" "}
@@ -38,6 +39,7 @@ export function L6Blockchain(props: LayerProps) {
                       된다.
                     </p>
                     <ChainViz />
+                    <GenesisPrimer />
                     <div className="rounded-sm border border-edge bg-surface/20 p-4 text-sm leading-relaxed">
                       <h4 className="text-[16px] font-medium text-accent2 leading-snug mb-2">
                         왜 변조 불가?
@@ -55,7 +57,8 @@ export function L6Blockchain(props: LayerProps) {
                         만든다고 할 때, 과거 100 블록 전을 바꾸려면 정직한
                         네트워크보다{" "}
                         <span className="text-text">압도적으로 빠르게</span>{" "}
-                        100+ 블록을 다시 만들어야 한다. 사실상 불가능.
+                        100 개가 넘는 블록을 다시 만들어야 한다. 현실적으로는
+                        불가능에 가깝다.
                       </p>
                     </div>
                   </section>
@@ -84,38 +87,25 @@ export function L6Blockchain(props: LayerProps) {
               },
               {
                 title: "Fork",
-                subtitle: "같은 높이에 두 후보가 있을 때",
+                subtitle: "일시적 분기와 규칙 변경",
                 body: (
                   <Section
-                    heading="fork · 같은 높이에 두 후보가 있을 때"
-                    sub="새 블록을 누가 만드는가는 다음 단계 (S8 PoW Mining) 의 주제. 여기선 한 가지만 짚는다 · 전 세계의 수많은 채굴자가 같은 ‘다음 블록’ 자리를 동시에 노리고 시도한다. 전파 지연 때문에 두 채굴자가 거의 동시에 블록을 찾으면 일시적으로 사슬이 두 갈래가 된다. 그 두 갈래가 어떻게 화해되는지."
+                    heading="fork · 사슬이 갈라지는 두 가지 경우"
+                    sub="fork 는 한 단어지만 맥락이 둘이다. 하나는 전파 지연 때문에 같은 높이에 두 블록 후보가 생기는 일시적 fork 다. 다른 하나는 검증 규칙 자체가 바뀌어 네트워크가 다른 규칙을 따르게 되는 protocol fork 다."
                   >
                     <ForkScenario />
                   </Section>
                 ),
               },
               {
-                title: "Most-work chain",
-                subtitle: "가장 긴 사슬이 아니라 작업이 가장 많이 쌓인 사슬",
+                title: "Longest chain rule",
+                subtitle: "통용 표현과 실제 규칙의 차이",
                 body: <MostWorkRule />,
               },
               {
                 title: "51% 공격", subtitle: "실제 비용은 얼마나 드나",
                 level: "basic",
                 body: <FiftyOnePercent />,
-              },
-              {
-                title: "Soft fork vs Hard fork",
-                subtitle: "검증 규칙이 바뀔 때",
-                level: "deep",
-                body: (
-                  <Section
-                    heading="Soft fork vs Hard fork · 프로토콜 자체가 바뀌는 경우"
-                    sub="블록 형식이나 검증 규칙이 바뀌는 일. 두 종류가 있고 결과가 크게 다르다."
-                  >
-                    <ForkTypes />
-                  </Section>
-                ),
               },
               {
                 title: "가장 유명한 hard fork", subtitle: "이더리움 DAO 해킹 (2016)",
@@ -126,18 +116,6 @@ export function L6Blockchain(props: LayerProps) {
                     sub="비트코인 사례는 아니지만, ‘체인의 사회적 합의로 hard fork 가 발동된’ 사상 가장 큰 사건. 비트코인이 ‘코드는 곧 법’ 원칙을 더 단단히 가져가게 만든 분기점이기도 하다."
                   >
                     <DAOHack />
-                  </Section>
-                ),
-              },
-              {
-                title: "Genesis block", subtitle: "사슬의 시작점",
-                level: "case",
-                body: (
-                  <Section
-                    heading="Genesis block · 사슬의 시작점"
-                    sub="2009 년 1 월 3 일, 사토시가 만든 첫 블록 (block height 0). 이전 해시가 모두 0 으로 박혀 있고, coinbase 메시지에 그 시점의 영국 신문 헤드라인이 남아있다."
-                  >
-                    <Genesis />
                   </Section>
                 ),
               },
@@ -158,15 +136,17 @@ export function L6Blockchain(props: LayerProps) {
                     <Probe>
                       ‘투명성’ 과 ‘프라이버시’ 는 보통 트레이드오프로 그려진다.
                       비트코인은 극단적 투명성 쪽을 택했다. 그래서 CoinJoin,
-                      Lightning, Taproot 같은 프라이버시 도구가 후행으로 등장.
-                      영원한 기록이 약속하는 것 (변경 불가) 과 빼앗는 것 (사적
-                      영역) 이 어떤 균형을 이뤄야 하나?
+                      Lightning, Taproot 같은 프라이버시 도구가 후행으로 등장했다.
+                      여기서는 영구 기록의 문제만 짚고, 구체적인 추적법과 방어
+                      도구는 S13 Privacy 에서 따로 다룬다. 영원한 기록이 약속하는
+                      것 (변경 불가) 과 빼앗는 것 (사적 영역) 이 어떤 균형을
+                      이뤄야 할까?
                     </Probe>
-                    <Reading label="비교 사례">
+                    <Reading label="S13 에서 다시 볼 사례">
                       Zcash (zk-SNARK 기반 프라이버시 코인), Monero (ring
                       signatures), Bitcoin 의 Silent Payments (
-                      <Term id="bip352">BIP352</Term>). 같은 PoW 위에서도
-                      프라이버시 수준은 디자인 선택이다.
+                      <Term id="bip352">BIP352</Term>) 는 S13 에서 더 자세히
+                      비교한다. 같은 PoW 위에서도 프라이버시 수준은 설계 선택이다.
                     </Reading>
                     <Reading label="검색 키워드">
                       ‘영원한 기록’ 자체를 완화하려는 학술 연구 키워드.{" "}
@@ -175,9 +155,9 @@ export function L6Blockchain(props: LayerProps) {
                       가능, Ateniese et al. 2017),{" "}
                       <span className="text-text">retractable / mutable
                       blockchain</span>, GDPR 의 ‘잊힐 권리’ 와 immutable
-                      ledger 의 충돌 등으로 검색하면 관련 논문이 나온다. 그러나
-                      이런 메커니즘은 ‘누구의 권한으로 지우나’ 라는 새 중심을
-                      도입하는 트레이드오프 · 그래서 비트코인 본체엔 채택되지 않는다.
+                      ledger 의 충돌 등으로 검색하면 관련 연구를 더 찾아볼 수 있다.
+                      다만 이런 메커니즘은 ‘누구의 권한으로 지우나’ 라는 새로운
+                      중심을 도입한다. 그래서 비트코인 메인넷에는 채택되지 않는다.
                     </Reading>
                   </Reflection>
                 ),
@@ -223,7 +203,7 @@ function DoubleSpending() {
         </h2>
         <p className="text-[15px] text-text/70 leading-[1.7] mt-2 max-w-2xl">
           비트코인이 풀고자 한 가장 본질적 문제. 디지털 데이터는 ‘복사’ 가
-          공짜라서, 그냥 두면 같은 코인 정보를 두 사람에게 동시에 보내고 둘 다
+          공짜라서, 별도 규칙이 없으면 같은 코인 정보를 두 사람에게 동시에 보내고 둘 다
           속일 수 있다. 비트코인은 이걸 두 단계로 막는다.
         </p>
       </div>
@@ -245,7 +225,7 @@ function DoubleSpending() {
         </div>
         <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-2.5">
           <div className="text-[14px] font-semibold text-accent leading-snug">
-            ② 가장 무거운 사슬 규칙
+            ② Longest chain rule
           </div>
           <div className="text-[16px] font-medium text-text leading-snug">
             ‘블록에 들어간 tx’ 가 ‘블록에 안 들어간 tx’ 를 이긴다
@@ -282,30 +262,31 @@ function BitcoinATMReflection() {
   return (
     <Reflection title="Bitcoin ATM 에선 인출이 어떻게 일어나나?">
       <p>
-        길거리에서 보이는 ‘Bitcoin ATM’. 현금을 넣으면 비트코인이 내 지갑에
-        들어오는 (또는 그 반대) 기계. 위에서 confirmation 깊이를 봤다면 한 가지
-        의문이 든다 · ‘그럼 ATM 에선 그 시간을 어떻게 처리하지?’
+        길거리에서 보이는 Bitcoin ATM 은 현금을 비트코인으로 바꾸거나,
+        비트코인을 현금으로 바꾸는 기계다. 위에서 confirmation 깊이를 봤다면
+        자연스럽게 한 가지 질문이 생긴다. ATM 은 이 대기 시간을 어떻게 처리할까?
       </p>
       <p>
-        실제 흐름은 즉시가 아니다. 보통:
+        실제로 써보면 당연하게도 즉시 입금이나 즉시 인출이 되지 않는다. 보통은
+        다음 순서로 진행된다.
       </p>
       <ul className="space-y-1.5 text-[14px] text-text/80 leading-[1.7] pl-4 list-disc">
         <li>
           현금 → BTC 매수: 사용자가 자기 지갑 주소를{" "}
           <span className="text-text">QR 코드</span> 로 ATM 카메라에 보여준다.
-          현금 투입 → ATM 운영사가 자기 hot wallet 에서 그 주소로 송금하는 tx
-          를 브로드캐스트. 사용자는{" "}
+          현금을 넣으면 ATM 운영사가 자기 hot wallet 에서 그 주소로 송금하는 tx
+          를 브로드캐스트한다. 사용자는{" "}
           <span className="text-text">자기 지갑 앱에서 confirmation 을 직접
           기다린다</span> (보통 1 ~ 3 confirmation, ATM 자리에서 즉시 떠나도
-          상관없음).
+          상관없다).
         </li>
         <li>
-          BTC → 현금 인출: 더 까다로움. 사용자가 ATM 의 receive 주소로 송금 tx
-          를 브로드캐스트 → ATM 은{" "}
+          BTC → 현금 인출은 더 까다롭다. 사용자가 ATM 의 receive 주소로 송금 tx
+          를 브로드캐스트하면 ATM 은{" "}
           <span className="text-text">최소 confirmation (보통 1 ~ 6) 까지
-          기다림</span> → 그 후에 현금이 토출. 그래서 길게는 30 ~ 60 분까지
+          기다린다</span>. 그 후에 현금이 나온다. 그래서 길게는 30 ~ 60 분까지
           ATM 앞에서 기다리거나 다시 와야 한다. ‘즉시 인출’ 이라는 표시는
-          현실에선 ‘confirmation 이 빠른 작은 액수’ 에 한정.
+          현실에서는 ‘confirmation 이 빠른 작은 액수’ 에 한정된다.
         </li>
       </ul>
       <p>
@@ -386,8 +367,8 @@ function ConfirmTable() {
         <div className="text-right">평균 대기시간</div>
       </div>
       <div className="divide-y divide-edge text-sm">
-        <ConfirmRow n={0} use="mempool 확인만, 즉시. 카페 결제 등 ‘되돌릴 만한 가치도 없는’ 미세 거래" wait="0" />
-        <ConfirmRow n={1} use="소액 (수십만 원 미만). 1 블록 reorg 는 아주 드물긴 함" wait="≈ 10 분" />
+        <ConfirmRow n={0} use="mempool 에서 보인 상태만 확인한다. 카페 결제처럼 되돌릴 유인이 작은 미세 거래에서만 현실적이다." wait="0" />
+        <ConfirmRow n={1} use="소액 결제에 쓰인다. 1 블록 reorg 는 드물지만 가능성은 남아 있다." wait="≈ 10 분" />
         <ConfirmRow n={3} use="중액. 거래소 입금 기준이 보통 여기 근처" wait="≈ 30 분" tone="accent2" />
         <ConfirmRow n={6} use="큰 액수. ‘Bitcoin 표준 finality’ 로 인용되는 깊이" wait="≈ 60 분" tone="accent" />
         <ConfirmRow n={100} use="coinbase tx (채굴 보상) 가 사용 가능해지는 깊이. 매우 안전" wait="≈ 17 시간" />
@@ -429,50 +410,64 @@ function ConfirmRow({
 
 function ForkScenario() {
   return (
-    <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-4">
-      <svg
-        viewBox="0 0 540 220"
-        className="w-full"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>
-          <marker
-            id="forkArrow"
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="5"
-            markerHeight="5"
-            orient="auto"
-          >
-            <path d="M0,0 L10,5 S0,10 z" fill="#7a8190" />
-          </marker>
-        </defs>
+    <div className="space-y-5">
+      <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-4">
+        <SectionHead
+          eyebrow="일시적 fork"
+          title="같은 높이에 두 후보가 생기는 경우"
+        />
+        <svg
+          viewBox="0 0 540 220"
+          className="w-full"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <defs>
+            <marker
+              id="forkArrow"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="5"
+              markerHeight="5"
+              orient="auto"
+            >
+              <path d="M0,0 L10,5 S0,10 z" fill="#7a8190" />
+            </marker>
+          </defs>
 
-        <BlockNode x={20} y={90} h="N" />
-        <BlockNode x={150} y={40} h="N+1 (A)" tone="accent2" />
-        <BlockNode x={150} y={140} h="N+1 (B)" tone="muted" />
-        <BlockNode x={290} y={40} h="N+2 (A)" tone="accent2" />
-        <BlockNode x={430} y={40} h="N+3 (A)" tone="accent" />
+          <BlockNode x={20} y={90} h="N" />
+          <BlockNode x={150} y={40} h="N+1 (A)" tone="accent2" />
+          <BlockNode x={150} y={140} h="N+1 (B)" tone="muted" />
+          <BlockNode x={290} y={40} h="N+2 (A)" tone="accent2" />
+          <BlockNode x={430} y={40} h="N+3 (A)" tone="accent" />
 
-        <line x1={100} y1={102} x2={150} y2={52} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" />
-        <line x1={100} y1={102} x2={150} y2={152} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" strokeDasharray="3 3" />
-        <line x1={230} y1={52} x2={290} y2={52} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" />
-        <line x1={370} y1={52} x2={430} y2={52} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" />
+          <line x1={100} y1={102} x2={150} y2={52} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" />
+          <line x1={100} y1={102} x2={150} y2={152} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" strokeDasharray="3 3" />
+          <line x1={230} y1={52} x2={290} y2={52} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" />
+          <line x1={370} y1={52} x2={430} y2={52} stroke="#7a8190" strokeWidth="0.8" markerEnd="url(#forkArrow)" />
 
-        <text x={190} y={184} fontSize="12" fill="#a0a8b8" fontFamily="JetBrains Mono">
-          stale branch
-        </text>
-        <text x={350} y={20} fontSize="12" fill="#a0a8b8" fontFamily="JetBrains Mono">
-          longest-work chain
-        </text>
-      </svg>
-      <div className="text-[15px] text-text/85 leading-[1.7]">
-        두 채굴자가 같은 prev (블록 N) 를 기반으로 거의 동시에 블록을 만들면
-        잠시 두 갈래 (A, B) 가 공존한다. 다음 블록 N+2 가 한쪽 위에 쌓이는 순간
-        그쪽이 ‘longest-work chain’ 이 되고, 다른 갈래는 버려진다 (
-        <Term id="orphan-block">stale block / orphan</Term>). 그 안의
-        트랜잭션은 mempool 로 돌아가 다음 블록에 다시 들어갈 수 있다.
+          <text x={190} y={184} fontSize="12" fill="#a0a8b8" fontFamily="JetBrains Mono">
+            stale branch
+          </text>
+          <text x={350} y={20} fontSize="12" fill="#a0a8b8" fontFamily="JetBrains Mono">
+            longest-work chain
+          </text>
+        </svg>
+        <div className="text-[15px] text-text/85 leading-[1.7]">
+          두 채굴자가 같은 prev (블록 N) 를 기반으로 거의 동시에 블록을 만들면
+          잠시 두 갈래 (A, B) 가 공존한다. 다음 블록 N+2 가 한쪽 위에 쌓이는 순간
+          그쪽이 ‘longest-work chain’ 이 되고, 다른 갈래는 버려진다 (
+          <Term id="orphan-block">stale block / orphan</Term>). 그 안의
+          트랜잭션은 mempool 로 돌아가 다음 블록에 다시 들어갈 수 있다.
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <SectionHead
+          eyebrow="protocol fork"
+          title="검증 규칙이 바뀌면 soft fork 와 hard fork 로 나뉜다"
+        />
+        <ForkTypes />
       </div>
     </div>
   );
@@ -586,37 +581,39 @@ function ForkTypeCard({
   );
 }
 
-function Genesis() {
+function GenesisPrimer() {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="px-4 py-2.5 border-b border-edge font-mono text-[13px] text-muted">
-        block #0 · 2009-01-03 18:15:05 UTC
+      <div className="px-4 py-2.5 border-b border-edge">
+        <div className="text-[13px] font-semibold text-accent2 leading-snug">
+          Genesis block · 사슬의 기준점
+        </div>
+        <div className="text-[13px] text-muted mt-1 leading-relaxed">
+          모든 블록은 직전 블록의 해시를 가리키지만, 첫 블록만은 예외다.
+        </div>
       </div>
-      <div className="p-4 space-y-2.5 font-mono text-[13px]">
-        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
-          <span className="text-muted">hash</span>
-          <span className="text-accent break-all">
-            00000000 0019d668 9c085ae1 6583e9 …
-          </span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
-          <span className="text-muted">prev_block_hash</span>
-          <span className="text-text/85 break-all">
-            00000000 00000000 00000000 00000000 …
-          </span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
+      <div className="p-4 space-y-3">
+        <p className="text-[14px] text-text/85 leading-[1.7]">
+          <span className="text-text">Genesis block</span> 은 비트코인 사슬의 첫
+          블록, 즉 block height 0 이다. 이전 블록이 없으므로{" "}
+          <code className="font-mono text-text">prev_block_hash</code> 는 0 으로
+          채워진다. 모든 노드는 이 블록을 출발점으로 삼아 그 뒤에 붙은 블록들이
+          유효한지 검증한다.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-2.5 text-[13px]">
+          <span className="text-muted">생성 시점</span>
+          <span className="font-mono text-text/85">2009-01-03 18:15:05 UTC</span>
           <span className="text-muted">coinbase 메시지</span>
           <span className="text-accent2 break-words leading-relaxed">
             “The Times 03/Jan/2009 Chancellor on brink of second bailout for
             banks”
           </span>
         </div>
-      </div>
-      <div className="px-4 py-2.5 border-t border-edge text-[13px] text-muted leading-relaxed">
-        coinbase 메시지의 신문 인용은 (a) 그 블록이 2009-01-03 이후 만들어졌다는
-        타임스탬프 증거, (b) 사토시가 의도적으로 ‘은행 시스템 위기’ 컨텍스트를
-        남긴 정치적 서명으로 읽힌다.
+        <p className="text-[13px] text-muted leading-relaxed">
+          이 신문 헤드라인은 그 블록이 2009 년 1 월 3 일 이후 만들어졌다는
+          타임스탬프 증거이면서, 은행 시스템 위기라는 시대적 맥락을 남긴
+          메시지로 읽힌다.
+        </p>
       </div>
     </div>
   );
@@ -681,12 +678,12 @@ function DAOHack() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
         <div className="rounded-sm border border-edge bg-surface/20 p-4 space-y-2">
           <h4 className="text-[16px] font-medium text-accent2 leading-snug">
-            왜 이게 hard fork
+            이게 왜 hard fork 일까?
           </h4>
           <p className="text-text/85 leading-relaxed">
             특정 블록 높이 이후, 도난당한 ETH 의 잔액을 강제로 옮기는 새 검증
-            규칙을 도입. 구버전 노드는 이 ‘비정상적’ 잔액 변경을 거부하므로
-            구체인을 따로 유지 → 영구 분기.
+            규칙이 도입됐다. 구버전 노드는 이 ‘비정상적’ 잔액 변경을 거부하므로
+            새 규칙을 따르는 사슬과 기존 규칙을 따르는 사슬이 영구적으로 갈라진다.
           </p>
         </div>
         <div className="rounded-sm border border-edge bg-surface/20 p-4 space-y-2">
@@ -696,8 +693,9 @@ function DAOHack() {
           <p className="text-text/85 leading-relaxed">
             비트코인 커뮤니티는 “코드는 곧 법, 사회적 개입으로 자금을 되돌리지
             않는다” 의 신념이 강하다. 그래서 비슷한 사고가 일어나도 hard fork
-            로 ‘구제’ 하지 않는다는 게 사실상의 규범. 2016 DAO fork 의 반사
-            효과로 그 입장이 더 단단해졌다.
+            로 ‘구제’ 하지 않는다는 것이 사실상의 규범에 가깝다. 2016 DAO fork
+            는 이 원칙을 어디까지 적용해야 하는지, 그리고 code as law 가 사용자
+            보호와 충돌할 때 어느 쪽을 우선해야 하는지 묻는 대표 사례다.
           </p>
         </div>
       </div>
@@ -709,9 +707,11 @@ function MostWorkRule() {
   return (
     <section className="space-y-5">
       <div>
-        <h2 className="text-[20px] font-medium tracking-tight">‘longest chain’ 은 정확하지 않다</h2>
+        <h2 className="text-[20px] font-medium tracking-tight">Longest chain rule · 정확히는 most-work chain</h2>
         <p className="text-[17px] text-text/70 leading-[1.7] mt-1.5 max-w-2xl">
-          입문서들이 흔히 ‘가장 긴 사슬을 따른다’ 고 줄여 말하지만, 실제 규칙은{" "}
+          비트코인의 포크 선택 규칙은 흔히{" "}
+          <span className="text-text">Longest chain rule</span> 이라고 소개된다.
+          다만 여기서 ‘longest’ 는 단순히 블록 개수가 많다는 뜻이 아니다. 실제 규칙은{" "}
           <span className="text-text">‘쌓인 작업량 (cumulative work) 이 가장 많은 사슬’</span>{" "}
           이다. 둘이 보통은 같지만, 난이도가 다른 두 갈래가 만나면 결과가
           달라진다.
@@ -723,20 +723,20 @@ function MostWorkRule() {
           블록 헤더의 <code className="font-mono">bits</code> 필드는 그 블록을
           만들 때의 target 을 압축한 값. 거기서{" "}
           <code className="font-mono">work = 2²⁵⁶ / target</code> 으로 한 블록의
-          기여 작업량이 나온다. 사슬의 work 는 그 값들의 누적합. 노드는 두
+          기여 작업량이 나온다. 사슬의 work 는 그 값들의 누적합이다. 노드는 두
           후보 사슬 중 work 누적합이 큰 쪽을 택한다.
         </p>
         <p className="text-text/70">
           이 차이가 드러나는 시나리오: 어떤 채굴자가 난이도 조정 직전에 다수
           블록을 빠르게 캐서 길이는 길지만 work 합이 더 작은 사슬을 만들었다면,
-          정직한 다수가 따르는 더 짧지만 ‘무거운’ 사슬에 진다. ‘긴 vs 무거운’
-          구분이 의도적 공격을 막는 핵심.
+          정직한 다수가 따르는 더 짧지만 누적 작업량이 큰 사슬에 진다. ‘길이’ 와
+          ‘누적 작업량’ 을 구분하는 것이 의도적 공격을 막는 핵심이다.
         </p>
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 p-4">
         <SectionHead
-          eyebrow="구체 예시"
+          eyebrow="구체적 예시"
           title="높이 vs work · 둘이 다를 수 있다"
         />
         <div className="border border-edge/70 bg-bg/40 divide-y divide-edge/70">
@@ -751,7 +751,9 @@ function MostWorkRule() {
           <WorkRow chain="사슬 B" height="102 블록" difficulty="0.9×" work="91.8 W" />
         </div>
         <div className="text-[13px] text-muted mt-3 leading-relaxed">
-          B 가 더 길지만 work 가 적다 → 노드는 A 를 ‘진짜’ 사슬로 본다.
+          fork 가 여러 번 이어지면 더 많은 블록을 가진 갈래가 눈에 띌 수 있다.
+          그러나 노드는 블록 개수만 보지 않는다. 위 예시에서는 B 가 더 길지만
+          누적 work 가 적기 때문에 A 를 ‘진짜’ 사슬로 본다.
         </div>
       </div>
     </section>
@@ -825,11 +827,12 @@ function FiftyOnePercent() {
           들어간 블록보다 앞선 지점에서 비밀 fork 를 키워 두었다가 공개한다.
           노드들이 work 가 더 많은 공격자 사슬로 reorg 하면, 원래 입금 트랜잭션은
           사라지고 거래소는 코인을 받은 적이 없는 상태가 된다. 결과적으로 공격자는
-          같은 자금을 두 번 쓴 셈이 된다.
+          같은 자금을 두 번 쓴 효과를 얻는다.
         </p>
         <p className="text-[14px] text-text/65 leading-[1.7]">
-          즉 51% 는 도구이고, 실제 수익은 그 위에서 일어나는 사기. 그래서 공격
-          비용 vs ‘속여낼 수 있는 액수’ 를 비교하는 게 안전성 분석의 핵심.
+          즉 51% 공격은 수단이고, 실제 수익은 그 위에서 일어나는 사기에서
+          발생한다. 그래서 공격 비용과 ‘속여낼 수 있는 액수’ 를 비교하는 것이
+          안전성 분석의 핵심이다.
         </p>
       </Callout>
 
@@ -866,7 +869,7 @@ function FiftyOnePercent() {
               <span className="font-mono text-accent">1 ZH/s</span> (10²¹ hashes/sec).
               51% 를 차지하려면 약{" "}
               <span className="font-mono text-accent">500 EH/s</span> 의 ASIC 이
-              필요.
+              필요하다.
             </div>
           </div>
           <div className="space-y-2">
@@ -905,7 +908,7 @@ function FiftyOnePercent() {
         <p>
           공격이 알려지면 그 체인의 가격이 폭락. 공격자가 갖고 있던 ASIC·잔여
           코인·미래 채굴 수입 모두 가치 손실. ‘공격이 성공하면 공격 대상 자체가
-          무가치해진다’ 는 자기 무력화 구조가 PoW 의 게임 이론적 안전성의 핵심.
+          무가치해진다’ 는 자기 무력화 구조가 PoW 의 게임 이론적 안전성의 핵심이다.
         </p>
         <p className="text-text/70">
           단, 이 ‘일반적으로 적자’ 결론은 합리 가정 하에서의 것이지 절대 안전

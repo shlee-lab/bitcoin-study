@@ -90,8 +90,8 @@ const FIELDS: FieldDef[] = [
       <>
         Alice 의 비밀키만이 이 메시지에 대한 유효한 서명을 만들 수 있다.
         그러나 누구든 Alice 의 공개키로{" "}
-        <span className="text-text">진짜인지 검증</span> 가능. 한 메시지에 만든
-        서명은 그 트랜잭션 한 건에만 유효 (다른 곳에 재사용 불가).
+        <span className="text-text">진짜인지 검증</span>할 수 있다. 한 메시지에
+        만든 서명은 그 트랜잭션 한 건에만 유효하며 다른 곳에 재사용할 수 없다.
       </>
     ),
     deepLink: "S3 · Transaction · ECDSA",
@@ -602,7 +602,7 @@ function PostBroadcast({ onEnter }: { onEnter: () => void }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Question
           n="01"
-          q="이게 정말 Alice 의 서명일까?"
+          q="정말 Alice 가 만든 서명일까?"
           a="공개키로 검증, 비밀키 없으면 못 만든다"
           to="S1 · ECDSA"
         />
@@ -615,7 +615,7 @@ function PostBroadcast({ onEnter }: { onEnter: () => void }) {
         <Question
           n="03"
           q="같은 코인을 두 곳에 동시에 못 쓰게 막을 방법은?"
-          a="네트워크가 가장 긴 사슬에 합의"
+          a="네트워크가 Longest chain rule 로 한 사슬에 수렴"
           to="S6 · S7"
         />
       </div>
@@ -646,7 +646,8 @@ function PostBroadcast({ onEnter }: { onEnter: () => void }) {
           <span className="text-text">Satoshi Nakamoto</span> 라는 익명의
           인물이 cypherpunk 메일링 리스트에 9 페이지짜리 백서를 올린다. 중앙
           기관 없이도 모두가 같은 거래 순서를 보게 만드는 규칙. 작업증명
-          (proof-of-work) 과 ‘가장 무거운 사슬’. 그 위에서, 어디에도 묶이지
+          (proof-of-work) 과 Longest chain rule (정확히는 누적 작업량이 가장 큰
+          사슬 선택). 그 위에서, 어디에도 묶이지
           않은 첫 화폐가 처음으로 가능해졌다.
         </p>
         <p className="text-text/60">
@@ -711,7 +712,7 @@ function MoneyTimeline() {
     {
       when: "1973 ~",
       name: "오일머니 (Petrodollar)",
-      desc: "사우디 석유 결제를 달러로만 하기로 합의했다. 무에서 풀린 달러를 ‘석유로’ 다시 묶어 신용을 보강한 셈이다.",
+      desc: "사우디 석유 결제를 달러로만 하기로 합의했다. 무에서 풀린 달러를 ‘석유’ 수요와 다시 연결해 신용을 보강한 구조다.",
     },
     {
       when: "1990s ~",

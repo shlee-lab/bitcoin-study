@@ -156,7 +156,7 @@ function IntroPair() {
       <div className="space-y-3">
         <p className="text-[17px] text-text/80 leading-[1.75]">
           S0 에서 Alice 는 송금 메시지를 만들었다. 하지만 보내려면 먼저
-          비트코인을 쓸 권한을 보관하는 도구가 필요하다. 그게{" "}
+          비트코인을 쓸 권한을 보관하는 도구가 필요하다. 그 도구가{" "}
           <span className="text-text">지갑</span>이다. 다만 비트코인 지갑은
           카드와 현금이 들어 있는 실물 지갑과 다르다.
         </p>
@@ -176,7 +176,7 @@ function IntroPair() {
         <div className="divide-y divide-edge text-[14px]">
           <AnalogyRow
             real="은행 계좌번호"
-            crypto="주소 (address). 받는 사람이 외부에 공개하는 식별자, 누구든 거기로 송금 가능."
+            crypto="주소 (address). 받는 사람이 외부에 공개하는 식별자이며, 누구든 그 주소로 송금할 수 있다."
           />
           <AnalogyRow
             real="ATM 카드 + 비밀번호"
@@ -225,7 +225,7 @@ function IntroPair() {
             bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
           </div>
           <div className="text-sm text-muted leading-relaxed pt-1">
-            외부 공유 가능. 자금을 받는 목적지 문자열. 한 사용자가 여러 개를
+            외부에 공유할 수 있는 자금 수신용 문자열이다. 한 사용자가 여러 개를
             만들어 쓰는 것이 일반적이다 (프라이버시 + 회계).
           </div>
         </div>

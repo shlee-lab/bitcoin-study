@@ -12,9 +12,9 @@ export function SeedDerivationBody() {
   return (
     <div className="text-sm leading-relaxed text-text/90 space-y-7">
       <p>
-        지금까지 본 ‘비밀키 한 개 → 주소 한 개’ 는 단순화된 모형. 실제
-        지갑은 한 시드 문구에서 출발해 트리 모양으로 자식 키를 무한히 만들어낸다.
-        그래서 <span className="text-text">한 줄의 백업</span> 으로 모든 자금이
+        지금까지 본 ‘비밀키 한 개 → 주소 한 개’ 는 단순화된 모형이다. 실제
+        지갑은 한 시드 문구에서 출발해 트리 모양으로 자식 키를 계속 만들어낸다.
+        그래서 <span className="text-text">한 줄의 백업</span> 만으로 모든 자금이
         복원된다. Sparrow, Electrum, Ledger, Trezor 같은 비트코인 지갑들은 같은{" "}
         <Term id="bip">BIP</Term> 표준{" "}
         <Term id="bip39">
@@ -69,7 +69,7 @@ export function SeedDerivationBody() {
             parent_pubkey ‖ index)
           </code>{" "}
           식으로 계산. 같은 부모 + 같은 index → 항상 같은 자식. 인덱스가
-          다르면 전혀 다른 키.
+          다르면 전혀 다른 키가 나온다.
         </p>
       </Section>
 
@@ -236,9 +236,9 @@ function BrainWalletCase() {
             관측 결과
           </div>
           <ul className="space-y-1 text-text/85 leading-[1.7]">
-            <li>· brain wallet 에 BTC 가 들어오는 즉시 자동 인출 봇 가동 중</li>
-            <li>· ‘password’, ‘bitcoin’, 영문 명언, song lyric 류는 분 단위로 털림</li>
-            <li>· 본인이 “남들은 안 떠올릴 문구” 라고 믿는 것조차 대부분 깨짐</li>
+            <li>· brain wallet 에 BTC 가 들어오면 자동화 봇이 곧바로 인출을 시도한다.</li>
+            <li>· ‘password’, ‘bitcoin’, 영문 명언, song lyric 류는 분 단위로 탈취될 수 있다.</li>
+            <li>· 본인이 “남들은 안 떠올릴 문구” 라고 믿는 표현도 대부분 공격 범위에 들어간다.</li>
           </ul>
         </div>
         <div className="border border-edge bg-surface/40 p-3 space-y-1.5">
@@ -246,9 +246,9 @@ function BrainWalletCase() {
             왜 이렇게 약한가
           </div>
           <ul className="space-y-1 text-text/85 leading-[1.7]">
-            <li>· 사람이 떠올리는 문장의 실효 엔트로피는 보통 30-40 bit 미만</li>
-            <li>· 30 bit 면 2³⁰ ≈ 10 억 회 · 노트북으로 분 단위 brute-force</li>
-            <li>· 반면 표준 BIP39 12 단어 = 128 bit · 같은 brute-force 가 우주 시간</li>
+            <li>· 사람이 떠올리는 문장의 실효 엔트로피는 보통 30-40 bit 미만이다.</li>
+            <li>· 30 bit 는 약 2³⁰, 즉 10 억 회 수준이라 노트북으로도 brute-force 가 가능하다.</li>
+            <li>· 반면 표준 BIP39 12 단어는 128 bit 수준이라 같은 방식의 brute-force 가 현실적으로 불가능하다.</li>
           </ul>
         </div>
       </div>
@@ -256,8 +256,8 @@ function BrainWalletCase() {
       <div className="text-[13px] text-text/75 leading-[1.7] border-t border-[#f76b6b]/20 pt-3">
         교훈 · ‘직접 생각해서 만든 시드 문구’ 같은 자작 보안은 어떤 형태든{" "}
         <span className="text-text">반드시 털린다</span>. 공격자는 24/7 자동화된
-        스크립트로 새 주소를 스캔하고 약한 키를 즉시 인출한다. 자기 손으로 키를
-        만들거나, 사람이 외우기 쉬운 입력을 비밀로 쓰는 어떤 방식이든 안전하지
+        스크립트로 새 주소를 스캔하고 약한 키의 자금을 곧바로 인출하려고 시도한다.
+        자기 손으로 키를 만들거나, 사람이 외우기 쉬운 입력을 비밀로 쓰는 어떤 방식이든 안전하지
         않다. 표준 BIP39 단어 시드 문구는{" "}
         <span className="text-text">제대로 만들어진 RNG</span> (지갑 앱·하드웨어
         지갑이 내부에서 생성) 에서 나와야 한다.{" "}

@@ -29,8 +29,8 @@ export function LevelDBBody() {
       <Section title="③ 노드가 종료될 때">
         <p>
           ChainState 는 메모리 캐시 + 디스크 LevelDB 가 함께 있어, 정상 종료
-          시엔 메모리 상태를 디스크로 flush 하고 끝. 비정상 종료 (전원 끔 등)
-          후 재시작 땐{" "}
+          시에는 메모리 상태를 디스크로 flush 한 뒤 종료된다. 비정상 종료 (전원 끔 등)
+          후 재시작할 때는{" "}
           <span className="text-text">undo data</span> 로 마지막 일관 상태까지
           되감거나 (rollback), 일정 깊이부터 재검증해 일관성을 회복한다.
         </p>
@@ -140,7 +140,7 @@ function ReasonGrid() {
         "outpoint 으로 lookup, write 도 outpoint 단위. JOIN, 트랜잭션 ACID, 복잡한 쿼리가 필요 없다.",
     },
     {
-      title: "엄청난 쓰기 빈도",
+      title: "높은 쓰기 빈도",
       body: (
         <>
           블록 하나당 수천 UTXO 가 추가/삭제. SQL 의 인덱스 유지 비용이 부담.{" "}
@@ -175,4 +175,3 @@ function ReasonGrid() {
     </div>
   );
 }
-

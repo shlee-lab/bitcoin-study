@@ -5,7 +5,7 @@ import { Term } from "../Term";
 export const HashMeta = {
   id: "hash" as const,
   title: "Hash function",
-  oneLiner: "임의 길이 입력 → 고정 길이 출력. 한 방향, 사실상 역산 불가능.",
+  oneLiner: "임의 길이 입력을 고정 길이 출력으로 바꾸며, 역산은 사실상 불가능하다.",
 };
 
 export function HashBody() {
@@ -37,7 +37,7 @@ export function HashBody() {
         />
         <p className="text-xs text-muted">
           한 글자, 사실 1 byte 만 다른데 출력은 두 값 사이에 어떤 패턴도 없다.
-          이게 입력의 어떤 정보도 출력으로 새지 않게 만든다.
+          이 성질 때문에 입력의 정보가 출력 패턴으로 새지 않는다.
         </p>
       </Section>
 
@@ -53,7 +53,7 @@ export function HashBody() {
         <p>
           8 개만 던졌는데 벌써 충돌 2 개{" "}
           (<span className="text-accent font-mono">9</span>: 0, Hello /{" "}
-          <span className="text-accent font-mono">b</span>: 1, a). 이게{" "}
+          <span className="text-accent font-mono">b</span>: 1, a). 이 현상이{" "}
           <Term id="birthday-paradox">
             <span className="text-text">birthday paradox</span>
           </Term>{" "}
@@ -177,8 +177,8 @@ export function HashBody() {
           <FamilyBox
             termId="one-way"
             kind="one-way"
-            line="누구든 H(x) 는 빠르고, H⁻¹ 은 사실상 불가능."
-            note="비밀이 없다. 모두에게 같은 어려움."
+            line="누구든 H(x) 는 빠르게 계산할 수 있지만, H⁻¹ 은 사실상 계산할 수 없다."
+            note="비밀이 없다. 모두에게 같은 난도다."
             example="Hash function · SHA-256, RIPEMD-160"
           />
           <FamilyBox
