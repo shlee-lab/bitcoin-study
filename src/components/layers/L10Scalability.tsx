@@ -78,11 +78,11 @@ function Bottleneck() {
         이라는 점이다.
       </p>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[12px] font-medium text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
           <div>한계</div>
           <div>의미</div>
         </div>
-        <div className="divide-y divide-edge text-[14px]">
+        <div className="divide-y divide-edge">
           <Row label="작은 블록" body="한 번에 담을 수 있는 거래 수가 제한된다." />
           <Row label="느린 간격" body="새 블록은 평균 10 분마다 하나씩 나온다." />
           <Row label="낮은 처리량" body="메인 체인만으로는 카드 네트워크 같은 대량 결제를 감당하기 어렵다." />
@@ -225,18 +225,18 @@ function PaymentChannel() {
       <ChannelDiagram />
       <ol className="space-y-2 text-[14px] text-text/85 leading-[1.7] list-none">
         <li>
-          <span className="text-muted font-mono text-xs mr-2">①</span> Alice 와
-          Bob 이 <span className="text-text">2-of-2 multisig</span> 주소에 자금을
-          예치한다 (온체인 tx 1).
+          <span className="inline-flex h-5 w-5 items-center justify-center border border-edge text-[12px] font-medium text-muted mr-2 align-[-1px]">1</span>
+          Alice 와 Bob 이 <span className="text-text">2-of-2 multisig</span>{" "}
+          주소에 자금을 예치한다 (온체인 tx 1).
         </li>
         <li>
-          <span className="text-muted font-mono text-xs mr-2">②</span> 채널
-          안에서는 <span className="text-text">commitment tx</span> 만 서로
+          <span className="inline-flex h-5 w-5 items-center justify-center border border-edge text-[12px] font-medium text-muted mr-2 align-[-1px]">2</span>
+          채널 안에서는 <span className="text-text">commitment tx</span> 만 서로
           서명해 교환한다. 온체인엔 안 올린다. 이론상 횟수 제한 없이 갱신할 수 있다.
         </li>
         <li>
-          <span className="text-muted font-mono text-xs mr-2">③</span> 채널을
-          닫을 때 마지막 상태를 온체인에 올려 자금을 회수 (온체인 tx 2).
+          <span className="inline-flex h-5 w-5 items-center justify-center border border-edge text-[12px] font-medium text-muted mr-2 align-[-1px]">3</span>
+          채널을 닫을 때 마지막 상태를 온체인에 올려 자금을 회수 (온체인 tx 2).
         </li>
       </ol>
       <Callout>
@@ -456,7 +456,7 @@ function HTLCDiagram() {
         <div className="text-[13px] font-semibold text-text/82 leading-snug">
           HTLC · 잠금 전파 + 비밀 역전파 (시뮬레이션)
         </div>
-        <div className="flex items-center gap-2 text-[11px] font-mono">
+        <div className="flex items-center gap-2 text-[12px] font-medium">
           <div className="flex items-center gap-1">
             {Array.from({ length: TOTAL }).map((_, i) => (
               <div
@@ -477,7 +477,7 @@ function HTLCDiagram() {
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
-            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 uppercase tracking-[0.16em] transition-colors"
+            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 transition-colors"
             disabled={step >= TOTAL - 1}
           >
             {paused ? "▶ play" : "⏸ pause"}
@@ -488,7 +488,7 @@ function HTLCDiagram() {
               setStep(0);
               setPaused(true);
             }}
-            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 uppercase tracking-[0.16em] transition-colors"
+            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 transition-colors"
           >
             ↻ replay
           </button>
@@ -706,8 +706,8 @@ function HTLCDiagram() {
       </svg>
 
       <div className="text-[14px] text-text/85 leading-[1.75] min-h-[60px] border-t border-edge/60 pt-3">
-        <span className="font-mono text-[12px] uppercase tracking-[0.12em] text-accent mr-2">
-          step {step + 1}
+        <span className="text-[13px] font-semibold text-accent mr-2">
+          단계 {step + 1}
         </span>
         {stepDesc[step]}
       </div>
@@ -765,7 +765,7 @@ function OtherEcosystems() {
             <h3 className="text-[16px] font-medium text-text">
               ① 새로운 빠른 L1
             </h3>
-            <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+            <span className="text-[13px] font-medium text-muted/90">
               parallel exec + fast BFT
             </span>
           </div>
@@ -805,7 +805,7 @@ function OtherEcosystems() {
             <h3 className="text-[16px] font-medium text-text">
               ② Rollup (이더리움 L2)
             </h3>
-            <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+            <span className="text-[13px] font-medium text-muted/90">
               batch + prove on L1
             </span>
           </div>
@@ -815,7 +815,7 @@ function OtherEcosystems() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="border border-edge bg-bg/40 p-4 space-y-2">
-              <div className="font-mono text-[11px] tracking-[0.14em] text-accent2/85 uppercase">
+              <div className="text-[13px] font-semibold text-accent2">
                 Optimistic Rollup
               </div>
               <p className="text-[13px] text-text/80 leading-[1.7]">
@@ -824,7 +824,7 @@ function OtherEcosystems() {
               </p>
             </div>
             <div className="border border-edge bg-bg/40 p-4 space-y-2">
-              <div className="font-mono text-[11px] tracking-[0.14em] text-accent2/85 uppercase">
+              <div className="text-[13px] font-semibold text-accent2">
                 ZK Rollup
               </div>
               <p className="text-[13px] text-text/80 leading-[1.7]">
@@ -846,7 +846,7 @@ function OtherEcosystems() {
             <h3 className="text-[16px] font-medium text-text">
               ③ Sharding
             </h3>
-            <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+            <span className="text-[13px] font-medium text-muted/90">
               split state / data
             </span>
           </div>
@@ -982,7 +982,7 @@ function PaymentRailsReflection() {
 function ChainRow({ name, tech }: { name: string; tech: string }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 px-4 py-2.5 items-baseline">
-      <div className="font-mono text-[13px] text-accent/85">{name}</div>
+      <div className="text-[14px] font-medium text-accent">{name}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{tech}</div>
     </div>
   );
@@ -999,7 +999,7 @@ function TradeoffRow({
 }) {
   return (
     <div className="grid grid-cols-1 sm:min-w-[680px] sm:grid-cols-[120px_1fr_1fr] gap-3 px-4 py-3 items-start">
-      <div className="font-mono text-[13px] text-accent/85">{name}</div>
+      <div className="text-[14px] font-medium text-accent">{name}</div>
       <div className="text-[13px] text-text/85 leading-relaxed">{good}</div>
       <div className="text-[13px] text-text/65 leading-relaxed">{bad}</div>
     </div>
@@ -1018,8 +1018,8 @@ function ChoicePoint({ title, body }: { title: string; body: string }) {
 function Row({ label, body }: { label: string; body: string }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2.5 items-baseline">
-      <div className="font-mono text-[13px] text-accent/80">{label}</div>
-      <div className="text-[13px] text-text/85 leading-relaxed">{body}</div>
+      <div className="text-[15px] font-medium text-text">{label}</div>
+      <div className="text-[14px] text-text/82 leading-[1.65]">{body}</div>
     </div>
   );
 }
