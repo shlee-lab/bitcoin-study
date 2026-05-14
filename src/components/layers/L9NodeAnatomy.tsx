@@ -316,39 +316,32 @@ function Opening() {
         </p>
       </div>
 
-      <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-[190px_210px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
-          <div>앞에서 본 말</div>
-          <div>노드 안에서는</div>
-          <div>왜 필요한가</div>
-        </div>
-        <div className="divide-y divide-edge">
-          <BridgeRow
-            concept="UTXO set"
-            implementation="ChainState"
-            why="지금 쓸 수 있는 output 만 모아 둔다. 새 tx 가 오면 노드는 여기서 input 이 실제로 남아 있는지 확인한다."
-          />
-          <BridgeRow
-            concept="블록이 체인에 추가된다"
-            implementation="Validator"
-            why="블록 헤더, 작업증명, tx, script, signature 를 차례로 검사한다. 하나라도 실패하면 그 블록은 버린다."
-          />
-          <BridgeRow
-            concept="노드가 다른 노드에 전파한다"
-            implementation="P2P stack"
-            why="다른 노드에게 새 tx 나 블록이 있다는 사실을 알리고, 필요한 데이터만 요청해 받는다."
-          />
-          <BridgeRow
-            concept="처음 시작하면 직접 검증한다"
-            implementation="Initial Block Download"
-            why="남이 준 잔액표를 믿지 않고, genesis block 부터 현재까지 다시 계산해 자기 ChainState 를 만든다."
-          />
-          <BridgeRow
-            concept="대기 중인 트랜잭션"
-            implementation="Mempool"
-            why="아직 블록에 들어가지 않은 tx 를 임시로 보관한다. 채굴자는 여기서 fee 가 높은 tx 부터 블록 후보에 넣는다."
-          />
-        </div>
+      <div className="space-y-3">
+        <BridgeCard
+          concept="UTXO set"
+          implementation="ChainState"
+          body="노드는 ‘지금 쓸 수 있는 output’ 만 따로 모아 둔다. 새 tx 가 오면 이 저장소를 보고 input 이 실제로 남아 있는지 확인한다."
+        />
+        <BridgeCard
+          concept="블록 검증"
+          implementation="Validator"
+          body="블록이 도착하면 곧바로 체인에 붙지 않는다. Validator 가 헤더, 작업증명, tx, script, signature 를 차례로 검사하고, 하나라도 실패하면 버린다."
+        />
+        <BridgeCard
+          concept="네트워크 전파"
+          implementation="P2P stack"
+          body="노드는 다른 노드에게 새 tx 나 블록이 있다는 사실을 알리고, 필요한 데이터만 요청해 받는다. inv, getdata, block 같은 짧은 메시지가 이 일을 한다."
+        />
+        <BridgeCard
+          concept="처음 실행할 때의 검증"
+          implementation="Initial Block Download"
+          body="노드는 남이 준 잔액표를 믿지 않는다. genesis block 부터 현재까지 직접 다시 계산해서 자기 ChainState 를 만든다."
+        />
+        <BridgeCard
+          concept="대기 중인 트랜잭션"
+          implementation="Mempool"
+          body="아직 블록에 들어가지 않은 tx 는 임시 공간에 머문다. 채굴자는 여기서 fee 가 높은 tx 부터 블록 후보에 넣는다."
+        />
       </div>
 
       <p className="text-[14px] text-text/65 leading-[1.7]">
@@ -360,24 +353,26 @@ function Opening() {
   );
 }
 
-function BridgeRow({
+function BridgeCard({
   concept,
   implementation,
-  why,
+  body,
 }: {
   concept: string;
   implementation: string;
-  why: string;
+  body: string;
 }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[190px_210px_1fr] gap-2.5 md:gap-4 px-4 py-3.5 items-start">
-      <div className="text-[15px] font-medium text-accent2 leading-snug">
-        {concept}
+    <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-2">
+      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <div className="text-[16px] font-medium text-text leading-snug">
+          {concept}
+        </div>
+        <div className="text-[13px] font-medium text-accent2 leading-snug">
+          노드 안에서는 {implementation}
+        </div>
       </div>
-      <div className="text-[14px] font-medium text-text leading-snug">
-        {implementation}
-      </div>
-      <div className="text-[14px] text-text/82 leading-[1.65]">{why}</div>
+      <p className="text-[14px] text-text/78 leading-[1.7]">{body}</p>
     </div>
   );
 }
