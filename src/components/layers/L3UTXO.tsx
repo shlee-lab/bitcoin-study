@@ -988,266 +988,73 @@ function PrivacyRisk({
 
 function TrackingAndObfuscation() {
   return (
-    <section className="space-y-10">
+    <section className="space-y-8">
       <div>
         <h2 className="text-[20px] font-medium tracking-tight">
-          추적과 우회 · 같은 그래프 위 두 진영
+          추적과 우회 · 같은 그래프 위의 두 방향
         </h2>
         <p className="text-[17px] text-text/70 leading-[1.7] mt-2">
-          UTXO 그래프가 영구 공개라는 사실 위에서, 두 방향의 기술이 동시에
-          발전한다. <span className="text-text">한쪽은 ‘추적’</span>{" "}
-          (chain analysis 회사들), <span className="text-text">다른 쪽은 ‘우회’</span>{" "}
-          (mixer, ZKP, off-chain). 그 사이의 줄다리기가 비트코인 프라이버시의
-          현재 모습이다. 여기서는 UTXO 그래프 관점의 기본 원리만 보고, 실제
-          프라이버시 도구와 규제 이슈는 S13 Privacy 에서 다시 다룬다.
+          UTXO 그래프는 영구 공개된다. 그래서 분석자는 자금 흐름을 따라가려 하고,
+          사용자는 그 연결을 약하게 만들려 한다. 여기서는 그래프 관점의 기본
+          원리만 본다. CoinJoin, Silent Payments, Tornado Cash, 규제 이슈는 S13
+          Privacy 에서 별도로 다룬다.
         </p>
       </div>
 
-      {/* ① TAINTING */}
       <div className="space-y-4">
         <h3 className="text-[18px] font-medium text-text leading-snug">
-          ① Tainting · 자금에 ‘오염 라벨’ 을 매기는 추적법
+          Tainting · 자금에 추적 라벨을 붙이는 방식
         </h3>
         <p className="text-[15px] text-text/80 leading-[1.7]">
-          체인 분석사가 어떤 UTXO 를 ‘위험 출처’ (해킹·랜섬·다크넷) 로 표시하면,
-          그 UTXO 가 input 으로 들어가는 모든 후속 트랜잭션의 output 들에도
-          오염이 ‘전파’ 된다. 그 라벨이 어디까지 따라붙는지를 계산하는 것이
-          추적의 핵심이다.
+          어떤 UTXO 가 해킹, 랜섬웨어, 다크넷 같은 위험 출처와 연결되었다고
+          표시되면, 그 UTXO 가 input 으로 들어간 뒤 만들어지는 output 들도
+          추적 대상이 된다. 라벨이 어디까지 따라붙는지 계산하는 방식이 tainting
+          이다.
         </p>
 
         <TaintGraph />
 
         <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-          <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
-            <div>전파 모델</div>
-            <div>‘이 output 에 오염이 얼마나 묻었나’ 의 계산법</div>
+          <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
+            <div>모델</div>
+            <div>어떻게 해석하나</div>
           </div>
-          <div className="divide-y divide-edge text-[14px]">
+          <div className="divide-y divide-edge">
             <TaintRow
               name="FIFO"
-              body="먼저 들어온 input 의 BTC 가 먼저 나간 output 으로 갔다고 가정. ‘선입선출’ 식 추적."
+              body="먼저 들어온 input 의 BTC 가 먼저 나간 output 으로 갔다고 가정하는 방식이다."
             />
             <TaintRow
               name="Haircut"
-              body="모든 output 에 input 의 오염을 액수 비례로 균등 분배한다. 가장 보수적인 모델이라 한 번 섞이면 모든 output 에 오염이 묻고, 거의 모든 BTC 가 ‘약한 오염’ 으로 분류되는 부작용이 생긴다."
+              body="오염 비율을 모든 output 에 금액 비례로 나눈다. 보수적이지만 너무 넓게 퍼질 수 있다."
             />
             <TaintRow
               name="Poison"
-              body="오염된 input 이 한 방울이라도 섞이면 모든 output 을 100% 오염으로 본다. 가장 공격적이다. 거래소가 입금 거부에 자주 사용한다."
+              body="오염된 input 이 조금이라도 섞이면 모든 output 을 오염으로 본다. 가장 공격적이며 입금 거부 판단에 쓰일 수 있다."
               tone="warn"
             />
           </div>
         </div>
-
-        <Callout tone="warn" title="fungibility (대체가능성) 의 위협">
-          <p className="text-[15px] text-text/80 leading-[1.7]">
-            이론상 모든 1 BTC 는 같다 (fungible). 하지만 거래소가 ‘오염된 1 BTC’
-            입금을 거부하면 같은 액면이 다른 가치를 갖는다. 이것이 비트코인
-            보유자들이 ‘mixer 가 도덕적이냐 아니냐’ 보다도 fungibility 보호
-            차원에서 mixing 을 옹호하는 이유다.
-          </p>
-        </Callout>
       </div>
 
-      {/* ② MIXING */}
       <div className="space-y-4">
         <h3 className="text-[18px] font-medium text-text leading-snug">
-          ② 여러 입력·여러 출력 · 방향성 그 자체를 잃게 만들기
+          Mixing · input 과 output 의 대응을 흐리게 만들기
         </h3>
         <p className="text-[15px] text-text/80 leading-[1.7]">
-          한 트랜잭션에 여러 사람의 input 과 같은 액수의 output 들이 섞이면,
-          외부에서 ‘어느 input 이 어느 output 으로 갔는지’ 매핑이 모호해진다.
-          common-input heuristic 이 깨지고 그래프 위에서 ‘갈래 (split)’ 가
-          발생한다.
+          여러 사람의 input 과 같은 금액의 output 이 한 트랜잭션 안에 함께
+          들어가면, 외부 관찰자는 어느 input 이 어느 output 으로 이어졌는지
+          단정하기 어려워진다. 그래프의 방향성 자체를 흐리게 만드는 접근이다.
         </p>
 
         <CoinJoinDiagram />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="rounded-sm border border-edge bg-surface/30 p-5 space-y-2">
-            <h4 className="text-[16px] font-medium text-accent2">
-              CoinJoin (Wasabi · Whirlpool · JoinMarket)
-            </h4>
-            <p className="text-[14px] text-text/75 leading-[1.7]">
-              여러 사용자가 같이 한 트랜잭션을 만든다. equal-output 으로 정규화:
-              모든 output 이 같은 액수라야 매핑이 진짜로 모호해짐. anonymity set
-              크기 = 같이 섞인 사용자 수.
-            </p>
-          </div>
-          <div className="rounded-sm border border-edge bg-surface/30 p-5 space-y-2">
-            <h4 className="text-[16px] font-medium text-accent2">
-              PayJoin (BIP78)
-            </h4>
-            <p className="text-[14px] text-text/75 leading-[1.7]">
-              송금자와 수신자가 함께 트랜잭션을 만들어, 외부에선 ‘일반 송금’ 처럼
-              보이지만 input 에 양쪽 자금이 모두 들어 있다. common-input
-              heuristic 이 거짓 양성을 낸다.
-            </p>
-          </div>
-        </div>
-
-        <Callout tone="warn" title="한계">
+        <Callout tone="warn" title="그래프만 흐려질 뿐, 모든 단서가 사라지지는 않는다">
           <p className="text-[14px] text-text/75 leading-[1.7]">
-            equal-output 자체가 패턴이라, chain analysis 가 ‘이 트랜잭션은 CoinJoin’
-            이라고 일단 분류할 수 있다. 그 후엔 timing·IP·후속 송금의 합산
-            패턴 등 메타데이터로 잘게 분리된다. 또한 mixing 한 자금만 따로
-            거래소에서 거부당하기도 한다. 익명성을 높이려는 선택이 실제 사용성
-            저하로 이어질 수 있다는 뜻이다.
-          </p>
-        </Callout>
-      </div>
-
-      {/* ③ ETHEREUM / TORNADO CASH / ZKP */}
-      <div className="space-y-4">
-        <h3 className="text-[18px] font-medium text-text leading-snug">
-          ③ 이더리움 익명 트랜잭션 사례 · Tornado Cash
-        </h3>
-        <p className="text-[15px] text-text/80 leading-[1.7]">
-          비트코인은 기반 계층에 mixing 이 없고, 위에 CoinJoin 같은 ‘약한
-          우회’ 가 얹힌다. 이더리움은 스마트 컨트랙트 위에서{" "}
-          <span className="text-text">암호학적으로 강한 mixing</span> 을 만들 수
-          있었고, 그 대표가 2019 년 출범한 Tornado Cash.
-        </p>
-
-        <div className="rounded-sm border border-edge bg-surface/30 p-5 space-y-3">
-          <h4 className="text-[16px] font-medium text-accent leading-snug">
-            Tornado Cash 메커니즘 (한 줄 요약)
-          </h4>
-          <ol className="space-y-2 text-[14px] text-text/80 leading-[1.7]">
-            <li>
-              <span className="font-mono text-muted mr-2">1.</span>
-              사용자 A 가 컨트랙트에 1 ETH 입금. 동시에 비밀{" "}
-              <code className="font-mono text-text">commitment = hash(secret, nullifier)</code>{" "}
-              만 공개.
-            </li>
-            <li>
-              <span className="font-mono text-muted mr-2">2.</span>
-              컨트랙트는 모든 commitment 들을 Merkle tree 에 모은다 (anonymity
-              pool).
-            </li>
-            <li>
-              <span className="font-mono text-muted mr-2">3.</span>
-              사용자 A 가 임의의 새 주소에서 1 ETH 인출 시 zk-SNARK proof 를
-              제출. “나는 pool 안 어떤 commitment 의 secret 을 안다” 만 증명되고,{" "}
-              <span className="text-text">어느 commitment 인지는 공개하지 않음</span>.
-            </li>
-            <li>
-              <span className="font-mono text-muted mr-2">4.</span>
-              <code className="font-mono text-text">nullifier</code> 만 공개되어
-              double-withdraw 차단. 그 외엔 입금-인출 사이 on-chain 연결고리를
-              직접 드러내지 않는다.
-            </li>
-          </ol>
-        </div>
-
-        <div className="rounded-sm border border-edge bg-surface/20 p-5 space-y-3">
-          <h4 className="text-[16px] font-medium text-text leading-snug">
-            왜 비트코인은 같은 방식을 쓰기 어렵나
-          </h4>
-          <p className="text-[14px] text-text/75 leading-[1.7]">
-            비트코인의 script 는 의도적으로{" "}
-            <span className="text-text">Turing-incomplete</span>. zk-SNARK
-            검증 로직 같은 거대한 연산을 넣을 수 없다. 같은 효과를 보려면 또
-            다른 기반 계층 변경 (covenants, BIP352 silent payment 등) 이
-            필요하고, 채택 보수성이 강해 진행이 느림. 보안·단순성을 우선한
-            대가의 한 면.
-          </p>
-        </div>
-
-        <Callout tone="warn" title="완벽한 mixer 도 메타데이터로 일부 추적된다">
-          <ul className="space-y-2 text-[14px] text-text/80 leading-[1.7]">
-            <li>
-              <span className="text-muted">·</span>{" "}
-              <span className="text-text">Timing</span>: Tornado 입금 5 분 뒤
-              같은 액수가 인출되면 사실상 같은 사람으로 추정될 수 있다.
-            </li>
-            <li>
-              <span className="text-muted">·</span>{" "}
-              <span className="text-text">Gas 출처</span>: 새 주소가 GAS 가
-              없는데 Tornado 인출을 어떻게 했나? 누가 GAS 를 보내줬는지 보면
-              연결된다.
-            </li>
-            <li>
-              <span className="text-muted">·</span>{" "}
-              <span className="text-text">후속 패턴</span>: 인출 후 같은
-              거래소·같은 디파이로 들어가면 KYC 와 다시 묶임.
-            </li>
-          </ul>
-          <p className="text-[14px] text-text/65 leading-[1.7] pt-2 border-t border-edge/60">
-            ‘완벽한 익명성’ 은 알고리즘만의 문제가 아니다. 사용자 측의 운영 보안
-            (timing 분리, 별도 GAS 출처, 인출 후 다른 네트워크 사용 등) 이
-            동반되어야 비로소 의미가 있다. 프라이버시는{" "}
-            <span className="text-text">‘plausible deniability’</span> 가 실용
-            목표.
-          </p>
-        </Callout>
-      </div>
-
-      {/* ④ 미국 OFAC 제재 + 코드 자유 논쟁 */}
-      <div className="space-y-4">
-        <h3 className="text-[18px] font-medium text-text leading-snug">
-          ④ 2022 OFAC 제재 · 소스코드를 제재한다는 사상 초유의 일
-        </h3>
-        <p className="text-[15px] text-text/80 leading-[1.7]">
-          체인 분석으로도 못 잡는 자금 흐름이 있다는 게 명확해지자, 미국은 한
-          단계 더 나갔다. ‘사용자’ 가 아니라{" "}
-          <span className="text-text">‘소스코드 그 자체’</span> 를 제재 대상으로
-          삼은 것.
-        </p>
-
-        <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-          <div className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
-            <div>시점</div>
-            <div>사건</div>
-          </div>
-          <div className="divide-y divide-edge text-[14px]">
-            <SanctionRow
-              when="2022-08-08"
-              what="미국 재무부 OFAC 가 Tornado Cash 컨트랙트 주소들을 SDN 리스트에 추가. 미국인의 그 컨트랙트 사용 금지. 사상 처음으로 ‘사용자’ 가 아니라 ‘스마트 컨트랙트’ 자체가 제재 대상."
-            />
-            <SanctionRow
-              when="2022-08-12"
-              what="GitHub 가 Tornado Cash 저장소를 takedown 하고 개발자 계정을 정지시켰다. ‘오픈소스 코드도 제재 대상이 될 수 있다’ 는 신호로 읽혔다."
-              tone="warn"
-            />
-            <SanctionRow
-              when="2022-08-26"
-              what="네덜란드가 핵심 개발자 Alexey Pertsev 를 체포했다. 죄목은 ‘mixer 운영 방조’. 코드 작성·배포 자체가 형사 책임이 될 수 있을까."
-              tone="warn"
-            />
-            <SanctionRow
-              when="2023-09"
-              what="Coinbase 등이 EFF 와 함께 OFAC 를 상대로 소송. 헌법 1 수정 (표현의 자유) 침해 주장."
-            />
-            <SanctionRow
-              when="2024-11"
-              what="제 5 순회 항소법원이 OFAC 의 제재가 위법이라고 판결했다. ‘Tornado Cash 의 immutable smart contract 는 IEEPA 가 정의하는 property 에 해당하지 않는다’ 가 핵심 논거다."
-              tone="ok"
-            />
-            <SanctionRow
-              when="2025-03"
-              what="OFAC 가 Tornado Cash 를 SDN 에서 제거했다. 그러나 Pertsev 형사 사건은 별개로 진행 중이다."
-              tone="ok"
-            />
-          </div>
-        </div>
-
-        <Callout tone="accent" title="생각해볼 문제">
-          <p className="text-[15px] text-text/80 leading-[1.7]">
-            <span className="text-text">소스코드는 표현(speech)인가, 도구(weapon)인가?</span>{" "}
-            누군가 GitHub 에 올린 ‘mixer 코드’ 가 범죄에 쓰였다면, 그 코드를 짠
-            사람에게 책임이 있나? 1990 년대 ‘PGP 암호화 코드를 종이책으로
-            출판하면 수출 통제 위반인가’ 논쟁의 디지털 버전.
-          </p>
-          <p className="text-[14px] text-text/70 leading-[1.7]">
-            더 어려운 질문: 비트코인 코어 자체가 어떤 합법성 회색지대를 만든다면,
-            그 코어 코드도 같은 논리로 제재할 수 있나? 노드 운영자, 채굴자,
-            지갑 개발자, 거래소 가운데 어느 단계에서 ‘책임’ 이 시작되는가? 분산
-            시스템에서 ‘제재 대상’ 을 정의할 수 있나?
-          </p>
-          <p className="text-[14px] text-text/65 leading-[1.7]">
-            법적 쟁점으로 더 볼 것: EFF 의 “Code is speech” 입장, Bernstein v. United
-            States (1996) PGP 판결, Coin Center 의 OFAC 소송 문서.
+            같은 금액 output 은 CoinJoin 의 흔적이 되기도 한다. 이후 다시 같은
+            지갑에서 합치거나, KYC 거래소로 바로 보내거나, 네트워크 메타데이터가
+            노출되면 프라이버시 이득은 줄어든다. S13 에서는 실제 도구와 운영상
+            위험을 더 구체적으로 본다.
           </p>
         </Callout>
       </div>
@@ -1374,25 +1181,6 @@ function CoinJoinDiagram() {
       <div className="text-[12px] text-muted/85 mt-2 leading-relaxed">
         외부 관찰자는 어느 input 이 어느 output 으로 갔는지 알기 어렵다.
       </div>
-    </div>
-  );
-}
-
-function SanctionRow({
-  when,
-  what,
-  tone,
-}: {
-  when: string;
-  what: string;
-  tone?: "warn" | "ok";
-}) {
-  const cls =
-    tone === "warn" ? "text-[#f76b6b]" : tone === "ok" ? "text-accent2" : "text-muted";
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-3 px-4 py-3 items-baseline">
-      <div className={`font-mono text-[12px] ${cls}`}>{when}</div>
-      <div className="text-[14px] text-text/80 leading-[1.65]">{what}</div>
     </div>
   );
 }
