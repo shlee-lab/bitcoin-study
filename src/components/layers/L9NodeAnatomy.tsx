@@ -317,30 +317,36 @@ function Opening() {
       </div>
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
-          <div>앞에서 배운 개념</div>
-          <div>노드 안의 실제 구성요소</div>
+        <div className="grid grid-cols-1 md:grid-cols-[190px_210px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
+          <div>앞에서 본 말</div>
+          <div>노드 안에서는</div>
+          <div>왜 필요한가</div>
         </div>
         <div className="divide-y divide-edge">
           <BridgeRow
-            theory="UTXO set · 아직 쓰이지 않은 output 목록"
-            real="노드 안에서는 ChainState 라는 키-값 저장소로 관리된다. 매 블록마다 사용된 output 은 제거되고, 새 output 은 추가된다."
+            concept="UTXO set"
+            implementation="ChainState"
+            why="지금 쓸 수 있는 output 만 모아 둔다. 새 tx 가 오면 노드는 여기서 input 이 실제로 남아 있는지 확인한다."
           />
           <BridgeRow
-            theory="블록이 체인에 추가된다"
-            real="여러 단계의 검증을 차례로 통과해야 노드가 받아들인다. 한 단계라도 실패하면 거부된다."
+            concept="블록이 체인에 추가된다"
+            implementation="Validator"
+            why="블록 헤더, 작업증명, tx, script, signature 를 차례로 검사한다. 하나라도 실패하면 그 블록은 버린다."
           />
           <BridgeRow
-            theory="노드가 다른 노드에 전파한다"
-            real="짧은 메시지 (inv → getdata → block) 가 ‘있어 / 줘 / 받아’ 로 흐름."
+            concept="노드가 다른 노드에 전파한다"
+            implementation="P2P stack"
+            why="다른 노드에게 새 tx 나 블록이 있다는 사실을 알리고, 필요한 데이터만 요청해 받는다."
           />
           <BridgeRow
-            theory="처음 시작하면 직접 검증한다"
-            real="첫 실행 시 0 번 블록부터 끝까지 다시 검증해 자기만의 상태를 짓는다."
+            concept="처음 시작하면 직접 검증한다"
+            implementation="Initial Block Download"
+            why="남이 준 잔액표를 믿지 않고, genesis block 부터 현재까지 다시 계산해 자기 ChainState 를 만든다."
           />
           <BridgeRow
-            theory="아직 블록에 들어가지 않은 거래들"
-            real="아직 블록에 안 들어간 tx 들을 메모리에 모아두는 자리. fee 순으로 정렬."
+            concept="대기 중인 트랜잭션"
+            implementation="Mempool"
+            why="아직 블록에 들어가지 않은 tx 를 임시로 보관한다. 채굴자는 여기서 fee 가 높은 tx 부터 블록 후보에 넣는다."
           />
         </div>
       </div>
@@ -354,13 +360,24 @@ function Opening() {
   );
 }
 
-function BridgeRow({ theory, real }: { theory: string; real: string }) {
+function BridgeRow({
+  concept,
+  implementation,
+  why,
+}: {
+  concept: string;
+  implementation: string;
+  why: string;
+}) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-2.5 sm:gap-4 px-4 py-3.5 items-start">
+    <div className="grid grid-cols-1 md:grid-cols-[190px_210px_1fr] gap-2.5 md:gap-4 px-4 py-3.5 items-start">
       <div className="text-[15px] font-medium text-accent2 leading-snug">
-        {theory}
+        {concept}
       </div>
-      <div className="text-[14px] text-text/82 leading-[1.65]">{real}</div>
+      <div className="text-[14px] font-medium text-text leading-snug">
+        {implementation}
+      </div>
+      <div className="text-[14px] text-text/82 leading-[1.65]">{why}</div>
     </div>
   );
 }
