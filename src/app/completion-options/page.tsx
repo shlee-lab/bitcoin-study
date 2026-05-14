@@ -420,7 +420,7 @@ function CompletionDetailQuiet() {
           처음부터 다시 보기
         </Link>
       </div>
-      <SupportInline />
+      <SupportMini />
     </div>
   );
 }
@@ -494,15 +494,6 @@ function SupportMini({ compact }: { compact?: boolean }) {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function SupportInline() {
-  return (
-    <div className="border-t border-edge pt-4 text-[12px] text-text/58 leading-[1.6]">
-      <span className="text-text/78 font-medium">후원</span> · Ethereum / ERC-20 ·{" "}
-      <span className="break-all">{ETH_ADDRESS}</span>
     </div>
   );
 }
