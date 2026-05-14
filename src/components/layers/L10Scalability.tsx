@@ -309,6 +309,26 @@ function LightningNetwork() {
           </p>
         </div>
       </div>
+      <div className="border border-edge bg-surface/30 overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
+          <div>현재 감각</div>
+          <div>어떻게 읽을까</div>
+        </div>
+        <div className="divide-y divide-edge">
+          <Row
+            label="수수료"
+            body="Lightning 수수료는 보통 base fee 와 비율 수수료로 구성된다. 공개 채널 정책의 중앙값은 base 100 msat, fee rate 100 ppm 수준이다. 100 ppm 은 보낸 금액의 0.01% 이므로, 실제 결제 수수료는 경로에 따라 sub-sat 에서 몇 sat 수준으로 끝나는 경우가 많다."
+          />
+          <Row
+            label="L1 대비"
+            body="온체인 송금은 수수료율이 낮을 때도 보통 수백 sat 이상이 들고, 혼잡하면 훨씬 비싸진다. Lightning 은 이미 열린 채널을 지나가기 때문에 소액·반복 결제에서는 L1 보다 한두 자릿수 이상 저렴한 경험을 만들 수 있다."
+          />
+          <Row
+            label="활성도"
+            body="2026년 5월 14일 mempool.space 공개 그래프 기준 약 17,400 노드, 41,000 채널, 4,880 BTC 공개 용량이 관측된다. 다만 비공개 채널과 custodial 지갑 내부 결제는 그래프에 완전히 잡히지 않는다."
+          />
+        </div>
+      </div>
       <p className="text-[14px] text-text/75 leading-[1.7]">
         Alice → Carol → David → Bob 의 다단계 라우팅. 각 노드는 자기가 받은
         만큼을 자기 다음 채널로 다음 노드에게 보낸다. 마지막에 자금이 Bob 에게
@@ -847,38 +867,42 @@ function OtherEcosystems() {
               ③ Sharding
             </h3>
             <span className="text-[13px] font-medium text-muted/90">
-              split state / data
+              data availability, not execution shards
             </span>
           </div>
           <p className="text-[14px] text-text/75 leading-[1.7]">
             네트워크 전체가 모든 일을 똑같이 처리하는 대신, 상태나 데이터를 여러
-            조각 (shard) 으로 나눈다. 각 검증자는 일부 조각만 처리하고, 전체
-            시스템은 병렬로 더 많은 일을 처리한다.
+            조각 (shard) 으로 나누자는 아이디어다. 직관은 단순하지만 실제
+            구현은 어렵다. shard 사이 메시지, 데이터 가용성, 검증자 배정, 공격
+            표면이 모두 늘어나기 때문이다.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="border border-edge bg-bg/40 p-4 space-y-2">
               <div className="text-[13px] font-semibold text-accent2">
-                실행 샤딩
+                예전 구상 · 실행 샤딩
               </div>
               <p className="text-[13px] text-text/80 leading-[1.7]">
-                계정·컨트랙트 실행 자체를 여러 shard 로 나눈다. 처리량은 커지지만
-                shard 사이 메시지와 보안 설계가 복잡해진다.
+                계정·컨트랙트 실행 자체를 여러 shard 로 나누는 방식이다. 처리량은
+                커질 수 있지만, shard 간 호출과 상태 동기화가 매우 복잡해진다.
+                Ethereum 은 이 방향을 주력 로드맵에서 사실상 내려놓았다.
               </p>
             </div>
             <div className="border border-edge bg-bg/40 p-4 space-y-2">
               <div className="text-[13px] font-semibold text-accent2">
-                데이터 샤딩
+                실제 적용 · blob 과 proto-danksharding
               </div>
               <p className="text-[13px] text-text/80 leading-[1.7]">
-                실행은 rollup 이 맡고, L1 은 rollup 데이터가 공개되어 있는지만
-                보장한다. 이더리움의 danksharding 로드맵은 이 방향에 가깝다.
+                현재 Ethereum 은 rollup 이 실행을 맡고, L1 은 rollup 데이터가
+                공개되어 있음을 보장하는 쪽으로 간다. Dencun 업그레이드의
+                EIP-4844 는 rollup 전용 임시 데이터 공간인 blob 을 도입했다.
               </p>
             </div>
           </div>
           <p className="text-[13px] text-muted/85 leading-[1.7]">
-            병렬성은 커지지만 “모든 노드가 모든 것을 직접 검증한다”는 단순성은
-            줄어든다. 데이터 가용성, shard 간 통신, validator 샘플링 같은 새
-            문제가 생긴다.
+            그래서 요즘 Ethereum 의 “sharding” 은 여러 실행 체인을 나누는 말이라기보다
+            rollup 이 필요한 데이터를 더 싸게 올리도록 L1 의 데이터 대역폭을 넓히는
+            의미에 가깝다. full danksharding 은 이 blob 공간을 더 키우고, 장기적으로는
+            data availability sampling 으로 노드 부담을 낮추려는 계획이다.
           </p>
         </div>
       </div>
@@ -948,7 +972,10 @@ function PaymentRailsReflection() {
           <span className="text-text">법정통화 안정성</span> · 결제는 가치 저장이
           아니다. 1 만 원짜리를 ‘오늘의 BTC 가격’ 으로 받는 가게는 거의 없다.
           stablecoin 이 그 간극을 메우고 있지만, 그것도 발행자 (Circle, Tether)
-          에 대한 신뢰가 전제되어야 한다.
+          에 대한 신뢰가 전제되어야 한다. 그럼에도 stablecoin 이 각광받고
+          빠르게 성장하는 이유가 여기에 있다. 사용자는 블록체인의 빠른 정산과
+          낮은 전송 비용을 원하지만, 일상 결제 단위는 여전히 달러 같은 안정적인
+          기준을 원한다.
         </li>
         <li>
           <span className="text-text">호환성 · 점진 이행</span> · 전 세계 결제
@@ -1049,36 +1076,102 @@ function ChannelDiagram() {
 }
 
 function NetworkDiagram() {
+  const channels = [
+    { x1: 72, y1: 92, x2: 168, y2: 58, width: 4, label: "채널 A", lx: 116, ly: 62 },
+    { x1: 72, y1: 108, x2: 168, y2: 146, width: 2, label: "예비 경로", lx: 106, ly: 143 },
+    { x1: 192, y1: 56, x2: 306, y2: 56, width: 5, label: "유동성 충분", lx: 248, ly: 42 },
+    { x1: 192, y1: 144, x2: 306, y2: 144, width: 2, label: "유동성 부족", lx: 248, ly: 164 },
+    { x1: 180, y1: 76, x2: 180, y2: 126, width: 1.5, label: "", lx: 0, ly: 0 },
+    { x1: 318, y1: 60, x2: 418, y2: 92, width: 4, label: "채널 B", lx: 370, ly: 66 },
+    { x1: 318, y1: 140, x2: 418, y2: 108, width: 2, label: "", lx: 0, ly: 0 },
+  ];
+
   return (
-    <div className="border border-edge bg-surface/30 p-4">
+    <div className="border border-edge bg-surface/30 p-4 space-y-3">
       <svg
-        viewBox="0 0 460 180"
+        viewBox="0 0 500 220"
         className="w-full"
         preserveAspectRatio="xMidYMid meet"
       >
-        <Edge x1={66} y1={86} x2={154} y2={54} />
-        <Edge x1={66} y1={94} x2={154} y2={126} />
-        <Edge x1={186} y1={50} x2={274} y2={50} />
-        <Edge x1={186} y1={130} x2={274} y2={130} />
-        <Edge x1={170} y1={66} x2={170} y2={114} />
-        <Edge x1={306} y1={54} x2={394} y2={86} />
-        <Edge x1={306} y1={126} x2={394} y2={94} />
+        <defs>
+          <marker
+            id="lnRouteArrow"
+            markerWidth="8"
+            markerHeight="8"
+            refX="7"
+            refY="4"
+            orient="auto"
+          >
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f7931a" />
+          </marker>
+        </defs>
+        <rect x="16" y="16" width="468" height="174" fill="#111318" stroke="#242a33" />
+        <text x="28" y="40" fontSize="13" fontWeight="600" fill="#e8eaed">
+          공개 채널 그래프에서 지갑이 경로를 고른다
+        </text>
+        <text x="28" y="60" fontSize="11.5" fill="#8f97a3">
+          두꺼운 선일수록 해당 방향으로 보낼 수 있는 유동성이 넉넉하다는 뜻
+        </text>
+        {channels.map((channel, i) => (
+          <g key={i}>
+            <line
+              x1={channel.x1}
+              y1={channel.y1}
+              x2={channel.x2}
+              y2={channel.y2}
+              stroke="#394151"
+              strokeWidth={channel.width}
+              strokeLinecap="round"
+            />
+            {channel.label ? (
+              <text
+                x={channel.lx}
+                y={channel.ly}
+                textAnchor="middle"
+                fontSize="11.5"
+                fontWeight="500"
+                fill="#9aa3af"
+              >
+                {channel.label}
+              </text>
+            ) : null}
+          </g>
+        ))}
         <path
-          d="M 66 86 L 154 50 L 274 50 L 394 86"
+          d="M 72 92 L 168 58 L 306 56 L 418 92"
           stroke="#f7931a"
-          strokeWidth="1.8"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          markerEnd="url(#lnRouteArrow)"
           fill="none"
         />
-        <Node x={50} y={90} label="Alice" />
-        <Node x={170} y={50} label="Carol" />
-        <Node x={170} y={130} label="Eve" />
-        <Node x={290} y={50} label="David" />
-        <Node x={290} y={130} label="Frank" />
-        <Node x={410} y={90} label="Bob" accent />
+        <text x="248" y="82" textAnchor="middle" fontSize="12" fontWeight="600" fill="#f7931a">
+          선택된 결제 경로
+        </text>
+        <Node x={56} y={100} label="Alice" role="보내는 지갑" />
+        <Node x={180} y={58} label="Carol" role="라우팅 노드" />
+        <Node x={180} y={146} label="Eve" role="대체 경로" muted />
+        <Node x={318} y={56} label="David" role="라우팅 노드" />
+        <Node x={318} y={144} label="Frank" role="대체 경로" muted />
+        <Node x={434} y={100} label="Bob" role="받는 지갑" accent />
       </svg>
-      <div className="text-[12px] text-muted/85 mt-2 leading-relaxed">
-        Alice → Carol → David → Bob. 오렌지가 활성 라우트. 직접 채널 없이도
-        다단계 경로로 자금이 흐른다.
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[13px] text-text/78 leading-[1.55]">
+        <div className="border border-edge bg-bg/35 px-3 py-2">
+          <span className="font-medium text-text">직접 채널 불필요</span>
+          <br />
+          Alice 와 Bob 이 직접 연결되지 않아도 된다.
+        </div>
+        <div className="border border-edge bg-bg/35 px-3 py-2">
+          <span className="font-medium text-text">유동성 방향</span>
+          <br />
+          같은 채널이라도 보낼 수 있는 방향과 한도가 다르다.
+        </div>
+        <div className="border border-edge bg-bg/35 px-3 py-2">
+          <span className="font-medium text-text">아주 작은 라우팅 수수료</span>
+          <br />
+          중간 노드는 유동성을 빌려준 대가를 받는다.
+        </div>
       </div>
     </div>
   );
@@ -1088,57 +1181,52 @@ function Node({
   x,
   y,
   label,
+  role,
   accent,
+  muted,
 }: {
   x: number;
   y: number;
   label: string;
+  role: string;
   accent?: boolean;
+  muted?: boolean;
 }) {
   return (
     <g>
       <circle
         cx={x}
         cy={y}
-        r={9}
-        fill="#0d0e10"
-        stroke={accent ? "#f7931a" : "#5b8def"}
-        strokeWidth="1.4"
+        r={15}
+        fill={muted ? "#171a20" : "#0d0e10"}
+        stroke={accent ? "#f7931a" : muted ? "#5b6472" : "#5b8def"}
+        strokeWidth="1.8"
+      />
+      <circle
+        cx={x}
+        cy={y}
+        r={4}
+        fill={accent ? "#f7931a" : muted ? "#5b6472" : "#5b8def"}
       />
       <text
         x={x}
-        y={y + 22}
+        y={y + 30}
         textAnchor="middle"
-        fontSize="11"
-        fill="#aaa"
-        fontFamily="JetBrains Mono"
+        fontSize="12.5"
+        fontWeight="600"
+        fill={muted ? "#8b93a0" : "#e8eaed"}
       >
         {label}
       </text>
+      <text
+        x={x}
+        y={y + 45}
+        textAnchor="middle"
+        fontSize="10.5"
+        fill="#7d8694"
+      >
+        {role}
+      </text>
     </g>
-  );
-}
-
-function Edge({
-  x1,
-  y1,
-  x2,
-  y2,
-}: {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-}) {
-  return (
-    <line
-      x1={x1}
-      y1={y1}
-      x2={x2}
-      y2={y2}
-      stroke="#2a2f3a"
-      strokeWidth="1"
-      strokeDasharray="3 3"
-    />
   );
 }

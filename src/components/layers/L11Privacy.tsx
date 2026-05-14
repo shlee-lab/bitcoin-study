@@ -83,10 +83,32 @@ function Pseudonymous() {
     <section className="space-y-5">
       <p className="text-[17px] text-text/85 leading-[1.75]">
         여기서 말하는 <span className="text-text">가명성 (pseudonymity)</span>
-        은 “이름이 보이지 않는다”와 “추적할 수 없다”를 구분하는 개념이다.
-        비트코인 주소에는 실명이 직접 적히지 않지만, 주소와 거래 흐름은 공개
-        장부 위에 영구히 남고 서로 연결될 수 있다.
+        은 “실명이 보이지 않는다”와 “행동을 추적할 수 없다”를 구분하는
+        개념이다. 비트코인 주소에는 주민등록번호나 계좌주 이름이 직접 적히지
+        않는다. 하지만 주소와 거래 흐름은 공개 장부 위에 영구히 남고, 여러
+        거래가 같은 주체의 행동으로 묶일 수 있다.
       </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="border border-edge bg-surface/30 p-4 space-y-2">
+          <div className="text-[14px] font-semibold text-accent2">
+            익명성
+          </div>
+          <p className="text-[14px] text-text/78 leading-[1.7]">
+            관찰자가 행위자를 특정하기 어렵고, 같은 사람이 반복해서 한 행동인지도
+            연결하기 어렵다. 목표는 “누가 했는지 모른다”에 가깝다.
+          </p>
+        </div>
+        <div className="border border-edge bg-surface/30 p-4 space-y-2">
+          <div className="text-[14px] font-semibold text-accent2">
+            가명성
+          </div>
+          <p className="text-[14px] text-text/78 leading-[1.7]">
+            실명 대신 주소나 계정 같은 식별자가 보인다. 처음에는 사람이 아니라
+            “주소 A” 로 보이지만, 주소 A 의 행동 기록은 계속 추적되고 서로 연결될
+            수 있다.
+          </p>
+        </div>
+      </div>
       <Callout tone="warn" title="현금 vs 비트코인">
         <p className="text-[14px] text-text/80 leading-[1.7]">
           현금은 거래가 발생한 순간 외부 기록이 남지 않는다. 비트코인은
@@ -117,11 +139,11 @@ function ChainAnalysis() {
         따라가는 일이다.
       </p>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
           <div>확인할 것</div>
           <div>읽는 방법</div>
         </div>
-        <div className="divide-y divide-edge text-[14px]">
+        <div className="divide-y divide-edge">
           <HRow
             label="주소"
             body="그 주소로 들어온 tx 와 나간 tx 를 시간순으로 본다. 같은 주소를 반복 사용하면 입금 내역이 한 화면에서 묶인다."
@@ -192,17 +214,9 @@ function BasicHygiene() {
         />
         <Hyg
           title="VPN 사용"
-          body="지갑이나 노드가 tx 를 네트워크에 처음 브로드캐스트할 때 IP 가 단서가 될 수 있다. VPN 을 쓰면 ISP 나 주변 네트워크가 바로 사용자를 보기 어렵고, 외부 노드에는 VPN 서버의 IP 가 보인다."
+          body="지갑이나 노드가 tx 를 네트워크에 처음 브로드캐스트할 때 IP 가 단서가 될 수 있다. VPN 을 쓰면 ISP 나 주변 네트워크가 바로 사용자를 보기 어렵고, 외부 노드에는 VPN 서버의 IP 가 보인다. 다만 VPN 은 체인 위의 주소 연결, change 추정, 거래소 KYC 기록을 지워주지 않는다. 신뢰 지점이 ISP 에서 VPN 사업자로 옮겨갈 뿐이므로, VPN 사업자가 로그를 남기거나 결제 정보와 접속 시간을 묶으면 오히려 단서가 한곳에 모일 수 있다."
         />
       </ul>
-      <Callout tone="warn" title="VPN 은 프라이버시의 완성품이 아니다">
-        <p className="text-[14px] text-text/80 leading-[1.7]">
-          VPN 은 체인 위의 주소 연결, change 추정, 거래소 KYC 기록을 지워주지
-          않는다. 또 신뢰 지점이 ISP 에서 VPN 사업자로 옮겨갈 뿐이다. VPN
-          사업자가 로그를 남기거나 결제 정보와 접속 시간을 묶으면, 오히려 한
-          곳에 단서가 모일 수 있다.
-        </p>
-      </Callout>
     </section>
   );
 }
@@ -218,21 +232,21 @@ function CoinJoinSection() {
       <CoinJoinDiagram />
       <ol className="space-y-2 text-[14px] text-text/85 leading-[1.7] list-none">
         <li>
-          <span className="text-muted font-mono text-xs mr-2">①</span> N 명의
-          사용자가 자기 input 을 모은다.
+          <span className="inline-flex h-5 w-5 items-center justify-center border border-edge text-[12px] font-medium text-muted mr-2 align-[-1px]">1</span>
+          N 명의 사용자가 자기 input 을 모은다.
         </li>
         <li>
-          <span className="text-muted font-mono text-xs mr-2">②</span> 각자
-          같은 금액의 output 을 받는다 (예: 0.1 BTC × N).
+          <span className="inline-flex h-5 w-5 items-center justify-center border border-edge text-[12px] font-medium text-muted mr-2 align-[-1px]">2</span>
+          각자 같은 금액의 output 을 받는다 (예: 0.1 BTC × N).
         </li>
         <li>
-          <span className="text-muted font-mono text-xs mr-2">③</span> 외부
-          관찰자는 ‘어느 input 이 어느 output 으로 갔는지’ 알 수 없다. 익명
+          <span className="inline-flex h-5 w-5 items-center justify-center border border-edge text-[12px] font-medium text-muted mr-2 align-[-1px]">3</span>
+          외부 관찰자는 ‘어느 input 이 어느 output 으로 갔는지’ 알 수 없다. 익명
           집합 (anonymity set) 이 N 이 된다.
         </li>
       </ol>
       <div className="border border-edge bg-surface/30 overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
           <div>핵심</div>
           <div>왜 필요한가</div>
         </div>
@@ -275,6 +289,22 @@ function CoinJoinSection() {
           CoinJoin 은 공통 입력 휴리스틱을 깨는 강한 도구지만, 금액 패턴,
           타이밍, 재결합, 거래소 KYC, 네트워크 메타데이터까지 모두 지우지는
           않는다. 프라이버시는 도구 하나가 아니라 사용 습관과 함께 만든다.
+        </p>
+      </Callout>
+      <Callout tone="warn" title="서비스 운영에는 법적 위험이 붙는다">
+        <p className="text-[14px] text-text/80 leading-[1.7]">
+          CoinJoin 은 프로토콜 아이디어로는 “여러 사용자가 함께 tx 를 만든다”에
+          가깝다. 하지만 실제 서비스가 coordinator 를 운영하고, 수수료를 받고,
+          범죄 수익 은닉을 돕는 도구처럼 홍보되면 규제기관은 이를 단순 지갑이
+          아니라 mixer 또는 money transmitting business 로 볼 수 있다.
+        </p>
+        <p className="text-[14px] text-text/72 leading-[1.7] mt-2">
+          2024 년 미국 DOJ 는 Samourai Wallet 창업자들을 자금세탁 공모와 무허가
+          자금송금업 운영 혐의로 기소했고, 이후 운영자들은 무허가 자금송금업
+          공모 혐의에 대해 유죄를 인정했다. Wasabi Wallet 의 zkSNACKs coordinator
+          도 2024 년 6 월 CoinJoin 조정 서비스를 중단했다. 즉 사용자는 프라이버시
+          효과뿐 아니라 거래소 입금 거부, 서비스 중단, 운영자 수사 같은 현실적
+          리스크까지 함께 봐야 한다.
         </p>
       </Callout>
     </section>
@@ -367,7 +397,7 @@ function PrivacyCoins() {
             <Term id="zcash">Zcash</Term> ·{" "}
             <Term id="zk-snark">zk-SNARK</Term> 기반
           </h3>
-          <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+          <span className="text-[13px] font-medium text-muted/90">
             2016 ~
           </span>
         </div>
@@ -408,7 +438,7 @@ function PrivacyCoins() {
             <Term id="stealth-address">Stealth address</Term> +{" "}
             <Term id="ringct">RingCT</Term>
           </h3>
-          <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+          <span className="text-[13px] font-medium text-muted/90">
             2014 ~
           </span>
         </div>
@@ -731,9 +761,9 @@ function TornadoCashReflection() {
 
 function HRow({ label, body }: { label: string; body: string }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 px-4 py-2.5 items-baseline">
-      <div className="font-mono text-[13px] text-accent2/80">{label}</div>
-      <div className="text-[13px] text-text/85 leading-relaxed">{body}</div>
+    <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-2.5 items-baseline">
+      <div className="text-[15px] font-medium text-text">{label}</div>
+      <div className="text-[14px] text-text/82 leading-[1.65]">{body}</div>
     </div>
   );
 }
