@@ -156,7 +156,7 @@ export function L7Mining(props: LayerProps) {
                 body: (
                   <Section
                     heading="Energy · 비트코인 전력 사용"
-                    sub="‘들인 작업 = 안전’ 이지만 그 작업은 진짜 전력을 소모한다. 규모와 종류를 정직하게."
+                    sub="PoW 에서는 연산량이 곧 보안 예산이지만, 그 연산은 실제 전력을 소모한다. 이 지점에서 비트코인의 에너지 논쟁과 PoS 라는 대안을 함께 봐야 한다."
                   >
                     <EnergyContext />
                   </Section>
@@ -508,34 +508,41 @@ function PickaxeIcon({ className = "" }: { className?: string }) {
     >
       <ellipse cx="25" cy="42" rx="11" ry="2.2" fill="#7a3d00" opacity="0.16" />
       <path
-        d="M17.2 19.7 25.6 14.8 36.7 33.9c.9 1.6.4 3.6-1.2 4.5l-1.3.8c-1.6.9-3.6.4-4.5-1.2L18.6 18.9"
-        fill="#8A5A32"
+        d="M16.8 21.4 21.2 17.8 39.2 38.6c1.1 1.3 1 3.2-.3 4.3l-1.3 1.1c-1.3 1.1-3.2 1-4.3-.3L15.4 22.9"
+        fill="#7B4B27"
       />
       <path
-        d="M22.7 16.5 36.7 40.7"
-        stroke="#5A351F"
-        strokeWidth="2.2"
+        d="M20.2 20.4 36.9 39.8"
+        stroke="#4F2D18"
+        strokeWidth="2"
         strokeLinecap="round"
-        opacity="0.35"
+        opacity="0.42"
       />
       <path
-        d="M8.1 16.4C14.6 7.8 25.6 5.5 36.7 9.9c-6.7.2-12.4 2.6-17 7.4l2.2 4.1-6.9 3.8-2.1-4.2c-1.8-.4-3.5-1.5-4.8-4.6Z"
-        fill="#FFD166"
+        d="M5.5 14.8C14.9 8.1 28.4 6.6 42.5 10.6c-9.7.7-17.3 3.4-22.7 8.1l3.1 4.1-6.6 5.1-3-4.2c-3.5-.5-6-3.2-7.8-8.9Z"
+        fill="#D9DEE6"
       />
       <path
-        d="M8.1 16.4C14.6 7.8 25.6 5.5 36.7 9.9c-6.7.2-12.4 2.6-17 7.4l2.2 4.1-6.9 3.8-2.1-4.2c-1.8-.4-3.5-1.5-4.8-4.6Z"
-        stroke="#6B3F1D"
-        strokeWidth="2.2"
+        d="M5.5 14.8C14.9 8.1 28.4 6.6 42.5 10.6c-9.7.7-17.3 3.4-22.7 8.1l3.1 4.1-6.6 5.1-3-4.2c-3.5-.5-6-3.2-7.8-8.9Z"
+        stroke="#3B4654"
+        strokeWidth="2.1"
         strokeLinejoin="round"
       />
       <path
-        d="M16.2 12.9c4.1-2.9 9-3.6 14.1-2.5"
-        stroke="#FFF0B8"
-        strokeWidth="2"
+        d="M13.3 15.2c5-3 11.5-4 19.1-2.9"
+        stroke="#FFFFFF"
+        strokeWidth="1.9"
         strokeLinecap="round"
       />
-      <circle cx="16.1" cy="23.9" r="2.1" fill="#F7931A" />
-      <circle cx="32.8" cy="36.4" r="1.4" fill="#B87945" opacity="0.7" />
+      <path
+        d="M34.8 9.3 42.5 10.6l-6.8 2.1"
+        stroke="#F7931A"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="16.7" cy="25.3" r="2" fill="#F7931A" />
+      <circle cx="35.7" cy="39" r="1.4" fill="#B87945" opacity="0.72" />
     </svg>
   );
 }
@@ -1021,26 +1028,79 @@ function SupplyReflection() {
 
 function EnergyContext() {
   return (
-    <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-3">
-      <div className="text-[13px] font-semibold text-muted/75">
-        snapshot · 2026 기준 대략
+    <div className="space-y-4">
+      <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-3">
+        <div className="text-[13px] font-semibold text-muted/75">
+          snapshot · 2026 기준 대략
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+          <Stat label="네트워크 hashrate" value="≈ 1 ZH/s" sub="10²¹ H/s" />
+          <Stat label="연간 전력 사용" value="≈ 150 TWh" sub="아르헨티나 1 국 수준" />
+          <Stat label="재생에너지 비중" value="≈ 50–60%" sub="추정치, 변동 큼" />
+        </div>
+        <p className="text-[15px] text-text/85 leading-[1.7]">
+          PoW 에서는 막대한 연산을 요구해 공격 비용을 높인다. 그래서 전력 사용을
+          줄이는 문제는 단순한 효율 개선이 아니라, 보안 예산을 어떻게 유지할지의
+          문제와도 연결된다. 한편 전력원을 재생에너지나 잉여 가스 (flared gas) 로
+          옮기려는 흐름도 있다. 따라서 “얼마나 쓰느냐” 와 “무엇으로 쓰느냐” 는
+          구분해서 봐야 한다.
+        </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
-        <Stat label="네트워크 hashrate" value="≈ 1 ZH/s" sub="10²¹ H/s" />
-        <Stat label="연간 전력 사용" value="≈ 150 TWh" sub="아르헨티나 1 국 수준" />
-        <Stat label="재생에너지 비중" value="≈ 50–60%" sub="추정치, 변동 큼" />
+
+      <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-3">
+        <h3 className="text-[17px] font-medium text-text leading-snug">
+          에너지 낭비 비판에서 등장한 PoS · 전력 대신 지분을 거는 방식
+        </h3>
+        <p className="text-[15px] text-text/85 leading-[1.7]">
+          PoW 의 전력 사용이 낭비라는 비판에 대응해 등장한 대표적 대안이{" "}
+          <span className="text-text">PoS (Proof of Stake)</span> 다. 최초의 PoS
+          계열 코인으로는 2012 년 등장한 Peercoin 이 자주 언급되고, 오늘날 가장
+          대표적인 사례는 2022 년 PoW 에서 PoS 로 전환한 Ethereum 이다.
+        </p>
+        <p className="text-[15px] text-text/85 leading-[1.7]">
+          PoS 에서는 채굴 장비와 전기를 쓰는 대신, 검증자가 자기 코인을 담보로
+          걸고 블록 제안과 검증에 참여한다. 따라서 핵심 권력은{" "}
+          <span className="text-text">연산 자원</span> 이 아니라{" "}
+          <span className="text-text">지분</span> 에서 나온다. 짧게 말하면 PoW 는
+          “해시 파워가 권력” 이고, PoS 는 “지분이 권력” 인 시스템이다.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[14px]">
+          <div className="rounded-sm border border-edge bg-bg/45 p-3 space-y-1.5">
+            <div className="text-[13px] font-semibold text-accent2">
+              PoS 의 장점
+            </div>
+            <p className="text-text/78 leading-[1.7]">
+              전력 소모가 작고, 사용자가 검증자나 위임자로 참여할 수 있는 경로가
+              상대적으로 넓다. 그래서 최근 등장한 많은 L1 체인과 앱체인은 PoS
+              계열 합의를 채택한다.
+            </p>
+          </div>
+          <div className="rounded-sm border border-edge bg-bg/45 p-3 space-y-1.5">
+            <div className="text-[13px] font-semibold text-accent">
+              PoS 의 한계
+            </div>
+            <p className="text-text/78 leading-[1.7]">
+              지분이 큰 참여자가 더 큰 영향력을 갖는다. 구현에 따라 slashing,
+              validator set, delegation, finality gadget 같은 세부 설계가 크게
+              달라진다.
+            </p>
+          </div>
+        </div>
+        <p className="text-[14px] text-text/70 leading-[1.7]">
+          흔한 비판은 “PoS 는 rich get richer 구조” 라는 것이다. 이 비판은
+          직관적으로 이해되지만, 그것만으로 PoS 가 특별히 불공정하다고 보기는
+          어렵다. PoW 에서도 연산 자원은 ASIC, 전기 계약, 냉각 설비, 운영 규모에
+          비례하고, 결국 자본이 많은 쪽이 더 많은 해시 파워를 확보한다. 따라서
+          더 정확한 비교는 “자본이 권력으로 바뀌는 경로가 전기·하드웨어인가,
+          토큰 지분인가” 의 차이다.
+        </p>
+        <p className="text-[13px] text-muted leading-relaxed">
+          현재는 비트코인을 제외한 다수의 새 체인이 PoS 계열을 채택한다. 다만
+          “PoS” 라는 한 단어 안에도 구현은 매우 다양하다. 여기서는 에너지 논쟁의
+          대안으로만 소개하고, 구체적인 합의 알고리즘의 차이는 이후 블록체인 일반
+          학습 코스에서 다루는 편이 적절하다.
+        </p>
       </div>
-      <p className="text-[15px] text-text/85 leading-[1.7]">
-        PoW 에서는 들인 에너지가 보안의 일부이므로, 에너지 사용을 줄이는 것은
-        보안 예산을 줄이는 문제와 연결된다. 한편 전력원 자체를 재생에너지·잉여
-        가스 (flared gas) 로 옮기려는 흐름도 있다. 그래서 ‘얼마를 쓰느냐’ 와
-        ‘무엇을 쓰느냐’ 는 별개의 논쟁이다.
-      </p>
-      <p className="text-[13px] text-muted leading-relaxed">
-        대안 합의 모델 (PoS) 은 전력 소모는 거의 없지만 ‘지분이 곧 권력’ 이라는
-        다른 트레이드오프를 가진다 (이더리움의 경로). 비트코인은 PoW 를 지키는
-        쪽을 택했다.
-      </p>
     </div>
   );
 }
