@@ -152,10 +152,16 @@ export default function Home() {
 
         <Support />
 
-        <footer className="pt-10 border-t border-edge flex items-center justify-between gap-4">
+        <footer className="pt-10 border-t border-edge flex flex-wrap items-center justify-between gap-4">
           <div className="text-[12px] text-muted/60">
             S0 → {lastLayerId}
           </div>
+          <Link
+            href="/license"
+            className="text-[12px] text-muted/60 hover:text-accent transition-colors"
+          >
+            CC BY-NC 4.0
+          </Link>
         </footer>
       </div>
     </main>
