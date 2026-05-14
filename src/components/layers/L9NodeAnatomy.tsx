@@ -41,53 +41,7 @@ export function L9NodeAnatomy(props: LayerProps) {
                 body: <NetworkVsStorage />,
               },
               {
-                title: "생각해보기", subtitle: "단일 구현이라는 역설",
-                body: (
-                  <Reflection title="탈중앙 시스템인데 코드는 한 군데?">
-                    <p>
-                      비트코인은 ‘탈중앙’ 이라고 한다. 그러나 실제 표준 코드는
-                      사실상 단 하나의 구현체 (Bitcoin Core) 다. 그 코드의 동작이
-                      곧 합의 규칙의 정의다. 다른 구현체 (btcd, libbitcoin) 가
-                      있지만 Bitcoin Core 와 100% 일치를 유지하기 위해 끊임없이
-                      그 동작을 복제하려 한다.
-                    </p>
-                    <p>
-                      모범 사례로 자주 언급되는 건{" "}
-                      <span className="text-text">이더리움</span>. Ethereum
-                      Foundation 은 의도적으로{" "}
-                      <span className="text-text">client diversity</span> 를
-                      목표로 잡고, 한 구현체에 hashrate/지분이 몰리지 않도록
-                      여러 client 를 직접 그랜트로 후원한다. 실행 client 만 해도
-                      Geth (Go), Nethermind (.NET), Besu (Java), Erigon (Go),
-                      Reth (Rust), 합의 client 도 Lighthouse, Prysm, Teku,
-                      Nimbus, Lodestar 다섯. ‘한 client 에 치명적 버그가 있어도
-                      네트워크의 절반 이상이 그 영향을 안 받게’ 라는 기준. 비트
-                      코인엔 이더리움만큼 강한 다중 클라이언트 문화가 없고,
-                      결과적으로 Bitcoin Core 가 노드 소프트웨어의 사실상 표준
-                      위치를 차지한다.
-                    </p>
-                    <Probe>
-                      만약 그 Bitcoin Core 에 치명적 버그가 있다면? 2018 년{" "}
-                      <span className="text-text">CVE-2018-17144</span>{" "}
-                      (‘inflation bug’) 는 같은 input 을 두 번 쓰는 트랜잭션을
-                      검증 단계에서 거부해야 하는데 일정 조건에서 그 검사를
-                      건너뛰는 버그였다. 악용됐다면 한 UTXO 를 여러 번 소비해
-                      ‘없는 코인’ 을 만들 수 있었음 → 21 M 발행 한도가 무너지는
-                      인플레이션. 다행히 패치 전에 발견·수정. 이 사건이 던진
-                      질문은 ‘단일 구현의 단일점 실패’ 와 ‘다양한 구현 사이에서
-                      합의가 갈라질 위험’ 중 어떤 트레이드오프를 감수할 것인가다.
-                    </Probe>
-                    <Reading label="검토 질문">
-                      ‘Don’t trust, verify’ 라는 비트코인의 모토가 코드 자체에
-                      는 어떻게 적용되나? 결국 누군가는 Core 코드를 신뢰해야
-                      한다. 코드 리뷰는 누가? Reproducible build 는 어떻게?
-                      자가 검증의 한계가 어디서 멈추는가.
-                    </Reading>
-                  </Reflection>
-                ),
-              },
-              {
-                title: "생각해보기", subtitle: "Bitcoin Core 거버넌스의 허점",
+                title: "생각해보기", subtitle: "비트코인은 탈중앙화된 시스템인데 코드는 누가 관리할까?",
                 body: <GovernanceReflection />,
               },
             ]}
@@ -100,32 +54,46 @@ export function L9NodeAnatomy(props: LayerProps) {
 
 function GovernanceReflection() {
   return (
-    <Reflection title="‘프로토콜은 누가 쓰는가’ · 거버넌스의 중앙화 허점">
+    <Reflection title="비트코인은 탈중앙화된 시스템인데 코드는 누가 관리할까?">
       <p>
-        비트코인 프로토콜은 백서가 아니라 코드로 정의된다. 그 코드의 사실상
-        표준이 Bitcoin Core 라는 한 저장소이고, 그 저장소에 직접 commit 할 수
-        있는 사람은 단{" "}
-        <span className="text-text">5 명 안팎의 maintainers</span> 다. 표면적으론{" "}
-        <Term id="bip">BIP</Term> 절차가 열려 있지만, 어떤 PR 이 merge 되고
-        어떤 BIP 가 release 에 포함될지의 게이트키핑은 이 소수가 사실상 쥐고
-        있다.
+        비트코인은 탈중앙화된 시스템이라고 한다. 하지만 실제 네트워크가 따르는
+        규칙은 결국 소프트웨어 코드로 구현된다. 현재 그 사실상의 표준 구현체는{" "}
+        <span className="text-text">Bitcoin Core</span> 이고, 대부분의 풀 노드는
+        이 코드를 기준으로 합의 규칙을 검증한다.
       </p>
       <p>
-        Bitcoin 코드 작성 풀도 좁다. 정기 contributor 는 수십 명 수준이고, 그
-        다수가 (Chaincode Labs, Spiral, Brink, Block 등) 특정 후원처에
-        의존한다는 점도 중요하다. 결국 ‘탈중앙 시스템의 프로토콜’ 이 실제로는{" "}
-        <span className="text-text">상대적으로 작은 코드·사람 풀에 묶여 있다</span>.
+        여기서 긴장이 생긴다. 누구나 코드를 읽고, fork 하고, 다른 구현체를 만들
+        수 있다. 그러나 Bitcoin Core 와 100% 같은 규칙으로 동작하지 않으면 같은
+        체인에 머물 수 없다. btcd, libbitcoin 같은 대체 구현체가 있어도 실제 운영
+        세계에서는 Bitcoin Core 의 동작을 정확히 복제해야 하는 압력이 크다.
       </p>
       <p>
-        ‘노드 운영자가 어느 버전을 돌릴지로 투표한다’ 는 명제는 이론상
-        맞지만, 대체 client 의 성숙도가 낮으면 실질 선택지가 없다. 결국 ‘Core
-        가 release 하면 따라간다’ 가 기본값이 된다. 이것이 ‘탈중앙’ 이 실제
-        운영에서 마주하는 한계다.
+        코드 관리도 완전히 흩어져 있지는 않다. Bitcoin Core 저장소에 직접 commit
+        할 수 있는 maintainer 는 소수이고, 정기 contributor 도 넓은 대중이라기보다
+        비교적 작은 전문가 집단이다. 표면적으로는 <Term id="bip">BIP</Term> 절차와
+        공개 PR 리뷰가 열려 있지만, 어떤 변경이 실제 release 에 포함될지는 이 작은
+        개발 생태계의 검토와 보수적 판단에 크게 의존한다.
+      </p>
+      <p>
+        이더리움은 이 문제에 다른 방식으로 대응한다. 실행 client 와 합의 client 를
+        여러 개 유지하고, 한 구현체에 지분이 과도하게 몰리지 않도록 client diversity
+        를 강조한다. 반면 비트코인은 다중 client 보다{" "}
+        <span className="text-text">단일 표준 구현의 예측 가능성</span> 을 더
+        중시해 왔다. 이것은 장점이기도 하고 위험이기도 하다.
       </p>
       <Probe>
-        Bitcoin 의 거버넌스가 ‘소수 maintainers + 후원 의존 contributor + 사실상
-        단일 client’ 라는 점은 51% 같은 채굴 공격보다 더 큰 장기 위험인가?
-        아니면 ‘느린·보수적 변경’ 이 오히려 안전성의 일부인가?
+        만약 Bitcoin Core 에 치명적 버그가 있다면 어떻게 될까? 2018 년
+        <span className="text-text"> CVE-2018-17144</span> 는 특정 조건에서
+        같은 input 을 두 번 쓰는 트랜잭션을 놓칠 수 있었던 버그였다. 악용됐다면
+        발행 한도 자체가 흔들릴 수 있었다. 다행히 패치 전에 발견됐지만, 이 사건은
+        단일 구현의 안정성과 다중 구현의 다양성 사이에 실제 트레이드오프가 있음을
+        보여준다.
+      </Probe>
+      <Probe>
+        “Don’t trust, verify” 는 코드에도 적용될 수 있을까? 노드 운영자는 이론상
+        자신이 돌릴 버전을 선택하지만, 실제로는 누군가의 코드 리뷰와 release 를
+        신뢰하게 된다. 이것은 비트코인의 결함일까, 아니면 보수적으로 천천히 변하는
+        시스템이 감수해야 하는 현실일까?
       </Probe>
       <Reading label="참고 논문">
         Bitcoin 의 ‘탈중앙도’ 를 학술적으로 분해 평가한 초기 작업으로 Arthur
@@ -400,21 +368,21 @@ function ComponentMap() {
         </defs>
 
         {/* Row labels · 행 사이 vertical gap 에 배치, 박스와 겹치지 않게 */}
-        <RowLabel y={14} text="외부" />
-        <RowLabel y={86} text="입출력" />
-        <RowLabel y={176} text="상태" />
-        <RowLabel y={276} text="영구" />
+        <RowLabel y={14} text="외부 연결" />
+        <RowLabel y={86} text="검증" />
+        <RowLabel y={176} text="현재 상태" />
+        <RowLabel y={276} text="영구 저장" />
 
         {/* Row 1 · 외부 */}
         <Box x={40} y={22} w={140} title="Network" />
         <Box x={420} y={22} w={140} title="RPC clients" />
 
-        {/* Row 2 · 입출력 */}
+        {/* Row 2 · 검증 */}
         <Box x={40} y={104} w={140} title="P2P stack" tone="accent2" />
         <Box x={230} y={104} w={140} title="Validator" tone="accent" />
         <Box x={420} y={104} w={140} title="RPC server" tone="accent2" />
 
-        {/* 외부 ↔ 입출력 · 박스 가장자리에서 시작·끝, 양방향은 x offset */}
+        {/* 외부 ↔ 검증 · 박스 가장자리에서 시작·끝, 양방향은 x offset */}
         <Arrow from={[103, 62]} to={[103, 104]} />
         <Arrow from={[117, 104]} to={[117, 62]} />
         <Arrow from={[483, 62]} to={[483, 104]} />
@@ -454,9 +422,9 @@ function RowLabel({ y, text }: { y: number; text: string }) {
     <text
       x={20}
       y={y}
-      fontSize="11"
+      fontSize="12"
       fill="#a0a8b8"
-      fontFamily="JetBrains Mono"
+      fontFamily="Inter, system-ui, sans-serif"
       fontWeight="500"
     >
       {text}
@@ -565,32 +533,31 @@ function ComponentMapGuide() {
           그림을 읽는 법
         </h4>
         <p className="text-[14px] text-text/80 leading-[1.7]">
-          노드 안의 모듈들을 네 가지 책임으로 행 (row) 을 나눠 그렸다. 위에서
-          아래로 갈수록 ‘바깥 세상 → 짧게 살아 있는 상태 → 영구히 디스크에
-          남는 것’ 순서.
+          이 그림은 노드 한 대가 외부 메시지를 받고, 검증하고, 자기 상태를
+          업데이트한 뒤, 필요한 데이터는 디스크에 남기는 흐름을 보여준다.
         </p>
       </div>
 
-      <div className="border border-edge divide-y divide-edge">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <RowExplain
-          label="외부"
+          label="외부 연결"
           tone="muted"
-          body="노드 입장에서 ‘바깥 세상’. 다른 풀 노드들 (네트워크 너머) 과 RPC 로 접속해 오는 클라이언트 (지갑, bitcoin-cli 같은 명령줄 도구) 두 종류. 노드는 이 둘과 직접 메시지를 주고받는다."
+          body="다른 풀 노드와는 P2P 로 통신하고, 지갑이나 bitcoin-cli 같은 도구는 RPC 로 접속한다. 노드는 이 두 통로를 통해 tx 와 블록을 받는다."
         />
         <RowExplain
-          label="입출력"
+          label="검증"
           tone="accent2"
-          body="외부 메시지를 받아 내부로 통역하고, 내부 결정을 외부로 내보내는 모듈들. P2P stack 이 네트워크 측, RPC server 가 클라이언트 측. 가운데 Validator 는 양쪽에서 받은 ‘이거 받아도 되나?’ 의 모든 판단을 한다 (노드의 두뇌)."
+          body="Validator 는 노드의 판단 담당이다. 받은 tx 나 블록이 합의 규칙을 만족하는지 확인하고, 통과한 것만 다음 단계로 넘긴다."
         />
         <RowExplain
-          label="상태"
+          label="현재 상태"
           tone="muted"
-          body="노드가 ‘지금 무엇이 사실인지’ 를 기억하는 자료구조. ChainState (현재 안 쓴 UTXO 셋), Block index (블록 헤더와 위치의 색인), Mempool (아직 블록에 안 들어간 검증된 tx 들). Validator 는 이 셋을 모두 읽고, 새 블록이 들어오면 셋 모두에 변경을 가한다."
+          body="ChainState, Block index, Mempool 은 노드가 지금 알고 있는 상태다. Validator 는 검증할 때 이 자료들을 읽고, 새 블록이 확정되면 내용을 갱신한다."
         />
         <RowExplain
-          label="영구"
+          label="영구 저장"
           tone="muted"
-          body="디스크에 사실상 영원히 쌓이는 데이터. Block files (블록 본체 모음) 와 Wallet (옵션, 키와 트랜잭션 기록) 이 여기에 해당한다. 노드를 껐다 켜도 보존되어야 하는 상태다."
+          body="Block files 는 블록 본체를 디스크에 저장한다. Wallet 은 선택 모듈이지만, 켜져 있다면 키와 내 거래 기록을 보관한다."
         />
       </div>
 
@@ -629,11 +596,10 @@ function ComponentMapGuide() {
         </div>
       </div>
 
-      <p className="text-[13px] text-text/65 leading-[1.7]">
-        그래서 그림의 화살표 의미 · 실선 (외부 ↔ 입출력, 입출력 ↔ Validator) 은
-        직접적인 메시지 흐름. 점선 (Validator ↔ 상태) 은 ‘검증 중에 읽고
-        결과로 쓴다’ 는 의존 관계. 영구 (Block files / Wallet) 는 상태 모듈
-        들이 디스크에 보존하는 결과물이라 화살표를 그리진 않았다.
+      <p className="text-[14px] text-text/65 leading-[1.7]">
+        실선 화살표는 메시지가 실제로 오가는 길이고, 점선은 Validator 가 검증 중에
+        읽거나 갱신하는 내부 상태를 뜻한다. Block files 와 Wallet 은 노드를 껐다
+        켜도 남아야 하는 데이터라 별도의 저장 영역으로 표시했다.
       </p>
     </div>
   );
@@ -650,11 +616,11 @@ function RowExplain({
 }) {
   const color = tone === "accent2" ? "text-accent2" : "text-accent";
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr] gap-3 px-4 py-3 items-baseline">
-      <div className={`text-[13px] font-semibold ${color}`}>
+    <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-1.5">
+      <div className={`text-[15px] font-medium leading-snug ${color}`}>
         {label}
       </div>
-      <div className="text-[13px] text-text/80 leading-[1.65]">{body}</div>
+      <div className="text-[14px] text-text/78 leading-[1.7]">{body}</div>
     </div>
   );
 }

@@ -135,10 +135,10 @@ function Op({
 }) {
   const c = tone === "accent" ? "text-accent" : "text-accent2";
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[110px_1fr] gap-3 px-4 py-3 items-baseline">
+    <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 px-4 py-3 items-start">
       <div className="space-y-0.5">
-        <div className={`font-mono text-[13px] ${c}`}>{name}</div>
-        <div className="text-[12px] text-muted font-medium">
+        <div className={`text-[15px] font-medium leading-snug ${c}`}>{name}</div>
+        <div className="text-[13px] text-muted">
           {sub}
         </div>
       </div>
