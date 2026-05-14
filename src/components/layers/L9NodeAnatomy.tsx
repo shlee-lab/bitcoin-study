@@ -300,8 +300,8 @@ function Opening() {
     <section className="space-y-5">
       <div>
         <p className="text-[17px] text-text/80 leading-[1.7]">
-          S1 ~ S9 까지 ‘비트코인이 어떻게 작동 가능한가’ 의 수학·암호·게임이론
-          그림을 봤다. 그럼 그 모든 추상적인 개념이 실제로{" "}
+          S1 ~ S9 에서는 비트코인이 작동하기 위해 필요한 개념적 구성을 확인했다.
+          그럼 그 추상적인 개념들이 실제로{" "}
           <span className="text-text">컴퓨터 한 대 위에서 무엇이 어떻게
           돌아가는가?</span>
         </p>
@@ -318,28 +318,28 @@ function Opening() {
 
       <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
-          <div>이론 (앞 레이어)</div>
-          <div>실제 (이 레이어에서 본다)</div>
+          <div>앞에서 배운 개념</div>
+          <div>노드 안의 실제 구성요소</div>
         </div>
         <div className="divide-y divide-edge text-sm">
           <BridgeRow
-            theory="‘UTXO 셋’"
+            theory="현재 쓰지 않은 출력들의 목록"
             real="현재 안 쓴 출력들의 키-값 저장소. 매 블록마다 수천 개 항목 추가·삭제."
           />
           <BridgeRow
-            theory="‘블록이 체인에 추가된다’"
+            theory="블록이 체인에 추가된다"
             real="여러 단계의 검증을 차례로 통과해야 노드가 받아들인다. 한 단계라도 실패하면 거부된다."
           />
           <BridgeRow
-            theory="‘노드가 다른 노드에 전파’"
+            theory="노드가 다른 노드에 전파한다"
             real="짧은 메시지 (inv → getdata → block) 가 ‘있어 / 줘 / 받아’ 로 흐름."
           />
           <BridgeRow
-            theory="‘처음 시작하면 자기가 검증’"
+            theory="처음 시작하면 직접 검증한다"
             real="첫 실행 시 0 번 블록부터 끝까지 다시 검증해 자기만의 상태를 짓는다."
           />
           <BridgeRow
-            theory="‘mempool’"
+            theory="아직 블록에 들어가지 않은 거래들"
             real="아직 블록에 안 들어간 tx 들을 메모리에 모아두는 자리. fee 순으로 정렬."
           />
         </div>
@@ -586,7 +586,7 @@ function ComponentMapGuide() {
         </h4>
         <div className="space-y-3">
           <div>
-            <div className="text-[13px] font-mono text-accent2 mb-1">
+            <div className="text-[15px] font-medium text-accent2 leading-snug mb-1.5">
               새 트랜잭션이 도착할 때
             </div>
             <p className="text-[14px] text-text/80 leading-[1.7]">
@@ -598,7 +598,7 @@ function ComponentMapGuide() {
             </p>
           </div>
           <div>
-            <div className="text-[13px] font-mono text-accent mb-1">
+            <div className="text-[15px] font-medium text-accent leading-snug mb-1.5">
               새 블록이 도착할 때
             </div>
             <p className="text-[14px] text-text/80 leading-[1.7]">

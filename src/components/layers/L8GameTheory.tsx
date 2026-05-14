@@ -124,6 +124,42 @@ export function L8GameTheory(props: LayerProps) {
                       그렇게 만드는 것이다.
                     </p>
                     <p>
+                      조금 더 강한 조건으로{" "}
+                      <span className="text-text">DSIC (dominant-strategy incentive compatibility)</span>
+                      가 있다. 다른 사람이 어떤 전략을 쓰든, 나에게는 정직하게
+                      행동하는 것이 항상 최선이라는 뜻이다. 블록체인에서는 이 질문이
+                      수수료 시장에도 바로 적용된다. 사용자가 얼마를 bid 해야 하고,
+                      채굴자나 validator 는 어떤 tx 를 포함해야 하며, 서로 담합하면
+                      규칙을 우회할 수 있는가를 따져야 하기 때문이다.
+                    </p>
+                    <Reading label="관련 연구">
+                      Tim Roughgarden 의{" "}
+                      <a
+                        href="https://arxiv.org/abs/2106.01340"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-text/85 underline decoration-edge underline-offset-4 hover:text-accent"
+                      >
+                        <em>“Transaction Fee Mechanism Design”</em>
+                      </a>{" "}
+                      (2021) 은 Bitcoin 과 Ethereum 의 수수료 시장을 mechanism
+                      design 문제로 다룬다. 관련 보고서{" "}
+                      <a
+                        href="https://arxiv.org/abs/2012.00854"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-text/85 underline decoration-edge underline-offset-4 hover:text-accent"
+                      >
+                        <em>“An Economic Analysis of EIP-1559”</em>
+                      </a>
+                      는 Ethereum 의 EIP-1559 를 분석하며,
+                      기존 first-price auction 과 달리 base fee 소각, tip, 가변
+                      블록 크기가 사용자와 블록 생산자의 인센티브를 어떻게 바꾸는지
+                      설명한다. 논문은 EIP-1559 가 특정 조건에서 DSIC 를 만족하고,
+                      miner 의 조작과 off-chain collusion 에 대해서도 별도 조건
+                      (MMIC, OCA-proofness) 으로 분석할 수 있음을 보인다.
+                    </Reading>
+                    <p>
                       비슷한 패턴은 다른 분산 시스템에서도 보인다. Tor 의 relay
                       운영자, BitTorrent 의 tit-for-tat, 위키의 reputation,
                       Stack Overflow 의 점수 시스템은 모두 개인의 이익이나 평판을
@@ -137,9 +173,13 @@ export function L8GameTheory(props: LayerProps) {
                       행위자 앞에서는 어떤 한계가 생길까?
                     </Probe>
                     <Reading label="이론 배경">
-                      Mechanism Design. Hurwicz, Maskin, Myerson 의 연구로 대표되는
-                      분야이며, 원하는 결과가 나오도록 규칙과 보상을 설계하는 문제를
-                      다룬다.
+                      Game theory 는 여러 참여자가 서로의 선택을 고려해 행동하는
+                      상황을 분석한다. Mechanism Design 은 한 걸음 더 나아가, 원하는
+                      결과가 나오도록 규칙과 보상 구조를 설계하는 분야다. Algorithmic
+                      game theory 는 여기에 컴퓨터과학을 결합해, 경매·네트워크·분산
+                      프로토콜처럼 실제 알고리즘으로 돌아가는 전략적 시스템을 다룬다.
+                      Roughgarden 의 수수료 메커니즘 연구는 이 세 영역이 블록체인에서
+                      만나는 대표 사례다.
                     </Reading>
                   </Reflection>
                 ),
