@@ -175,12 +175,12 @@ export function L7Mining(props: LayerProps) {
                 ),
               },
               {
-                title: "역사적 reorg 사례", subtitle: "채굴 경쟁의 비정상 사건들",
+                title: "사슬이 실제로 뒤집힌 사건들", subtitle: "깊은 reorg 가 일어난 이유",
                 level: "case",
                 body: (
                   <Section
-                    heading="역사적 reorg 사례"
-                    sub="채굴 경쟁이 ‘비정상’ 으로 흘러 깊은 reorg 가 일어났던 몇 안 되는 사례. 모두 악의적 51% 공격이 아니라 버그·운영 사고였다."
+                    heading="사슬이 실제로 뒤집힌 사건들"
+                    sub="깊은 reorg 는 이론으로만 존재하는 현상이 아니다. 다만 아래 사례들은 악의적 51% 공격이 아니라, 버그·운영 사고·검증 생략이 겹치며 생긴 사건에 가깝다."
                   >
                     <ReorgHistory />
                   </Section>

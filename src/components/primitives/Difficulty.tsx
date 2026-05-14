@@ -55,7 +55,24 @@ export function DifficultyBody() {
         <AdjustmentExamples />
       </Section>
 
-      <Section title="④ 왜 4× 제한?">
+      <Section title="④ 다른 체인은 어떻게 조정할까?">
+        <p>
+          비트코인처럼 2016 블록 단위로 난이도를 조정하는 방식만 있는 것은 아니다.
+          Monero 는 매 블록 최근 구간을 다시 보며 난이도를 조정해 해시레이트
+          변화에 빠르게 반응하고, Ethereum 도 PoW 시절에는 거의 매 블록 난이도를
+          다시 계산했다.
+        </p>
+        <ChainComparison />
+        <p className="text-sm text-muted">
+          조정 주기가 짧으면 네트워크 상황을 빨리 반영해 블록 간격이 오래 흔들리지
+          않는다는 장점이 있다. 반대로 조정 규칙이 너무 민감하거나 예측 가능하면,
+          블록 공개를 늦추는 전략이나 timestamp 를 이용한 전략이 난이도 변화와
+          결합될 수 있다. 뒤의 게임이론 섹션에서 다룰 selfish mining 은 이런
+          “채굴자가 정직하게 바로 공개하지 않을 때” 생기는 인센티브 문제를 다룬다.
+        </p>
+      </Section>
+
+      <Section title="⑤ 왜 4× 제한?">
         <p>
           누군가 갑자기 hashrate 를 100× 늘렸다고 거짓말 하는 헤더를 만들기
           어렵게 만든다. 그리고 한 사이클에서 너무 큰 변화는 시스템 안정성에도
@@ -186,6 +203,50 @@ function AdjustmentExamples() {
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+function ChainComparison() {
+  const rows = [
+    {
+      chain: "Bitcoin",
+      interval: "2016 블록마다",
+      point: "느리지만 단순하고 예측 가능하다. 급격한 변화는 4× cap 으로 제한한다.",
+    },
+    {
+      chain: "Monero",
+      interval: "매 블록 조정",
+      point: "최근 블록 구간을 반영해 해시레이트 변화에 빠르게 반응한다. 대신 조정 규칙의 세부 설계가 더 중요해진다.",
+    },
+    {
+      chain: "Ethereum PoW",
+      interval: "거의 매 블록 조정",
+      point: "블록 간격을 빠르게 보정했다. PoW 시절에는 난이도 폭탄 같은 별도 규칙도 함께 있었다.",
+    },
+  ];
+
+  return (
+    <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
+      <div className="hidden sm:grid grid-cols-[130px_140px_1fr] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+        <div>체인</div>
+        <div>조정 주기</div>
+        <div>핵심</div>
+      </div>
+      <div className="divide-y divide-edge">
+        {rows.map((row) => (
+          <div
+            key={row.chain}
+            className="grid grid-cols-1 sm:grid-cols-[130px_140px_1fr] gap-1.5 sm:gap-3 px-4 py-3"
+          >
+            <div className="font-medium text-text">{row.chain}</div>
+            <div className="text-[13px] text-accent2">{row.interval}</div>
+            <div className="text-[13px] text-text/78 leading-relaxed">
+              {row.point}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
