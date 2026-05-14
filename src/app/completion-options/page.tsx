@@ -101,6 +101,47 @@ export default function CompletionOptionsPage() {
             </div>
           </div>
         </section>
+
+        <section className="border-t border-edge pt-9 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8">
+            <div className="text-[16px] font-semibold text-text">
+              A안 세부 디자인
+            </div>
+            <div className="space-y-3">
+              <p className="text-[15px] text-text/75 leading-[1.75] max-w-3xl">
+                A안은 팝업이 아니라 마지막 학습 섹션 하단에 붙는 완료 패널로
+                구현하는 것이 좋습니다. 아래는 같은 메시지를 유지하되 버튼과
+                후원 영역의 무게감을 다르게 둔 세부 옵션입니다.
+              </p>
+              <div className="text-[14px] text-text/60 leading-[1.7]">
+                추천은 <span className="text-text">A-2</span>입니다. 버튼은 조용하지만
+                클릭 가능성이 분명하고, 후원 정보가 학습 완료 메시지를 방해하지
+                않습니다.
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <DetailOption
+              id="A-1"
+              name="단정한 CTA"
+              note="가장 기본적인 형태. 홈 버튼을 명확하게 보여준다."
+              preview={<CompletionDetailClassic />}
+            />
+            <DetailOption
+              id="A-2"
+              name="조용한 액션 바"
+              note="추천. 버튼의 존재감은 유지하되 광고 같은 느낌을 줄인다."
+              preview={<CompletionDetailQuiet />}
+            />
+            <DetailOption
+              id="A-3"
+              name="요약 + 다음 예고"
+              note="마지막에 배운 내용을 다시 정리하고 다음 코스를 조금 더 강조한다."
+              preview={<CompletionDetailSummary />}
+            />
+          </div>
+        </section>
       </div>
     </main>
   );
@@ -297,11 +338,150 @@ function CompletionActions() {
   );
 }
 
-function SupportMini() {
+function DetailOption({
+  id,
+  name,
+  note,
+  preview,
+}: {
+  id: string;
+  name: string;
+  note: string;
+  preview: React.ReactNode;
+}) {
+  return (
+    <article className="border border-edge bg-surface/25">
+      <div className="p-4 border-b border-edge space-y-2">
+        <div className="flex items-center justify-between gap-3">
+          <div className="text-[13px] font-semibold text-accent">{id}</div>
+          <div className="text-[12px] text-muted">완료 패널</div>
+        </div>
+        <h3 className="text-[18px] font-semibold text-text">{name}</h3>
+        <p className="text-[13px] text-text/60 leading-[1.6]">{note}</p>
+      </div>
+      <div className="p-4 bg-bg/35">{preview}</div>
+    </article>
+  );
+}
+
+function CompletionDetailClassic() {
+  return (
+    <div className="border border-edge bg-surface/35 p-5 space-y-5">
+      <CompletionBadge text="Bitcoin Study 완료" />
+      <CompletionCopy />
+      <NextNotice compact />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center gap-2 bg-accent text-bg px-4 py-2.5 text-[14px] font-medium hover:bg-accent/90 transition-colors"
+        >
+          <HomeIcon small />
+          홈으로 돌아가기
+        </Link>
+        <Link
+          href="/learn"
+          className="inline-flex items-center justify-center border border-edge px-4 py-2.5 text-[14px] font-medium text-text/78 hover:text-text hover:border-accent/60 transition-colors"
+        >
+          처음부터 다시 보기
+        </Link>
+      </div>
+      <SupportMini compact />
+    </div>
+  );
+}
+
+function CompletionDetailQuiet() {
+  return (
+    <div className="border-y border-edge bg-bg/20 py-6 space-y-5">
+      <div className="px-1 space-y-4">
+        <CompletionBadge text="학습 완료" />
+        <CompletionCopy />
+      </div>
+      <div className="border border-edge bg-surface/25 p-4">
+        <div className="text-[14px] font-semibold text-text">
+          다음 콘텐츠는 준비 중입니다
+        </div>
+        <p className="text-[13px] text-text/65 leading-[1.65] mt-1">
+          Ethereum 과 Consensus 중심의 주제를 추후 추가할 예정입니다.
+        </p>
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <Link
+          href="/"
+          className="inline-flex h-10 items-center gap-2 border border-accent/70 px-3.5 text-[14px] font-medium text-accent hover:bg-accent hover:text-bg transition-colors"
+        >
+          <HomeIcon small />
+          홈으로 돌아가기
+        </Link>
+        <Link
+          href="/learn"
+          className="inline-flex h-10 items-center border border-edge px-3.5 text-[14px] font-medium text-text/68 hover:text-text hover:border-edge/90 transition-colors"
+        >
+          처음부터 다시 보기
+        </Link>
+      </div>
+      <SupportInline />
+    </div>
+  );
+}
+
+function CompletionDetailSummary() {
+  return (
+    <div className="border border-edge bg-surface/35 p-5 space-y-5">
+      <CompletionBadge text="학습 완료" />
+      <CompletionCopy />
+      <div className="grid grid-cols-1 gap-2">
+        <MiniSummary title="이제 설명할 수 있는 것" text="UTXO, 서명, tx, 블록, PoW, 노드 검증, 프라이버시와 확장성의 tradeoff" />
+        <MiniSummary title="다음에 이어질 것" text="Ethereum, Smart Contract, Consensus, PoS와 validator 설계" />
+      </div>
+      <div className="flex items-center justify-between gap-3 border-t border-edge pt-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-[14px] font-medium text-text hover:text-accent transition-colors"
+        >
+          <HomeIcon small />
+          홈으로 돌아가기
+        </Link>
+        <Link
+          href="/learn"
+          className="text-[14px] font-medium text-muted hover:text-text transition-colors"
+        >
+          다시 보기
+        </Link>
+      </div>
+      <SupportMini compact />
+    </div>
+  );
+}
+
+function CompletionCopy() {
+  return (
+    <div className="space-y-3">
+      <h3 className="text-[24px] font-semibold leading-tight text-text">
+        여기까지 따라왔다면 Bitcoin 의 핵심 구조를 설명할 수 있습니다.
+      </h3>
+      <p className="text-[14px] text-text/70 leading-[1.7]">
+        주소, 서명, 트랜잭션, 블록, 채굴, 노드, 확장성, 프라이버시가 하나의
+        송금 안에서 어떻게 연결되는지 확인했습니다.
+      </p>
+    </div>
+  );
+}
+
+function MiniSummary({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="border border-edge bg-bg/35 p-3">
+      <div className="text-[13px] font-semibold text-text">{title}</div>
+      <div className="text-[12px] text-text/58 leading-[1.55] mt-1">{text}</div>
+    </div>
+  );
+}
+
+function SupportMini({ compact }: { compact?: boolean }) {
   return (
     <div className="border-t border-edge pt-4">
       <div className="flex items-start gap-3">
-        <CoffeeMini />
+        {!compact ? <CoffeeMini /> : null}
         <div className="min-w-0">
           <div className="text-[13px] font-semibold text-text/85">
             도움이 되었다면 커피 한 잔으로 응원할 수 있습니다
@@ -314,6 +494,15 @@ function SupportMini() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function SupportInline() {
+  return (
+    <div className="border-t border-edge pt-4 text-[12px] text-text/58 leading-[1.6]">
+      <span className="text-text/78 font-medium">후원</span> · Ethereum / ERC-20 ·{" "}
+      <span className="break-all">{ETH_ADDRESS}</span>
     </div>
   );
 }
