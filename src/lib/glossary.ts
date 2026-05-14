@@ -171,6 +171,10 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     term: "double-SHA256",
     def: "SHA-256 을 두 번 연달아 적용. SHA256(SHA256(x)). 비트코인 블록 헤더 해시·트랜잭션 ID 등에 사용.",
   },
+  "merkle-damgard": {
+    term: "Merkle-Damgard construction",
+    def: "긴 메시지를 일정 크기 블록으로 나눈 뒤, 압축 함수의 결과를 다음 블록의 입력으로 이어 붙여 최종 해시를 만드는 고전적 해시 함수 구조. SHA-256 이 이 계열이다. 최종 해시가 내부 상태처럼 드러나기 때문에 length-extension attack 을 고려해야 한다.",
+  },
   bech32: {
     term: "Bech32",
     def: "BIP173 의 주소 인코딩. SegWit v0 주소 (bc1q…) 에 사용. base32 알파벳 + BCH 코드 기반 강한 체크섬으로 오타 방지.",

@@ -1373,7 +1373,7 @@ function HashChoice() {
         </h3>
         <p className="text-[15px] text-text/80 leading-[1.7]">
           SHA-256 은{" "}
-          <span className="text-text">Merkle–Damgård</span> 구조다. 이 구조엔
+          <Term id="merkle-damgard">Merkle-Damgard 구조</Term>다. 이 구조엔
           유명한 약점이 하나 있다.{" "}
           <span className="text-text">length-extension attack</span>.
         </p>
@@ -1403,7 +1403,7 @@ function HashChoice() {
         <p className="text-[15px] text-text/80 leading-[1.7]">
           이더리움 (2015 출시) 은 이 시점에 등장한 새 해시 패밀리{" "}
           <span className="text-text">Keccak</span> 을 채택했다. Keccak 은
-          Merkle–Damgård 가 아니라{" "}
+          <Term id="merkle-damgard">Merkle-Damgard</Term> 가 아니라{" "}
           <span className="text-text">sponge construction</span> 기반.
         </p>
         <p className="text-[14px] text-text/75 leading-[1.7]">
