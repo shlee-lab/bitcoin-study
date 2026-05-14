@@ -19,7 +19,6 @@ export function L8GameTheory(props: LayerProps) {
               {
                 title: "Pooled mining",
                 subtitle: "share, partial PoW, 풀 시장 분포",
-                level: "deep",
                 body: (
                   <section className="space-y-5">
                     <p className="text-[17px] text-text/80 leading-[1.75]">
@@ -495,7 +494,7 @@ function SelfishDiagram() {
   // 1: 공격자가 N+1' 을 비밀로 채굴
   // 2: 정직이 N+1 채굴 · 공격자도 N+2' 까지 비밀로 (lead 2)
   // 3: 정직이 N+2 채굴 · 공격자도 N+3' 비밀 (lead 2 유지)
-  // 4: 공격자 사슬 공개 → 정직 N+1, N+2 무효화
+  // 4: 공격자 체인 공개 → 정직 N+1, N+2 무효화
   const TOTAL = 5;
   const STEP_MS = 2200;
   const [step, setStep] = useState(0);
@@ -526,14 +525,14 @@ function SelfishDiagram() {
     "공격자가 N+1' 을 먼저 찾았다. 그러나 공개하지 않고 숨김 (private lead 1).",
     "정직이 N+1 을 공개. 동시에 공격자는 비밀로 N+2' 까지 키움 (private lead 2).",
     "정직이 N+2 추가. 공격자도 N+3' 비밀 채굴 · 여전히 더 길다.",
-    "공격자가 비밀 사슬을 한꺼번에 broadcast. most-work 규칙으로 공격자 사슬이 채택되고, 정직 N+1·N+2 는 orphan 이 된다.",
+    "공격자가 비밀 체인을 한꺼번에 broadcast. most-work 규칙으로 공격자 체인이 채택되고, 정직 N+1·N+2 는 orphan 이 된다.",
   ];
 
   return (
     <div className="border border-edge bg-surface/30 p-4 space-y-3">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="text-[14px] font-semibold text-muted">
-          Selfish mining · 두 사슬의 경쟁 (시뮬레이션)
+          Selfish mining · 두 체인의 경쟁 (시뮬레이션)
         </div>
         <div className="flex items-center gap-2 text-[11px] font-mono">
           <div className="flex items-center gap-1">
@@ -613,7 +612,7 @@ function SelfishDiagram() {
           fontFamily="Inter, system-ui, sans-serif"
           fontWeight="500"
         >
-          공개 사슬
+          공개 체인
         </text>
         <text
           x={16}
@@ -769,7 +768,7 @@ function SelfishDiagram() {
             fontFamily="JetBrains Mono"
             fontWeight="500"
           >
-            공격자 사슬
+            공격자 체인
           </text>
           <text
             x={535}
@@ -838,7 +837,7 @@ function ChainBlock({
     tone === "accent2" ? "#5b8def" : tone === "warn" ? "#f76b6b" : "#a0a8b8";
   const w = 70;
   const h = 30;
-  // highlight (공격자 사슬 공개 채택 시점) 일 때 fill 살짝 채우기, faded (orphan 정직 블록) 일 때 opacity ↓
+  // highlight (공격자 체인 공개 채택 시점) 일 때 fill 살짝 채우기, faded (orphan 정직 블록) 일 때 opacity ↓
   const opacity = faded ? 0.4 : 1;
   const fill = highlight ? "#f7931a18" : "#0d0f14";
   const finalStroke = highlight ? "#f7931a" : stroke;
@@ -897,8 +896,8 @@ function SelfishMechanic() {
         </li>
         <li>
           <span className="text-muted font-mono text-xs mr-2">2.</span> 정직
-          네트워크가 따라붙어 두 사슬의 길이가 같아지려는 순간 비공개 사슬을
-          공개한다. 그러면 most-work 규칙에 따라 공격자 사슬이 채택될 수 있다.
+          네트워크가 따라붙어 두 체인의 길이가 같아지려는 순간 비공개 체인을
+          공개한다. 그러면 most-work 규칙에 따라 공격자 체인이 채택될 수 있다.
         </li>
         <li>
           <span className="text-muted text-xs mr-2">3.</span> 공격자
@@ -914,7 +913,7 @@ function SelfishMechanic() {
             ① 상대방의 채굴 이득을 무효화한다
           </h5>
           <p className="text-[14px] text-text/80 leading-[1.7]">
-            공격자 사슬이 채택되는 순간 정직 채굴자가 같은 시간 동안 찾았던
+            공격자 체인이 채택되는 순간 정직 채굴자가 같은 시간 동안 찾았던
             블록 (위 그림의 N+1, N+2) 은 모두{" "}
             <Term id="orphan-block">orphan</Term> 이 된다. 그 안에 있던{" "}
             <span className="text-text">coinbase + fee 보상</span> 은
@@ -932,8 +931,8 @@ function SelfishMechanic() {
           <p className="text-[14px] text-text/80 leading-[1.7]">
             비트코인은 매 2016 블록마다 ‘그 2016 개를 만드는 데 걸린 실제
             시간’ 으로 다음 시기 난이도를 조절한다 (10 분에 한 개 유지). selfish
-            mining 이 일어나면 일부 hashrate 가 ‘나중에 버려질 사슬’ 에 낭비되므로
-            최종 채택되는 사슬의 진행 속도가 실제로 느려지고, 다음 epoch 에서{" "}
+            mining 이 일어나면 일부 hashrate 가 ‘나중에 버려질 체인’ 에 낭비되므로
+            최종 채택되는 체인의 진행 속도가 실제로 느려지고, 다음 epoch 에서{" "}
             <span className="text-text">난이도가 낮춰진다</span>. 낮아진 난이도
             아래서는 같은 hashrate 로 더 많은 블록을 만들 수 있다. 공격자는 이미
             자기 보상 비율도 올렸기 때문에, 절대 보상과 시간당 보상 모두 정직

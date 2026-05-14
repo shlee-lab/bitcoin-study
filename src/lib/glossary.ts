@@ -241,7 +241,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
   },
   pow: {
     term: "PoW · Proof of Work",
-    def: "작업 증명. 정해진 난이도의 해시 퍼즐을 푼 채굴자가 다음 블록을 만들 권한을 가진다. ‘들인 계산량’ 자체가 사슬의 보안.",
+    def: "작업 증명. 정해진 난이도의 해시 퍼즐을 푼 채굴자가 다음 블록을 만들 권한을 가진다. ‘들인 계산량’ 자체가 체인의 보안.",
   },
   "merkle-tree": {
     term: "머클 트리 (Merkle tree)",
@@ -329,7 +329,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
   },
   "selfish-mining": {
     term: "selfish mining",
-    def: "찾은 블록을 곧장 공개하지 않고 비밀 사슬을 키우다 전략적으로 던져 정직한 네트워크 작업을 헛수고로 만드는 채굴 전략. 임계 hashrate (≈25-33%) + 강한 연결성 필요.",
+    def: "찾은 블록을 곧장 공개하지 않고 비밀 체인을 키우다 전략적으로 던져 정직한 네트워크 작업을 헛수고로 만드는 채굴 전략. 임계 hashrate (≈25-33%) + 강한 연결성 필요.",
   },
   lamport: {
     term: "Leslie Lamport",

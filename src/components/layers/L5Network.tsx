@@ -155,7 +155,7 @@ export function L5Network(props: LayerProps) {
                       그 차단은 어려워진다.
                     </p>
                     <p>
-                      반대로 노드가 적으면? 정부·기업이 ‘진짜 사슬’ 의 정의를
+                      반대로 노드가 적으면? 정부·기업이 ‘진짜 체인’ 의 정의를
                       바꾸는 압력을 가하기 쉬워진다. 분산성은 단순히 채굴자 분포
                       가 아니라{" "}
                       <span className="text-text">검증자 분포</span> 의 문제.
@@ -169,7 +169,7 @@ export function L5Network(props: LayerProps) {
                     </Probe>
                     <Reading label="검색 키워드">
                       Eclipse attack (한 노드를 악의적 peer 로 포위해 가짜
-                      사슬을 보여주기), Erlay (P2P 트래픽 효율 개선 제안).
+                      체인을 보여주기), Erlay (P2P 트래픽 효율 개선 제안).
                       분산 네트워크 자체의 보안성도 활발한 연구 영역.
                     </Reading>
                   </Reflection>
@@ -394,7 +394,7 @@ function NetworkAnim({ onClickNode }: { onClickNode: (key: string) => void }) {
         </div>
       </div>
       <div className="px-1 pt-2 text-xs text-muted text-center font-mono">
-        주황 점 = 가십 메시지 · 노드 클릭 → 모든 노드가 합의하는 사슬(S7)로
+        주황 점 = 가십 메시지 · 노드 클릭 → 모든 노드가 합의하는 체인(S7)으로
       </div>
     </div>
   );
@@ -481,8 +481,8 @@ function DistributedThesis() {
         />
         <ThesisCard
           n="③"
-          title="합의 = 다수가 같은 사슬"
-          body="같은 규칙 (consensus rules) 을 따르는 노드들이 같은 사슬에 도달한다. 룰이 다르면 다른 사슬로 갈라지고, 이것이 fork 다. 다음 레이어들은 이런 갈림을 안전하게 수렴시키는 방법을 다룬다."
+          title="합의 = 다수가 같은 체인"
+          body="같은 규칙 (consensus rules) 을 따르는 노드들이 같은 체인에 도달한다. 룰이 다르면 다른 체인으로 갈라지고, 이것이 fork 다. 다음 레이어들은 이런 갈림을 안전하게 수렴시키는 방법을 다룬다."
           tone="accent"
         />
       </div>
@@ -624,7 +624,7 @@ function ByzantineGenerals() {
         <p className="text-[14px] text-text/70 leading-[1.7]">
           이 모델의 보안 한계: 정직한 채굴자의 hashrate 합이 50% 를 넘는 한 안전.
           이 ‘50% 가정’ 이 비트코인 보안의 핵심 가설. PoW 자체는 다음 두 레이어
-          (S7 사슬 / S8 채굴) 에서 자세히.
+          (S7 블록체인 / S8 채굴) 에서 자세히.
         </p>
       </div>
     </section>
@@ -922,12 +922,12 @@ function WhyManyNodes() {
         <ThreatCard
           name="Eclipse 공격"
           short="한 노드를 가짜 peer 로 둘러싸기"
-          body="피해자 노드의 8 개 outbound + 117 개 inbound 슬롯을 공격자 IP 로 모두 차지하면, 그 노드는 ‘공격자 우주’ 에서 살게 된다. 이 경우 가짜 사슬과 이중지출이 가능해진다. 노드 수가 많고 IP 다양성이 클수록 공격은 어려워진다."
+          body="피해자 노드의 8 개 outbound + 117 개 inbound 슬롯을 공격자 IP 로 모두 차지하면, 그 노드는 ‘공격자 우주’ 에서 살게 된다. 이 경우 가짜 체인과 이중지출이 가능해진다. 노드 수가 많고 IP 다양성이 클수록 공격은 어려워진다."
         />
         <ThreatCard
           name="국가급 검열"
           short="ISP·국경에서 트래픽 차단"
-          body="중국 GFW 처럼 비트코인 P2P 포트(8333)를 차단하면? Tor·I2P 위 노드, 위성 (Blockstream Satellite), 메시 네트워크 (Goldfish/LoRa) 가 우회 경로. 노드 분포가 한 나라·한 ISP 에 몰리면 한 정부가 사슬을 잘라낼 수 있다."
+          body="중국 GFW 처럼 비트코인 P2P 포트(8333)를 차단하면? Tor·I2P 위 노드, 위성 (Blockstream Satellite), 메시 네트워크 (Goldfish/LoRa) 가 우회 경로. 노드 분포가 한 나라·한 ISP 에 몰리면 한 정부가 체인을 잘라낼 수 있다."
           tone="accent"
         />
         <ThreatCard
@@ -944,7 +944,7 @@ function WhyManyNodes() {
         <div className="divide-y divide-edge text-sm">
           <NodeCountRow
             n="~ 1,000"
-            outcome="중앙화 클러스터에 가깝다. 정부나 대기업이 마음먹으면 사슬을 통제할 수 있어, 은행과 크게 다르지 않은 시스템이 된다."
+            outcome="중앙화 클러스터에 가깝다. 정부나 대기업이 마음먹으면 체인을 통제할 수 있어, 은행과 크게 다르지 않은 시스템이 된다."
             tone="bad"
           />
           <NodeCountRow
@@ -1062,7 +1062,7 @@ function SystemContrast() {
         <ContrastCard
           mode="분산 시스템 (peer-to-peer)"
           examples="비트코인, BitTorrent, Tor, mesh net"
-          truth="‘진실’ = 다수 노드의 합의된 사슬"
+          truth="‘진실’ = 다수 노드의 합의된 체인"
           fail="노드 일부 죽어도 계속 동작"
           censor="모든 노드를 동시에 막아야 차단 가능"
           tone="accent"

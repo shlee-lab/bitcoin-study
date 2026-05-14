@@ -26,7 +26,7 @@ export function L6Blockchain(props: LayerProps) {
                       에게 전해진다고 끝이 아니다. 시간이 지나며{" "}
                       <span className="text-text">블록이 계속 추가되는데</span>,
                       그 블록들이 어떻게 한 줄로 묶여 ‘되돌릴 수 없게’ 되는가.
-                      이렇게 이어진 블록들의 사슬을{" "}
+                      이렇게 이어진 블록들의 체인을{" "}
                       <span className="text-text">블록체인</span> 이라고 부른다.
                     </p>
                     <p className="text-[15px] text-text/70 leading-[1.7]">
@@ -90,7 +90,7 @@ export function L6Blockchain(props: LayerProps) {
                 subtitle: "일시적 분기와 규칙 변경",
                 body: (
                   <Section
-                    heading="fork · 사슬이 갈라지는 두 가지 경우"
+                    heading="fork · 체인이 갈라지는 두 가지 경우"
                     sub="fork 는 한 단어지만 맥락이 둘이다. 하나는 전파 지연 때문에 같은 높이에 두 블록 후보가 생기는 일시적 fork 다. 다른 하나는 검증 규칙 자체가 바뀌어 네트워크가 다른 규칙을 따르게 되는 protocol fork 다."
                   >
                     <ForkScenario />
@@ -545,7 +545,7 @@ function ForkTypes() {
         kind="Hard fork"
         line="새 규칙이 기존엔 무효였던 블록을 유효하게 한다 (혹은 그 반대)."
         ex="Bitcoin Cash 분리 (2017), Bitcoin SV (2018)"
-        compat="구버전 노드는 새 블록을 거부 → 사슬이 영구히 둘로 갈림. NOT backward-compatible."
+        compat="구버전 노드는 새 블록을 거부 → 체인이 영구히 둘로 갈림. NOT backward-compatible."
         tone="accent"
       />
     </div>
@@ -586,7 +586,7 @@ function GenesisPrimer() {
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
       <div className="px-4 py-2.5 border-b border-edge">
         <div className="text-[13px] font-semibold text-accent2 leading-snug">
-          Genesis block · 사슬의 기준점
+          Genesis block · 체인의 기준점
         </div>
         <div className="text-[13px] text-muted mt-1 leading-relaxed">
           모든 블록은 직전 블록의 해시를 가리키지만, 첫 블록만은 예외다.
@@ -594,7 +594,7 @@ function GenesisPrimer() {
       </div>
       <div className="p-4 space-y-3">
         <p className="text-[14px] text-text/85 leading-[1.7]">
-          <span className="text-text">Genesis block</span> 은 비트코인 사슬의 첫
+          <span className="text-text">Genesis block</span> 은 비트코인 체인의 첫
           블록, 즉 block height 0 이다. 이전 블록이 없으므로{" "}
           <code className="font-mono text-text">prev_block_hash</code> 는 0 으로
           채워진다. 모든 노드는 이 블록을 출발점으로 삼아 그 뒤에 붙은 블록들이
@@ -636,12 +636,12 @@ function DAOHack() {
     },
     {
       when: "2016-07-20",
-      what: "block #1 920 000 에서 hard fork 적용. 도난 자금이 회수 가능한 별도 컨트랙트로 옮겨짐. 다수 hashrate 와 거래소가 fork 사슬을 ‘ETH’ 로 채택.",
+      what: "block #1 920 000 에서 hard fork 적용. 도난 자금이 회수 가능한 별도 컨트랙트로 옮겨짐. 다수 hashrate 와 거래소가 fork 체인을 ‘ETH’ 로 채택.",
       tone: "accent" as const,
     },
     {
       when: "2016-07 ~",
-      what: "fork 를 거부하고 원래 사슬을 그대로 유지한 소수파가 ‘Ethereum Classic (ETC)’ 으로 분리. 두 체인이 영구히 공존.",
+      what: "fork 를 거부하고 원래 체인을 그대로 유지한 소수파가 ‘Ethereum Classic (ETC)’ 으로 분리. 두 체인이 영구히 공존.",
       tone: "accent2" as const,
     },
   ];
@@ -683,7 +683,7 @@ function DAOHack() {
           <p className="text-text/85 leading-relaxed">
             특정 블록 높이 이후, 도난당한 ETH 의 잔액을 강제로 옮기는 새 검증
             규칙이 도입됐다. 구버전 노드는 이 ‘비정상적’ 잔액 변경을 거부하므로
-            새 규칙을 따르는 사슬과 기존 규칙을 따르는 사슬이 영구적으로 갈라진다.
+            새 규칙을 따르는 체인과 기존 규칙을 따르는 체인이 영구적으로 갈라진다.
           </p>
         </div>
         <div className="rounded-sm border border-edge bg-surface/20 p-4 space-y-2">
@@ -712,7 +712,7 @@ function MostWorkRule() {
           비트코인의 포크 선택 규칙은 흔히{" "}
           <span className="text-text">Longest chain rule</span> 이라고 소개된다.
           다만 여기서 ‘longest’ 는 단순히 블록 개수가 많다는 뜻이 아니다. 실제 규칙은{" "}
-          <span className="text-text">‘쌓인 작업량 (cumulative work) 이 가장 많은 사슬’</span>{" "}
+          <span className="text-text">‘쌓인 작업량 (cumulative work) 이 가장 많은 체인’</span>{" "}
           이다. 둘이 보통은 같지만, 난이도가 다른 두 갈래가 만나면 결과가
           달라진다.
         </p>
@@ -723,13 +723,13 @@ function MostWorkRule() {
           블록 헤더의 <code className="font-mono">bits</code> 필드는 그 블록을
           만들 때의 target 을 압축한 값. 거기서{" "}
           <code className="font-mono">work = 2²⁵⁶ / target</code> 으로 한 블록의
-          기여 작업량이 나온다. 사슬의 work 는 그 값들의 누적합이다. 노드는 두
-          후보 사슬 중 work 누적합이 큰 쪽을 택한다.
+          기여 작업량이 나온다. 체인의 work 는 그 값들의 누적합이다. 노드는 두
+          후보 체인 중 work 누적합이 큰 쪽을 택한다.
         </p>
         <p className="text-text/70">
           이 차이가 드러나는 시나리오: 어떤 채굴자가 난이도 조정 직전에 다수
-          블록을 빠르게 캐서 길이는 길지만 work 합이 더 작은 사슬을 만들었다면,
-          정직한 다수가 따르는 더 짧지만 누적 작업량이 큰 사슬에 진다. ‘길이’ 와
+          블록을 빠르게 캐서 길이는 길지만 work 합이 더 작은 체인을 만들었다면,
+          정직한 다수가 따르는 더 짧지만 누적 작업량이 큰 체인에 진다. ‘길이’ 와
           ‘누적 작업량’ 을 구분하는 것이 의도적 공격을 막는 핵심이다.
         </p>
       </div>
@@ -741,19 +741,19 @@ function MostWorkRule() {
         />
         <div className="border border-edge/70 bg-bg/40 divide-y divide-edge/70">
           <div className="hidden md:grid grid-cols-[0.9fr_1fr_1fr_1fr_1fr] gap-3 px-3 py-2 text-[13px] font-semibold text-muted">
-            <div>사슬</div>
+            <div>체인</div>
             <div>길이 (높이)</div>
             <div>평균 difficulty</div>
             <div>총 work</div>
             <div>노드 선택?</div>
           </div>
-          <WorkRow chain="사슬 A" height="100 블록" difficulty="1.0×" work="100 W" selected />
-          <WorkRow chain="사슬 B" height="102 블록" difficulty="0.9×" work="91.8 W" />
+          <WorkRow chain="체인 A" height="100 블록" difficulty="1.0×" work="100 W" selected />
+          <WorkRow chain="체인 B" height="102 블록" difficulty="0.9×" work="91.8 W" />
         </div>
         <div className="text-[13px] text-muted mt-3 leading-relaxed">
           fork 가 여러 번 이어지면 더 많은 블록을 가진 갈래가 눈에 띌 수 있다.
           그러나 노드는 블록 개수만 보지 않는다. 위 예시에서는 B 가 더 길지만
-          누적 work 가 적기 때문에 A 를 ‘진짜’ 사슬로 본다.
+          누적 work 가 적기 때문에 A 를 ‘진짜’ 체인으로 본다.
         </div>
       </div>
     </section>
@@ -808,8 +808,8 @@ function FiftyOnePercent() {
           ‘51% 공격’ 이 실제로 무엇이고 얼마나 비싼가
         </h2>
         <p className="text-[17px] text-text/70 leading-[1.7] mt-1.5 max-w-2xl">
-          공격자가 정직한 네트워크보다 빠르게 사슬을 키우면, 자기에게 유리한
-          버전 (예: 자기가 보낸 송금 취소) 으로 사슬을 ‘갈아치울’ 수 있다.
+          공격자가 정직한 네트워크보다 빠르게 체인을 키우면, 자기에게 유리한
+          버전 (예: 자기가 보낸 송금 취소) 으로 체인을 ‘갈아치울’ 수 있다.
           하지만 ‘빠르게’ 가 무엇을 의미하는지 구체적으로 보면, 비용이 천문학적
           이라는 게 드러난다.
         </p>
@@ -825,7 +825,7 @@ function FiftyOnePercent() {
           전형적인 시나리오는 이렇다. 공격자는 거래소에 BTC 를 입금하고,
           confirmation 을 받은 뒤 코인이나 현금을 인출한다. 동시에 그 입금 거래가
           들어간 블록보다 앞선 지점에서 비밀 fork 를 키워 두었다가 공개한다.
-          노드들이 work 가 더 많은 공격자 사슬로 reorg 하면, 원래 입금 트랜잭션은
+          노드들이 work 가 더 많은 공격자 체인으로 reorg 하면, 원래 입금 트랜잭션은
           사라지고 거래소는 코인을 받은 적이 없는 상태가 된다. 결과적으로 공격자는
           같은 자금을 두 번 쓴 효과를 얻는다.
         </p>
@@ -843,15 +843,15 @@ function FiftyOnePercent() {
         <div className="divide-y divide-edge text-sm">
           <AttackStep
             n="①"
-            what="공격자가 ‘되돌리고 싶은 거래’ 가 든 블록보다 한 블록 위에서 비밀 사슬 시작"
+            what="공격자가 ‘되돌리고 싶은 거래’ 가 든 블록보다 한 블록 위에서 비밀 체인 시작"
           />
           <AttackStep
             n="②"
-            what="공개 블록이 6 confirmation 깊이까지 묻혀가는 동안, 비밀 사슬을 더 빨리 키워야 함 (work 누적합이 더 커지도록)"
+            what="공개 블록이 6 confirmation 깊이까지 묻혀가는 동안, 비밀 체인을 더 빨리 키워야 함 (work 누적합이 더 커지도록)"
           />
           <AttackStep
             n="③"
-            what="공격자 사슬을 일제히 공개 → 노드들이 ‘work 가 더 많은’ 새 사슬로 reorg → 원래 거래가 사라짐"
+            what="공격자 체인을 일제히 공개 → 노드들이 ‘work 가 더 많은’ 새 체인으로 reorg → 원래 거래가 사라짐"
           />
         </div>
       </div>
@@ -932,7 +932,7 @@ function FiftyOnePercent() {
           <AttackCase
             when="2019-01 · 2020-08"
             chain="Ethereum Classic (ETC)"
-            what="이더리움의 (DAO 분기 이전) 원본 사슬. 두 번 큰 공격. 2020-08 에는 한 달 사이 세 차례 reorg, 거래소들에서 합산 ≈ $5.6 M 손실."
+            what="이더리움의 (DAO 분기 이전) 원본 체인. 두 번 큰 공격. 2020-08 에는 한 달 사이 세 차례 reorg, 거래소들에서 합산 ≈ $5.6 M 손실."
           />
           <AttackCase
             when="2020-01"

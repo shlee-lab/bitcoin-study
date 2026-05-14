@@ -130,8 +130,8 @@ export function L2Transaction(props: LayerProps) {
                     <p>
                       비트코인은 엄밀히 말하면 ‘영구’ 가 아니다. 네트워크는 흔히
                       Longest chain rule 이라고 부르는 규칙, 더 정확히는
-                      most-work chain 규칙으로 한 사슬을 선택한다. 누군가가 정직한
-                      네트워크보다 더 많은 작업을 들여 다른 사슬을 키우면 깊은
+                      most-work chain 규칙으로 한 체인을 선택한다. 누군가가 정직한
+                      네트워크보다 더 많은 작업을 들여 다른 체인을 키우면 깊은
                       블록도 이론상 reorg 된다. 다만 confirmation 깊이가 깊어질
                       수록 그런 일이 일어날 확률이 기하급수적으로 작아져서, 6
                       confirmation 즈음부턴 ‘실용적으로’ 영구라고 합의해 쓰는

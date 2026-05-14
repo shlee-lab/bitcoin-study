@@ -17,7 +17,7 @@ const HEADER_FIELDS = [
   {
     name: "prev_block_hash",
     sample: "00000000000000000005c4…f0d8e1",
-    desc: "이전 블록 헤더의 double-SHA256. 사슬을 만드는 연결고리",
+    desc: "이전 블록 헤더의 double-SHA256. 체인을 만드는 연결고리",
     bytes: 32,
     accent: true,
   },
@@ -71,7 +71,7 @@ export function L4Block(props: LayerProps) {
                       에 담겨 영구히 기록된다. 그 묶음이 바로{" "}
                       <span className="text-text">블록</span> 이다. 여러 블록이
                       다시{" "}
-                      <span className="text-text">암호학적으로 연결되어 하나의 사슬을 이루면</span>{" "}
+                      <span className="text-text">암호학적으로 연결되어 하나의 체인을 이루면</span>{" "}
                       그것이 블록체인이 된다 (두 단계 뒤 S7).
                     </p>
 

@@ -41,7 +41,7 @@ export default function DraftsPage() {
 
         <div className="text-[14px] text-text/60 leading-[1.7] pt-6 border-t border-edge">
           이 톤이 맞으면 다음 패널들도 같은 스타일로 그립니다 (mempool 대기 ·
-          채굴자 발견 · 블록 사슬 결합 · 노드 검증 · Bob 의 알림 등). 어색한
+          채굴자 발견 · 블록 연결 · 노드 검증 · Bob 의 알림 등). 어색한
           요소 짚어주세요.
         </div>
       </div>

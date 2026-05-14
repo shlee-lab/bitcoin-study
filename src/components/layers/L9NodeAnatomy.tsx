@@ -171,7 +171,7 @@ function NetworkVsStorage() {
             네트워크 위
           </div>
           <h3 className="text-[18px] font-medium text-text leading-snug">
-            블록체인 (사슬)
+            블록체인
           </h3>
           <p className="text-[14px] text-text/75 leading-[1.7]">
             합의의 추상 자료구조. 한 블록이{" "}
@@ -188,7 +188,7 @@ function NetworkVsStorage() {
             DB (LevelDB 두 개 + flat 파일)
           </h3>
           <p className="text-[14px] text-text/75 leading-[1.7]">
-            노드는 그 사슬을 그대로 ‘이어진 자료구조’ 로 저장하지 않는다.
+            노드는 그 체인을 그대로 ‘이어진 자료구조’ 로 저장하지 않는다.
             매 블록마다 수천 번 조회·갱신이 일어나니, 그렇게 두면 너무 느림.
             그래서 효율을 위해{" "}
             <span className="text-text">key-value DB 두 개</span> 와{" "}
@@ -230,7 +230,7 @@ function NetworkVsStorage() {
         <p className="text-[14px] text-text/80 leading-[1.7]">
           ‘블록체인’ 이라는 하나의 추상이 실제론 두 가지 책임으로 갈라진다.
           네트워크 위에선 합의 (consensus) 의 단위로서{" "}
-          <span className="text-text">사슬 형태</span> 가 의미 있다 · prev_hash
+          <span className="text-text">체인 형태</span> 가 의미 있다 · prev_hash
           한 줄로 거꾸로 거슬러 올라가 변조 불가능을 보장.
           그러나 한 노드 안에선 그 추상을 그대로 메모리/디스크에 둘 이유가 없다.
           노드가 매 순간 묻는 질문은 ‘이 UTXO 가 아직 살아있나?’ 같은{" "}
@@ -327,7 +327,7 @@ function Opening() {
             real="현재 안 쓴 출력들의 키-값 저장소. 매 블록마다 수천 개 항목 추가·삭제."
           />
           <BridgeRow
-            theory="‘블록이 사슬에 추가된다’"
+            theory="‘블록이 체인에 추가된다’"
             real="여러 단계의 검증을 차례로 통과해야 노드가 받아들인다. 한 단계라도 실패하면 거부된다."
           />
           <BridgeRow

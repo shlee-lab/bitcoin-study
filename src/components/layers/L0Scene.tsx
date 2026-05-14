@@ -615,7 +615,7 @@ function PostBroadcast({ onEnter }: { onEnter: () => void }) {
         <Question
           n="03"
           q="같은 코인을 두 곳에 동시에 못 쓰게 막을 방법은?"
-          a="네트워크가 Longest chain rule 로 한 사슬에 수렴"
+          a="네트워크가 Longest chain rule 로 한 체인에 수렴"
           to="S6 · S7"
         />
       </div>
@@ -647,7 +647,7 @@ function PostBroadcast({ onEnter }: { onEnter: () => void }) {
           인물이 cypherpunk 메일링 리스트에 9 페이지짜리 백서를 올린다. 중앙
           기관 없이도 모두가 같은 거래 순서를 보게 만드는 규칙. 작업증명
           (proof-of-work) 과 Longest chain rule (정확히는 누적 작업량이 가장 큰
-          사슬 선택). 그 위에서, 어디에도 묶이지
+          체인 선택). 그 위에서, 어디에도 묶이지
           않은 첫 화폐가 처음으로 가능해졌다.
         </p>
         <p className="text-text/60">

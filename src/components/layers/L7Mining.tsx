@@ -24,8 +24,8 @@ export function L7Mining(props: LayerProps) {
                     <p className="text-[17px] text-text/80 leading-[1.75]">
                       S7 에서 블록들이{" "}
                       <span className="text-text">prev_hash 로 이어져</span>{" "}
-                      변조 불가능한 사슬이 된다는 걸 봤다. 이제 남은 질문은 그
-                      사슬 끝에{" "}
+                      변조 불가능한 체인이 된다는 걸 봤다. 이제 남은 질문은 그
+                      체인 끝에{" "}
                       <span className="text-text">새 블록을 누가 추가할 수 있는가</span>
                       다. 블록을 만드는 권한은 단순한 순번이 아니라 권력에 가깝다.
                       어떤 트랜잭션이 언제 포함되는지, 어떤 트랜잭션이 뒤로 밀리는지
@@ -113,7 +113,7 @@ export function L7Mining(props: LayerProps) {
                       <span className="text-text">막대한 양의 시도</span> 를
                       들였다는 사실이다. target 이 작을수록 (= 어려울수록) 평균
                       시도 수는 기하급수적으로 늘어난다. 그 ‘들인 시도’ 가 곧
-                      사슬의 뒷받침이 된다.
+                      체인을 지키는 비용의 근거가 된다.
                     </div>
                   </section>
                 ),
@@ -175,49 +175,16 @@ export function L7Mining(props: LayerProps) {
                 ),
               },
               {
-                title: "사슬이 실제로 뒤집힌 사건들", subtitle: "깊은 reorg 가 일어난 이유",
+                title: "Reorg · 메인체인이 다른 체인으로 교체되는 순간",
+                subtitle: "깊은 reorg 가 일어난 이유",
                 level: "case",
                 body: (
                   <Section
-                    heading="사슬이 실제로 뒤집힌 사건들"
+                    heading="Reorg · 메인체인이 다른 체인으로 교체되는 순간"
                     sub="깊은 reorg 는 이론으로만 존재하는 현상이 아니다. 다만 아래 사례들은 악의적 51% 공격이 아니라, 버그·운영 사고·검증 생략이 겹치며 생긴 사건에 가깝다."
                   >
                     <ReorgHistory />
                   </Section>
-                ),
-              },
-              {
-                title: "생각해보기", subtitle: "에너지가 곧 안전이라는 등식",
-                body: (
-                  <Reflection title="‘낭비’ 와 ‘보안’ 사이 · 공짜 점심은 없다">
-                    <p>
-                      PoW 비판자: “비트코인은 아르헨티나의 1년 전력 사용량에
-                      가까운 전기를 쓴다. 이 정도 규모의 에너지 소비는 낭비다.”
-                    </p>
-                    <p>
-                      PoW 옹호자: “그 전기가 곧 보안이다. 51% 로 사슬을
-                      되감으려면 같은 전기를 다시 들여야 한다. 보안은 ‘이미
-                      들인 비용을 되돌릴 수 없다’ 는 사실에서 나온다.” 이걸
-                      줄이면 곧 보안이 줄어든다.
-                    </p>
-                    <p>
-                      PoS (Proof of Stake) 는 전기를 쓰지 않는 대신 보안이 ‘큰
-                      지분 보유자’ 에게 의존한다. 누가 이미 많은 지분을 갖고
-                      있는지가 의사결정 권한에도 영향을 준다. 전기를 아끼는 대신
-                      다른 신뢰 가정을 받아들이는 선택이며, 공짜 해결책은 아니다.
-                    </p>
-                    <Probe>
-                      에너지를 안 쓰면서 PoW 와 같은 객관적 보안을 주는 모델이
-                      가능할까? 만약 불가능하다면, 비트코인이 쓰는 전력은 ‘낭비’
-                      일까 ‘비용’ 일까? 같은 양의 전기를 디지털 화폐의 보안에 쓰는
-                      게 금을 캐는 것보다 더 나쁠까?
-                    </Probe>
-                    <Reading label="쟁점 키워드">
-                      채굴이 점차 잉여 전력 (gas flaring, hydro-spill) 으로
-                      옮겨가는 현상. 그리드의 ‘마지막 소비자’ 역할로 신재생
-                      에너지 경제성을 개선한다는 주장과 그 반론.
-                    </Reading>
-                  </Reflection>
                 ),
               },
               {
@@ -241,12 +208,12 @@ function ReorgHistory() {
     },
     {
       date: "2013-03",
-      desc: "Bitcoin Core 0.7 / 0.8 의 BDB 락 차이로 두 사슬이 6 시간 동안 분기했다. 0.8 → 0.7 다운그레이드 권장으로 봉합되었다.",
+      desc: "Bitcoin Core 0.7 / 0.8 의 BDB 락 차이로 두 체인이 6 시간 동안 분기했다. 0.8 → 0.7 다운그레이드 권장으로 봉합되었다.",
       depth: "24 blocks",
     },
     {
       date: "2015-07",
-      desc: "‘SPV mining’ 사고. soft fork 가 활성화된 직후, 일부 풀이 새 블록 본체를 다 받아 검증하지 않고 (헤더만 보고) 그 위에 빈 블록을 쌓아 채굴했다. 그런데 그 모-블록이 새 규칙을 어긴 invalid 블록이라 결국 6 블록이 무효화 (reorg) 되었다. 속도 욕심으로 검증을 생략한 결과 잘못된 사슬에 hashrate 가 낭비된 사례다.",
+      desc: "‘SPV mining’ 사고. soft fork 가 활성화된 직후, 일부 풀이 새 블록 본체를 다 받아 검증하지 않고 (헤더만 보고) 그 위에 빈 블록을 쌓아 채굴했다. 그런데 그 모-블록이 새 규칙을 어긴 invalid 블록이라 결국 6 블록이 무효화 (reorg) 되었다. 속도 욕심으로 검증을 생략한 결과 잘못된 체인에 hashrate 가 낭비된 사례다.",
       depth: "6 blocks",
     },
   ];
@@ -1049,7 +1016,48 @@ function EnergyContext() {
 
       <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-3">
         <h3 className="text-[17px] font-medium text-text leading-snug">
-          에너지 낭비 비판에서 등장한 PoS · 전력 대신 지분을 거는 방식
+          낭비인가, 보안 비용인가
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[14px]">
+          <div className="rounded-sm border border-edge bg-bg/45 p-3 space-y-1.5">
+            <div className="text-[13px] font-semibold text-accent">
+              PoW 비판
+            </div>
+            <p className="text-text/78 leading-[1.7]">
+              비트코인은 아르헨티나의 1년 전력 사용량에 가까운 전기를 쓴다.
+              비판자들은 이 정도 규모의 에너지 소비를 불필요한 낭비로 본다.
+            </p>
+          </div>
+          <div className="rounded-sm border border-edge bg-bg/45 p-3 space-y-1.5">
+            <div className="text-[13px] font-semibold text-accent2">
+              PoW 옹호
+            </div>
+            <p className="text-text/78 leading-[1.7]">
+              옹호자들은 그 전력 비용이 공격 비용을 높인다고 본다. 메인체인을
+              되감으려면 공격자도 막대한 연산과 전력을 다시 투입해야 하기 때문이다.
+            </p>
+          </div>
+        </div>
+        <p className="text-[14px] text-text/70 leading-[1.7]">
+          이 논쟁에서 PoS 가 등장했다. PoS 는 전기를 거의 쓰지 않지만, 보안의
+          중심을 연산 자원에서 지분으로 옮긴다. 즉 “공짜 해결책” 이라기보다 어떤
+          비용과 권력을 어디에 둘 것인가의 선택에 가깝다.
+        </p>
+        <Probe>
+          에너지를 거의 쓰지 않으면서 PoW 와 같은 객관적 공격 비용을 만들 수
+          있을까? 어렵다면 비트코인의 전력 사용은 낭비에 가까울까, 보안 비용에
+          가까울까?
+        </Probe>
+        <Reading label="쟁점 키워드">
+          채굴이 점차 잉여 전력 (gas flaring, hydro-spill) 으로 옮겨가는 현상.
+          그리드의 “마지막 소비자” 역할로 신재생 에너지 경제성을 개선한다는 주장과
+          그 반론.
+        </Reading>
+      </div>
+
+      <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-3">
+        <h3 className="text-[17px] font-medium text-text leading-snug">
+          PoS · 전력 대신 지분을 거는 방식
         </h3>
         <p className="text-[15px] text-text/85 leading-[1.7]">
           PoW 의 전력 사용이 낭비라는 비판에 대응해 등장한 대표적 대안이{" "}
@@ -1236,11 +1244,18 @@ function PostSubsidyReflection() {
         미래에 풀 수 있는 미해결 문제인가, 아니면 PoW 자체의 본질적 한계인가?
       </Probe>
       <Reading label="참고 논문">
-        Eric Budish (Chicago Booth) 의{" "}
-        <em className="text-text/85">“The Economic Limits of Bitcoin and the Blockchain”</em>{" "}
-        (NBER 2018) 도 비슷한 관점에서 채굴 인센티브의 거시 한계를 다룬다.
-        ‘fee 만으로 충분하다’ 는 반대 입장의 정식 학술 논문은 의외로 드물다
-        (대부분 업계 측 백서·블로그).
+        Eric Budish 의{" "}
+        <em className="text-text/85">“The Economic Limits of Bitcoin and the Blockchain”</em>
+        (2018) 도 보안 예산을 경제학적으로 본다. 핵심은 단순하다. 블록체인이
+        큰 금액의 결제를 안전하게 처리하려면, 공격자가 double-spend 로 얻을 수
+        있는 이익보다 정직하게 채굴해서 얻는 보상이 충분히 커야 한다. 즉 시스템이
+        보호하려는 가치가 커질수록 채굴자 보상, 곧 보안 비용도 커져야 한다.
+        <span className="block mt-2">
+          반대로 “미래에는 fee 만으로 충분한 보안 예산이 만들어질 것” 이라는
+          주장은 업계 글과 백서에서는 자주 나오지만, 위 논문들처럼 수학 모델로
+          정리된 학술 반론은 상대적으로 적다. 그래서 이 쟁점은 아직 닫힌 결론이라기보다
+          비트코인의 장기 가정에 가깝다.
+        </span>
       </Reading>
     </Reflection>
   );
