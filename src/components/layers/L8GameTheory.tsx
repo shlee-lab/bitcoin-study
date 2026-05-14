@@ -17,18 +17,21 @@ export function L8GameTheory(props: LayerProps) {
           <Stepper
             steps={[
               {
-                title: "Pooled mining",
-                subtitle: "share, partial PoW, 풀 시장 분포",
+                title: "마이닝 풀",
+                subtitle: "pooled mining, share, 풀 시장 분포",
                 body: (
                   <section className="space-y-5">
                     <p className="text-[17px] text-text/80 leading-[1.75]">
                       S8 에서 ‘퍼즐을 푸는 자가 다음 블록을 만든다’ 는 PoW 의
                       메커니즘을 봤다. 그런데 실제론 거의 모든 채굴자가{" "}
-                      <span className="text-text">혼자 채굴하지 않는다</span>.
-                      풀 (mining pool) 에 가입해 share 를 제출하고, 풀이 찾은
-                      블록 보상을 비율대로 나눠 받는다. 이 구조가 만드는 전략적 행동
-                      (selfish mining, block withholding, 51%) 과 그 한계가 이
-                      단계의 주제다.
+                      <span className="text-text">혼자 채굴하지 않는다</span>. 여러
+                      채굴자가 해시레이트를 한곳에 모아 보상을 나눠 받는 방식을{" "}
+                      <span className="text-text">pooled mining</span> 이라고 하고,
+                      이때 운영되는 조직이나 서비스가{" "}
+                      <span className="text-text">마이닝 풀 (mining pool)</span> 이다.
+                      채굴자는 풀에 share 를 제출하고, 풀이 찾은 블록 보상을 비율대로
+                      나눠 받는다. 이 구조가 만드는 전략적 행동 (selfish mining,
+                      block withholding, 51%) 과 그 한계가 이 단계의 주제다.
                     </p>
                     <PooledMining />
                   </section>
