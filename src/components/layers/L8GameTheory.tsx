@@ -582,7 +582,7 @@ function SelfishDiagram() {
         <div className="text-[14px] font-semibold text-muted">
           Selfish mining · 두 체인의 경쟁 (시뮬레이션)
         </div>
-        <div className="flex items-center gap-2 text-[11px] font-mono">
+        <div className="flex items-center gap-2 text-[12px] font-medium">
           <div className="flex items-center gap-1">
             {Array.from({ length: TOTAL }).map((_, i) => (
               <div
@@ -603,7 +603,7 @@ function SelfishDiagram() {
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
-            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 uppercase tracking-[0.16em] transition-colors"
+            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 transition-colors"
             disabled={step >= TOTAL - 1}
           >
             {paused ? "▶ play" : "⏸ pause"}
@@ -614,7 +614,7 @@ function SelfishDiagram() {
               setStep(0);
               setPaused(true);
             }}
-            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 uppercase tracking-[0.16em] transition-colors"
+            className="text-muted hover:text-text border border-edge hover:border-accent/60 px-2 py-1 transition-colors"
           >
             ↻ replay
           </button>
@@ -833,8 +833,8 @@ function SelfishDiagram() {
       </svg>
 
       <div className="text-[13px] text-text/85 leading-[1.7] min-h-[44px] border-t border-edge/60 pt-3">
-        <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent mr-2">
-          step {step + 1}
+        <span className="text-[13px] font-semibold text-accent mr-2">
+          단계 {step + 1}
         </span>
         {stepDesc[step]}
       </div>

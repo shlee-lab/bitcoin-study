@@ -81,7 +81,7 @@ export function Stepper({
           onClick={advance}
           className="group w-full max-w-2xl text-left flex flex-col sm:flex-row sm:items-baseline gap-2.5 sm:gap-5 py-4 pr-2 border-t border-edge hover:border-accent2/60 transition-colors"
         >
-          <span className="font-mono text-[11px] tracking-[0.12em] text-muted uppercase shrink-0 sm:w-16 pt-0.5">
+          <span className="text-[13px] font-medium text-muted shrink-0 sm:w-16 pt-0.5">
             {String(revealed + 1).padStart(2, "0")}
             <span className="text-muted/50"> / {String(steps.length).padStart(2, "0")}</span>
           </span>
@@ -118,7 +118,7 @@ function StepHeader({
 }) {
   return (
     <div className="flex items-center gap-2.5 flex-wrap">
-      <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted">
+      <span className="text-[13px] font-medium text-muted">
         {String(index + 1).padStart(2, "0")}
         <span className="text-muted/45"> / {String(total).padStart(2, "0")}</span>
       </span>
@@ -205,7 +205,8 @@ function inferLevel(title: string, subtitle?: string): StepLevel {
 function readStepParam(max: number) {
   if (typeof window === "undefined") return 1;
   const raw = new URLSearchParams(window.location.search).get("step");
-  const parsed = raw ? Number.parseInt(raw, 10) : 1;
+  const stored = raw ? null : window.localStorage.getItem(stepStorageKey());
+  const parsed = Number.parseInt(raw ?? stored ?? "1", 10);
   if (!Number.isFinite(parsed)) return 1;
   return Math.min(Math.max(parsed, 1), max);
 }
@@ -213,10 +214,17 @@ function readStepParam(max: number) {
 function writeStepParam(step: number) {
   if (typeof window === "undefined") return;
   const url = new URL(window.location.href);
+  window.localStorage.setItem(stepStorageKey(), String(step));
   if (step <= 1) {
     url.searchParams.delete("step");
   } else {
     url.searchParams.set("step", String(step));
   }
   window.history.replaceState(null, "", url.toString());
+}
+
+function stepStorageKey() {
+  if (typeof window === "undefined") return "bitcoin-study:step:unknown";
+  const at = new URLSearchParams(window.location.search).get("at") ?? "S0";
+  return `bitcoin-study:step:${at}`;
 }

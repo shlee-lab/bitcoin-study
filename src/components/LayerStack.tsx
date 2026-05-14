@@ -285,7 +285,7 @@ function StageBar({
               data-stage-idx={i}
               onClick={() => goTo(id)}
               title={`${layer.subtitle} · ${layer.title}`}
-              className={`flex-1 min-w-[3.25rem] px-1 py-2.5 text-center font-mono text-[11px] tracking-wide transition border-b-2 whitespace-nowrap ${
+              className={`flex-1 min-w-[3.25rem] px-1 py-2.5 text-center text-[12px] font-semibold transition border-b-2 whitespace-nowrap ${
                 active
                   ? "text-accent border-accent"
                   : visited

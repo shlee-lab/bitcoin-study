@@ -123,6 +123,24 @@ export function L5Network(props: LayerProps) {
                       </p>
                     </div>
                     <NodeKinds />
+                    <Callout title="라이트 지갑의 프라이버시 문제">
+                      <p className="text-[14px] text-text/80 leading-[1.7]">
+                        SPV 지갑은 전체 블록을 직접 검증하지 않기 때문에, “내
+                        주소와 관련된 거래가 있는가” 를 다른 노드나 서버에 물어야
+                        한다. 예전 BIP37 방식은{" "}
+                        <Term id="bloom-filter">Bloom filter</Term> 로 관심
+                        대상을 숨기려 했지만, 질의 패턴만으로도 지갑의 주소들이
+                        묶일 수 있었다.
+                      </p>
+                      <p className="text-[14px] text-text/72 leading-[1.7] mt-2">
+                        그래서 최근 라이트 클라이언트 설계는 서버에 내 주소 필터를
+                        보내는 대신, 블록별{" "}
+                        <Term id="compact-block-filter">compact block filter</Term>
+                        를 받아 지갑이 로컬에서 확인하는 방향으로 이동했다. 그래도
+                        최종 기준은 같다. 가장 강한 검증과 프라이버시는 자기 풀
+                        노드에 지갑을 연결할 때 나온다.
+                      </p>
+                    </Callout>
                   </section>
                 ),
               },
@@ -225,7 +243,7 @@ function NodeKinds() {
   ];
   return (
     <div className="rounded-sm border border-edge bg-surface/30 overflow-hidden">
-      <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2 border-b border-edge text-[13px] font-semibold text-muted">
+      <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2.5 border-b border-edge text-[14px] font-semibold text-text/75">
         <div>종류</div>
         <div>역할</div>
         <div>디스크</div>
@@ -245,13 +263,13 @@ function NodeKinds() {
               className="grid grid-cols-1 sm:grid-cols-[140px_1fr_100px_120px] gap-3 px-4 py-2.5 items-baseline"
             >
               <div>
-                <div className={`font-mono text-[13px] ${color}`}>{k.name}</div>
-                <div className="text-xs text-muted mt-0.5">{k.use}</div>
+                <div className={`text-[14px] font-medium ${color}`}>{k.name}</div>
+                <div className="text-[12px] text-muted mt-0.5">{k.use}</div>
               </div>
               <div className="text-[13px] text-text/85 leading-relaxed">
                 {k.role}
               </div>
-              <div className="font-mono text-[13px] text-muted">{k.disk}</div>
+              <div className="text-[13px] font-medium text-muted">{k.disk}</div>
               <div className="text-[13px] text-muted">{k.privacy}</div>
             </div>
           );

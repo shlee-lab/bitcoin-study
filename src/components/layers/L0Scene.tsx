@@ -378,13 +378,13 @@ function ExploreGrid({
           type="button"
           onClick={onBroadcast}
           disabled={!canBroadcast || broadcasted}
-          className={`font-mono text-[13px] px-5 py-2 border uppercase tracking-[0.16em] transition-colors ${
+          className={`text-[14px] font-medium px-5 py-2 border transition-colors ${
             canBroadcast && !broadcasted
               ? "border-accent bg-accent text-bg hover:bg-accent/90"
               : "border-edge bg-bg/40 text-muted cursor-not-allowed"
           }`}
         >
-          ▶ Send
+          전송
         </button>
       </div>
     </div>
@@ -395,10 +395,10 @@ function ProgressStrip({ filled }: { filled: Set<FieldKey> }) {
   return (
     <div className="border border-edge bg-surface/30 px-3 py-2.5 space-y-2">
       <div className="flex items-baseline justify-between">
-        <div className="font-mono text-[11px] tracking-[0.14em] text-muted">
+        <div className="text-[13px] font-medium text-muted">
           진행 · {filled.size} / {FIELDS.length}
         </div>
-        <div className="font-mono text-[11px] text-muted/70 tracking-wide">
+        <div className="text-[12px] font-medium text-muted/70">
           {FIELDS.map((f) => (filled.has(f.key) ? "■" : "□")).join(" ")}
         </div>
       </div>
@@ -447,15 +447,15 @@ function FieldCard({
       }`}
     >
       {isNext && (
-        <div className="absolute -top-[9px] left-3 px-1.5 py-0.5 bg-bg border border-accent text-accent font-mono text-[10px] tracking-[0.16em]">
-          NEXT
+        <div className="absolute -top-[10px] left-3 px-1.5 py-0.5 bg-bg border border-accent text-accent text-[11px] font-semibold">
+          다음
         </div>
       )}
       <div className="flex items-baseline justify-between gap-2">
         <div className="text-[14px] font-medium text-text/90">
           {field.koLabel}
         </div>
-        <div className="font-mono text-[11px] tracking-[0.14em] text-muted/85 uppercase">
+        <div className="text-[12px] font-medium text-muted/85">
           {field.label}
         </div>
       </div>
@@ -527,7 +527,7 @@ function DetailPanel({ field }: { field: FieldDef | null }) {
         <div className="flex items-baseline gap-2.5 min-w-0">
           {field ? (
             <>
-              <span className="font-mono text-[11px] tracking-[0.18em] text-accent2/80 uppercase shrink-0">
+              <span className="text-[13px] font-medium text-accent2/85 shrink-0">
                 {field.label}
               </span>
               <span className="text-muted/40 shrink-0">·</span>
@@ -538,7 +538,7 @@ function DetailPanel({ field }: { field: FieldDef | null }) {
           )}
         </div>
         {field && (
-          <div className="text-[11px] text-accent2/85 font-mono shrink-0">
+          <div className="text-[12px] text-accent2/85 font-medium shrink-0">
             ↓ {field.deepLink}
           </div>
         )}

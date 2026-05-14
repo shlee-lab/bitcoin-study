@@ -136,7 +136,7 @@ export function Term({
                 }}
                 className="bg-surface ring-1 ring-edge p-4 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
               >
-                <div className="text-[12px] text-accent2/85 font-mono tracking-[0.14em] mb-2">
+                <div className="text-[13px] text-accent2/90 font-semibold mb-2">
                   {entry.term}
                 </div>
                 <div className="text-[14px] text-text/85 leading-[1.65]">

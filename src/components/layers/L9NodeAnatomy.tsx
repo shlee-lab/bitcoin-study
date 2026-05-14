@@ -229,8 +229,8 @@ function Stratum({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3 px-4 py-3 items-baseline">
       <div className="space-y-0.5">
-        <div className="font-mono text-[13px] text-text/85">{name}</div>
-        <div className="font-mono text-[11px] text-accent2/85 uppercase tracking-[0.14em]">
+        <div className="text-[14px] font-medium text-text/85">{name}</div>
+        <div className="text-[13px] font-medium text-accent2/85">
           {kind}
         </div>
       </div>

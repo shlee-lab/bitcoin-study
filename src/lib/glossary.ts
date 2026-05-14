@@ -311,6 +311,14 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     term: "SPV · Simplified Payment Verification",
     def: "라이트 클라이언트가 전체 블록을 받지 않고 헤더 + merkle proof 만으로 자기 트랜잭션 포함 여부를 검증하는 방식. 사토시 백서 8 절.",
   },
+  "bloom-filter": {
+    term: "Bloom filter",
+    def: "집합에 어떤 항목이 ‘있을 가능성’을 작게 압축해 표현하는 확률적 자료구조. BIP37 SPV 지갑은 관심 주소/트랜잭션을 직접 말하지 않으려고 Bloom filter 를 보냈지만, 질의 패턴으로 지갑 소유자의 주소가 추정될 수 있어 프라이버시 한계가 컸다.",
+  },
+  "compact-block-filter": {
+    term: "compact block filter",
+    def: "BIP157/158 계열 라이트 클라이언트 방식. 서버가 블록마다 작은 필터를 제공하고, 지갑은 필터를 로컬에서 확인한 뒤 관련 가능성이 있는 블록만 요청한다. BIP37 처럼 자기 주소 필터를 서버에 보내지 않아 프라이버시가 낫지만, 여전히 풀 노드 검증과 같지는 않다.",
+  },
   generator: {
     term: "generator point G",
     def: "secp256k1 곡선 위의 고정된 한 점. 모든 public key 는 어떤 정수 d 에 대해 d·G. 모든 사용자가 같은 G 를 쓴다.",

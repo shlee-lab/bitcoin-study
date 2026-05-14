@@ -332,8 +332,8 @@ function CrossLayerRecap() {
               key={i}
               className="grid grid-cols-1 sm:grid-cols-[80px_70px_1fr] gap-3 px-4 py-3 items-baseline"
             >
-              <div className="font-mono text-[13px] text-accent">{s.when}</div>
-              <div className="font-mono text-[13px] text-accent2">{s.layer}</div>
+              <div className="text-[13px] font-medium text-accent">{s.when}</div>
+              <div className="text-[13px] font-medium text-accent2">{s.layer}</div>
               <div className="text-[13px] text-text/85 leading-relaxed">
                 {s.what}
               </div>

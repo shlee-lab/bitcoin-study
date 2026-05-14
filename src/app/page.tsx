@@ -95,7 +95,7 @@ export default function Home() {
                     href={`/learn?at=${id}`}
                     className="grid grid-cols-[56px_1fr_auto] items-center gap-5 py-5 group"
                   >
-                    <div className="w-12 h-12 border border-edge bg-bg flex items-center justify-center font-mono text-[14px] font-medium tracking-wide text-accent/85 group-hover:bg-accent group-hover:text-bg group-hover:border-accent transition-colors">
+                    <div className="w-12 h-12 border border-edge bg-bg flex items-center justify-center text-[14px] font-semibold text-accent/85 group-hover:bg-accent group-hover:text-bg group-hover:border-accent transition-colors">
                       {layer.subtitle}
                     </div>
                     <div className="min-w-0">
