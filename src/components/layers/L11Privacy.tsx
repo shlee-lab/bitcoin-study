@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { LayerShell } from "../LayerShell";
 import { Reflection, Probe, Reading, Callout } from "../Reflection";
 import { Stepper } from "../Stepper";
@@ -7,13 +8,17 @@ import { Term } from "../Term";
 import type { LayerProps } from "../LayerStack";
 
 export function L11Privacy(props: LayerProps) {
+  const [complete, setComplete] = useState(false);
+
   return (
     <LayerShell
       id="S13"
       {...props}
+      showCompletion={complete}
       body={
         <div className="max-w-3xl">
           <Stepper
+            onCompletionChange={setComplete}
             steps={[
               {
                 title: "비트코인은 익명인가",

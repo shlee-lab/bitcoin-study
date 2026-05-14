@@ -11,10 +11,12 @@ export function LayerShell({
   id,
   onEnter,
   body,
+  showCompletion,
 }: {
   id: LayerId;
   onEnter: LayerProps["onEnter"];
   body?: React.ReactNode;
+  showCompletion?: boolean;
 }) {
   const layer = LAYERS[id];
 
@@ -109,16 +111,11 @@ export function LayerShell({
           </motion.section>
         )}
 
-        <CompletionGate />
+        {showCompletion ? <CompletionPanel /> : null}
         <Pager />
       </div>
     </div>
   );
-}
-
-function CompletionGate() {
-  const { currentIdx, total } = useNav();
-  return currentIdx === total - 1 ? <CompletionPanel /> : null;
 }
 
 function Pager() {
@@ -183,18 +180,10 @@ function CompletionPanel() {
           </h2>
           <p className="text-[15px] text-text/70 leading-[1.75]">
             주소, 서명, 트랜잭션, 블록, 채굴, 노드, 확장성, 프라이버시가 하나의
-            송금 안에서 어떻게 연결되는지 확인했습니다.
+            송금 안에서 어떻게 연결되는지 확인했습니다. 다음 콘텐츠는 Ethereum 과
+            Consensus 중심의 주제로 추후 추가할 예정입니다.
           </p>
         </div>
-      </div>
-
-      <div className="border border-edge bg-surface/25 p-4">
-        <div className="text-[14px] font-semibold text-text">
-          다음 콘텐츠는 준비 중입니다
-        </div>
-        <p className="text-[13px] text-text/65 leading-[1.65] mt-1">
-          Ethereum 과 Consensus 중심의 주제를 추후 추가할 예정입니다.
-        </p>
       </div>
 
       <div className="flex flex-wrap items-center gap-2">

@@ -395,15 +395,7 @@ function CompletionDetailQuiet() {
     <div className="border-y border-edge bg-bg/20 py-6 space-y-5">
       <div className="px-1 space-y-4">
         <CompletionBadge text="학습 완료" />
-        <CompletionCopy />
-      </div>
-      <div className="border border-edge bg-surface/25 p-4">
-        <div className="text-[14px] font-semibold text-text">
-          다음 콘텐츠는 준비 중입니다
-        </div>
-        <p className="text-[13px] text-text/65 leading-[1.65] mt-1">
-          Ethereum 과 Consensus 중심의 주제를 추후 추가할 예정입니다.
-        </p>
+        <CompletionCopy includeNext />
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <Link
@@ -454,7 +446,7 @@ function CompletionDetailSummary() {
   );
 }
 
-function CompletionCopy() {
+function CompletionCopy({ includeNext }: { includeNext?: boolean }) {
   return (
     <div className="space-y-3">
       <h3 className="text-[24px] font-semibold leading-tight text-text">
@@ -463,6 +455,9 @@ function CompletionCopy() {
       <p className="text-[14px] text-text/70 leading-[1.7]">
         주소, 서명, 트랜잭션, 블록, 채굴, 노드, 확장성, 프라이버시가 하나의
         송금 안에서 어떻게 연결되는지 확인했습니다.
+        {includeNext
+          ? " 다음 콘텐츠는 Ethereum 과 Consensus 중심의 주제로 추후 추가할 예정입니다."
+          : ""}
       </p>
     </div>
   );

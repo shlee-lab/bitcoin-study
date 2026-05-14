@@ -12,7 +12,13 @@ export type Step = {
   body: React.ReactNode;
 };
 
-export function Stepper({ steps }: { steps: Step[] }) {
+export function Stepper({
+  steps,
+  onCompletionChange,
+}: {
+  steps: Step[];
+  onCompletionChange?: (complete: boolean) => void;
+}) {
   const [revealed, setRevealed] = useState(() => readStepParam(steps.length));
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const hasMore = revealed < steps.length;
@@ -36,6 +42,10 @@ export function Stepper({ steps }: { steps: Step[] }) {
   useEffect(() => {
     setRevealed(readStepParam(steps.length));
   }, [steps.length]);
+
+  useEffect(() => {
+    onCompletionChange?.(revealed >= steps.length);
+  }, [onCompletionChange, revealed, steps.length]);
 
   useEffect(() => {
     function onPopState() {
