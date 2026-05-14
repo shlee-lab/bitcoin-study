@@ -323,8 +323,8 @@ function Opening() {
         </div>
         <div className="divide-y divide-edge">
           <BridgeRow
-            theory="현재 쓰지 않은 출력들의 목록"
-            real="현재 안 쓴 출력들의 키-값 저장소. 매 블록마다 수천 개 항목 추가·삭제."
+            theory="UTXO set · 아직 쓰이지 않은 output 목록"
+            real="노드 안에서는 ChainState 라는 키-값 저장소로 관리된다. 매 블록마다 사용된 output 은 제거되고, 새 output 은 추가된다."
           />
           <BridgeRow
             theory="블록이 체인에 추가된다"
