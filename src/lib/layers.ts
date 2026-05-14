@@ -102,7 +102,7 @@ export const LAYERS: Record<LayerId, Layer> = {
     parentId: "S7",
     title: "PoW Mining",
     subtitle: "S8",
-    oneLiner: "다음 블록을 누가 만들지는 관리자가 정하지 않는다. 채굴자들이 해시 퍼즐을 풀며 경쟁하고, 먼저 조건을 만족한 블록이 후보가 된다.",
+    oneLiner: "블록을 만드는 권한은 어떤 트랜잭션이 언제 포함될지 정하는 권력이다. 비트코인은 중앙 관리자가 아니라 해시 퍼즐을 먼저 푼 채굴자에게 다음 블록 후보를 제안하게 한다.",
     childIds: ["S9"],
     primitives: ["difficulty"],
   },

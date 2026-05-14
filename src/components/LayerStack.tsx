@@ -1,24 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { LAYERS, LAYER_ORDER, pathTo, gateKey, type LayerId } from "@/lib/layers";
-import { L0Scene } from "./layers/L0Scene";
-import { L1Wallet } from "./layers/L1Wallet";
-import { L1BWallet } from "./layers/L1BWallet";
-import { L2Transaction } from "./layers/L2Transaction";
-import { L3UTXO } from "./layers/L3UTXO";
-import { L4Block } from "./layers/L4Block";
-import { L5Network } from "./layers/L5Network";
-import { L6Blockchain } from "./layers/L6Blockchain";
-import { L7Mining } from "./layers/L7Mining";
-import { L8GameTheory } from "./layers/L8GameTheory";
-import { L9NodeAnatomy } from "./layers/L9NodeAnatomy";
-import { L9BNodeOperation } from "./layers/L9BNodeOperation";
-import { L10Scalability } from "./layers/L10Scalability";
-import { L11Privacy } from "./layers/L11Privacy";
 
 export type LayerProps = {
   onEnter: (childId: LayerId, sourceKey?: string) => void;
@@ -43,21 +30,29 @@ export function useNav() {
   return ctx;
 }
 
+function LayerLoading() {
+  return (
+    <div className="flex-1 flex items-center justify-center px-6 text-[14px] text-muted">
+      섹션을 불러오는 중...
+    </div>
+  );
+}
+
 const REGISTRY: Record<LayerId, React.ComponentType<LayerProps>> = {
-  S0: L0Scene,
-  S1: L1Wallet,
-  S2: L1BWallet,
-  S3: L2Transaction,
-  S4: L3UTXO,
-  S5: L4Block,
-  S6: L5Network,
-  S7: L6Blockchain,
-  S8: L7Mining,
-  S9: L8GameTheory,
-  S10: L9NodeAnatomy,
-  S11: L9BNodeOperation,
-  S12: L10Scalability,
-  S13: L11Privacy,
+  S0: dynamic(() => import("./layers/L0Scene").then((m) => m.L0Scene), { loading: LayerLoading }),
+  S1: dynamic(() => import("./layers/L1Wallet").then((m) => m.L1Wallet), { loading: LayerLoading }),
+  S2: dynamic(() => import("./layers/L1BWallet").then((m) => m.L1BWallet), { loading: LayerLoading }),
+  S3: dynamic(() => import("./layers/L2Transaction").then((m) => m.L2Transaction), { loading: LayerLoading }),
+  S4: dynamic(() => import("./layers/L3UTXO").then((m) => m.L3UTXO), { loading: LayerLoading }),
+  S5: dynamic(() => import("./layers/L4Block").then((m) => m.L4Block), { loading: LayerLoading }),
+  S6: dynamic(() => import("./layers/L5Network").then((m) => m.L5Network), { loading: LayerLoading }),
+  S7: dynamic(() => import("./layers/L6Blockchain").then((m) => m.L6Blockchain), { loading: LayerLoading }),
+  S8: dynamic(() => import("./layers/L7Mining").then((m) => m.L7Mining), { loading: LayerLoading }),
+  S9: dynamic(() => import("./layers/L8GameTheory").then((m) => m.L8GameTheory), { loading: LayerLoading }),
+  S10: dynamic(() => import("./layers/L9NodeAnatomy").then((m) => m.L9NodeAnatomy), { loading: LayerLoading }),
+  S11: dynamic(() => import("./layers/L9BNodeOperation").then((m) => m.L9BNodeOperation), { loading: LayerLoading }),
+  S12: dynamic(() => import("./layers/L10Scalability").then((m) => m.L10Scalability), { loading: LayerLoading }),
+  S13: dynamic(() => import("./layers/L11Privacy").then((m) => m.L11Privacy), { loading: LayerLoading }),
 };
 
 function isLayerId(v: string | null): v is LayerId {
