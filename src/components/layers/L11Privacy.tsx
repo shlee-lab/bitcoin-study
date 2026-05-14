@@ -708,7 +708,7 @@ function TornadoCashReflection() {
         세탁에 쓰였다는 점이었다. 한쪽엔 ‘프라이버시는 기본권’, 다른 한쪽엔
         ‘이 도구는 실제로 적국의 자금 세탁에 쓰였다’ 가 충돌했다.
       </p>
-      <Callout tone="warn" title="후속 충격">
+      <Callout tone="warn" title="제재 이후 벌어진 일">
         <div className="text-[13px] text-text/80 leading-[1.7] space-y-1">
           <div>
             · 헌법학자·EFF (Electronic Frontier Foundation) 등이 First
