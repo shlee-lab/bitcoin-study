@@ -43,7 +43,7 @@ export function L8GameTheory(props: LayerProps) {
                 level: "deep",
                 body: (
                   <Section
-                    heading="② 찾은 블록을 바로 공개하는 게 최선일까?"
+                    heading="찾은 블록을 바로 공개하는 게 최선일까?"
                     sub="블록을 찾으면 즉시 공개하는 것이 당연해 보인다. 하지만 일정 조건에서는 블록 공개를 늦추는 편이 더 큰 이익을 만들 수 있다. 그 전략이 selfish mining 이다."
                   >
                     <SelfishDiagram />
@@ -58,7 +58,7 @@ export function L8GameTheory(props: LayerProps) {
                 level: "deep",
                 body: (
                   <Section
-                    heading="③ Block withholding (BWH) · 풀 내부 방해 공작"
+                    heading="Block withholding (BWH) · 풀 내부 방해 공작"
                     sub="채굴자가 풀에 가입한 뒤, 부분 작업(share)은 정상 제출하면서도 실제 유효 블록을 찾으면 풀에 알리지 않는 공격이다. 풀의 기대 수익을 낮춰 채굴자 이탈을 유도한다."
                   >
                     <BWHMechanic />
@@ -71,7 +71,7 @@ export function L8GameTheory(props: LayerProps) {
                 level: "deep",
                 body: (
                   <Section
-                    heading="④ Feather forking · 약한 검열 시도"
+                    heading="Feather forking · 약한 검열 시도"
                     sub="hashrate 가 적은 채굴자도 ‘이 트랜잭션이 들어간 블록 위에는 쌓지 않겠다’ 고 선언할 수 있다. 위협이 충분하면 다른 채굴자도 그 트랜잭션을 피하게 되고, 약한 형태의 검열이 생긴다."
                   >
                     <FeatherFork />
@@ -85,7 +85,7 @@ export function L8GameTheory(props: LayerProps) {
                 body: (
                   <>
                     <Section
-                      heading="⑤ 사회적 합의 계층 · 코드 밖의 결정"
+                      heading="사회적 합의 계층 · 코드 밖의 결정"
                       sub="합의 규칙이 바뀌는 일은 결국 노드 운영자들의 선택이다. 채굴자 hashrate 다수가 아니라, 무엇을 유효한 블록으로 받아들일지 정하는 검증 노드들이 마지막 결정권을 가진다."
                     >
                       <SocialLayer />
@@ -97,7 +97,7 @@ export function L8GameTheory(props: LayerProps) {
                       <p>
                         모든 합리적 채굴자가 정직을 선택할 때, 누구도
                         일방적으로 전략을 바꿔 더 큰 이득을 얻을 수 없다 (Nash
-                        equilibrium). 위 ②~⑤ 의 어느 전략도 보통 조건에서는
+                        equilibrium). 위 전략들은 보통 조건에서는
                         정직하게 채굴하는 것보다 기대 수익이 낮거나, 시도하는 순간 자기
                         자산 가치를 함께 갉아먹는다.
                       </p>
@@ -112,30 +112,34 @@ export function L8GameTheory(props: LayerProps) {
                 ),
               },
               {
-                title: "생각해보기", subtitle: "이기심에서 나온 정직, 다른 곳에도 적용될까?",
+                title: "생각해보기",
+                subtitle: "이기적 참여자를 정직하게 움직일 수 있을까?",
                 body: (
-                  <Reflection title="incentive-compatible design 의 일반성">
+                  <Reflection title="인센티브 설계는 어디까지 작동할까">
                     <p>
-                      비트코인은 ‘참여자가 자기 이익만 추구해도 시스템 전체엔
-                      바람직한 결과가 나오게’ 설계됐다. 게임이론 용어로{" "}
-                      <span className="text-text">incentive-compatible</span>.
-                      선의에 기대지 않는 시스템.
+                      비트코인은 참여자가 자기 이익을 추구하더라도, 대체로 정직하게
+                      행동하는 편이 유리하도록 설계되어 있다. 게임이론에서는 이런
+                      성질을 <span className="text-text">incentive-compatible</span>
+                      하다고 말한다. 핵심은 선의를 믿는 것이 아니라, 보상 구조를
+                      그렇게 만드는 것이다.
                     </p>
                     <p>
-                      이 패턴은 다른 분산 시스템에서도 보인다: Tor 의 relay
+                      비슷한 패턴은 다른 분산 시스템에서도 보인다. Tor 의 relay
                       운영자, BitTorrent 의 tit-for-tat, 위키의 reputation,
-                      Stack Overflow 의 점수 시스템. 모두 ‘자기 이익 → 공공선’
-                      의 채널을 만든 설계.
+                      Stack Overflow 의 점수 시스템은 모두 개인의 이익이나 평판을
+                      시스템 전체의 유익한 행동과 연결하려는 설계다.
                     </p>
                     <Probe>
                       같은 원리를 어디에 더 적용할 수 있을까? 콘텐츠 모더레이션?
-                      AI 학습 데이터 라벨링? 평판 시스템? 한 가지 함정 · 이기심
-                      에 기댄 설계는 ‘이기심이 합리적일 때’ 만 작동한다. 비합리적
-                      행위자 (이념적 공격, 정부 개입) 앞에선 어떤가?
+                      AI 학습 데이터 라벨링? 평판 시스템? 다만 인센티브 설계는
+                      참여자가 비용과 보상을 합리적으로 계산할 때 가장 잘 작동한다.
+                      이념적 공격자나 정부 개입처럼 경제적 보상보다 다른 목표가 큰
+                      행위자 앞에서는 어떤 한계가 생길까?
                     </Probe>
                     <Reading label="이론 배경">
-                      Mechanism Design (노벨 경제학상 2007), Hurwicz · Maskin
-                      · Myerson · 비트코인이 가져다 쓴 그 이론적 토대.
+                      Mechanism Design. Hurwicz, Maskin, Myerson 의 연구로 대표되는
+                      분야이며, 원하는 결과가 나오도록 규칙과 보상을 설계하는 문제를
+                      다룬다.
                     </Reading>
                   </Reflection>
                 ),
