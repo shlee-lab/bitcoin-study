@@ -754,12 +754,12 @@ function UtxoSetReality() {
       </div>
 
       <div className="text-[13px] font-semibold text-muted/75">
-        snapshot · 2024 기준 대략
+        snapshot · 2026 년 기준 공개 추정치
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <Stat label="UTXO 개수" value="~ 1.5 억" sub="매년 ~10% 성장" />
-        <Stat label="ChainState 크기" value="~ 12 GB" sub="LevelDB 디스크 · serialized" />
+        <Stat label="UTXO 개수" value="1.5 ~ 1.8 억" sub="측정 방식에 따라 차이" />
+        <Stat label="ChainState 크기" value="10 ~ 15 GB" sub="LevelDB 디스크 · serialized" />
         <Stat label="블록당 평균 변화" value="+2,000 ~ +5,000" sub="새 UTXO 생성 / 소비" />
       </div>
 
@@ -805,10 +805,10 @@ function Stat({
 }) {
   return (
     <div className="rounded-sm border border-edge bg-surface/30 p-4 space-y-1.5">
-      <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+      <div className="text-[13px] font-semibold text-muted">
         {label}
       </div>
-      <div className="font-mono text-[20px] text-accent">{value}</div>
+      <div className="text-[20px] font-semibold text-accent">{value}</div>
       <div className="text-[12px] text-text/65 leading-relaxed">{sub}</div>
     </div>
   );
@@ -824,12 +824,13 @@ function UtxoSizeChart() {
     { y: 2020, count: 80, size: 5 },
     { y: 2022, count: 120, size: 8 },
     { y: 2024, count: 150, size: 12 },
+    { y: 2026, count: 165, size: 13 },
   ];
   const W = 540;
   const H = 220;
   const pad = { l: 40, r: 60, t: 24, b: 36 };
-  const xScale = (y: number) => pad.l + ((y - 2012) / (2024 - 2012)) * (W - pad.l - pad.r);
-  const yMax = 160;
+  const xScale = (y: number) => pad.l + ((y - 2012) / (2026 - 2012)) * (W - pad.l - pad.r);
+  const yMax = 180;
   const yScale = (v: number) => H - pad.b - (v / yMax) * (H - pad.t - pad.b);
 
   const countPath = points.map((p, i) => `${i === 0 ? "M" : "L"} ${xScale(p.y).toFixed(1)} ${yScale(p.count).toFixed(1)}`).join(" ");
@@ -837,8 +838,8 @@ function UtxoSizeChart() {
 
   return (
     <div className="rounded-sm border border-edge bg-surface/30 p-4">
-      <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted mb-3">
-        UTXO 개수 vs ChainState 크기 (2012–2024, 대략)
+      <div className="text-[13px] font-semibold text-muted mb-3">
+        UTXO 개수 vs ChainState 크기 (2012–2026, 대략)
       </div>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" preserveAspectRatio="xMidYMid meet">
         {/* axes */}
@@ -846,7 +847,7 @@ function UtxoSizeChart() {
         <line x1={pad.l} y1={H - pad.b} x2={pad.l} y2={pad.t} stroke="#3a3f4a" strokeWidth="1" />
 
         {/* gridlines + y-axis labels (count, left axis) */}
-        {[40, 80, 120, 160].map((v) => (
+        {[45, 90, 135, 180].map((v) => (
           <g key={v}>
             <line x1={pad.l} y1={yScale(v)} x2={W - pad.r} y2={yScale(v)} stroke="#1c1f27" strokeWidth="0.6" strokeDasharray="2 4" />
             <text x={pad.l - 6} y={yScale(v) + 3} textAnchor="end" fontSize="11" fill="#a0a8b8" fontFamily="JetBrains Mono">{v}M</text>
@@ -881,8 +882,8 @@ function UtxoSizeChart() {
         </g>
       </svg>
       <div className="text-[12px] text-text/65 mt-2 leading-relaxed">
-        2024 시점 약 1.5 억 UTXO, 12 GB. 매년 ~10% 성장하지만 디스크는 더 빨리
-        커지진 않음 (압축·정리 효과).
+        정확한 값은 노드 버전과 측정 방식에 따라 달라진다. 여기서는 UTXO 셋이
+        노드 운영 비용을 꾸준히 밀어 올리는 방향성만 잡으면 충분하다.
       </div>
     </div>
   );
